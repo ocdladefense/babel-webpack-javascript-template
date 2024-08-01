@@ -2,22 +2,49 @@
   "name": "myapp",
   "version": "0.1.0",
   "description": "My app.",
-  "type": "module",
   "main": "view.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src/index.js -o dist/index.js"
+    "babel-build": "babel -d src/ -o dist/index.js",
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack serve",
+    "lint": "eslint src/**",
+    "lint-fix": "eslint --fix src/**",
+    "git-reset": "git reset --soft HEAD~1",
+    "git-force": "git push origin +main --force",
+    "watch": "webpack serve --open"
   },
   "author": "José Bernal",
   "license": "ISC",
   "dependencies": {
-    "@ocdla/view": "file:./dev_modules/@ocdla/node-view"
+    "autoprefixer": "^10.4.19",
+    "dotenv": "^16.4.5",
+    "globals": "^15.6.0",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.6",
+    "@ocdla/lib-http": "file:./dev_modules/@ocdla/lib-http",
+    "@ocdla/view": "file:./dev_modules/@ocdla/view"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.15.5",
-    "@babel/preset-env": "^7.15.6",
-    "@babel/preset-react": "^7.14.5",
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
+    "@babel/preset-react": "^7.24.7",
+    "@eslint/js": "^9.5.0",
+    "@ocdla/view": "^2.3.14",
+    "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.11.0",
+    "dotenv-webpack": "^8.1.0",
+    "eslint": "^9.7.0",
+    "html-webpack-plugin": "^5.5.4",
+    "postcss-loader": "^8.1.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "style-loader": "^3.3.4",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.2",
     "jsdoc": "^4.0.2"
   }
 }

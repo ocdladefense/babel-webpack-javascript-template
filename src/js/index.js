@@ -1,5 +1,5 @@
 /** @jsx vNode */
-import {vNode, View} from "../node_modules/@ocdla/view/view.js"
+import {vNode, View} from "../../node_modules/@ocdla/view/view.js"
 console.log("Loaded index.js"); 
 
 const Profile = function(props) {
