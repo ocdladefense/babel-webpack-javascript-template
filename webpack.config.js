@@ -14,7 +14,8 @@ const copyPlugin = require('copy-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        app: path.resolve(__dirname, './src/js/index.js')
+        app: path.resolve(__dirname, './src/js/index.js'),
+        helper: path.resolve(__dirname, './src/js/helper.js')
     },
     snapshot: {
         managedPaths: ["/node_modules"],
@@ -51,7 +52,18 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
+                        presets: [
+                            ['@babel/preset-env'],
+                            ['@babel/preset-react',
+                                {
+                                    "pragma": "vNode", // default pragma is React.createElement (only in classic runtime)
+                                    "pragmaFrag": "Fragment", // default is React.Fragment (only in classic runtime)
+                                    "throwIfNamespace": false, // defaults to true
+                                    "runtime": "classic" // defaults to classic
+                                    // "importSource": "custom-jsx-library" // defaults to react (only in automatic runtime)
+                                }
+                            ]
+                        ]
                     }
                 }
             },
