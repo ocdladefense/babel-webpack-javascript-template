@@ -4,19 +4,14 @@ import { vNode, View } from "@ocdla/view/view.js";
 import Navbar from '@ocdla/global-components/src/components/Navbar';
 import Breadcrumbs from '@ocdla/global-components/src/components/Breadcrumbs';
 import Sidebar from '@ocdla/global-components/src/components/Sidebar';
-import Body from '@ocdla/global-components/src/components/Body';
+// import Body from '@ocdla/global-components/src/components/Body';
 import Footer from '@ocdla/global-components/src/components/Footer';
 
 
 
 
 
-export default function App({ view, crumbs, sidebarFirstItems, sidebarSecondItems }) {
-    // const appTypeIndicators = appTypeCurrent ? '📚' : '🔍';
-    // const appTypeString = appTypeCurrent ? 'books-online' : 'ors-viewer';
-
-    // Breadcrumbs - separator is calculated internally, but should be passed in as a parameter.
-    // const seperatorString = i !== items.length - 1 ? ' / ' : ' ';
+export default function App({ view, children, crumbs, sidebarFirstItems, sidebarSecondItems }) {
 
     return (
         <>
@@ -35,7 +30,9 @@ export default function App({ view, crumbs, sidebarFirstItems, sidebarSecondItem
             <div class='container mx-auto border-x'>
                 <div class='lg:grid lg:grid-cols-6'>
                     <Sidebar items={sidebarFirstItems} />
-                    <Body />
+                    <main class='flex w-full flex-col gap-4 p-4 lg:col-span-4 lg:col-start-2 lg:me-auto lg:border-x lg:p-8'>
+                        {children}
+                    </main>
                     <Sidebar items={sidebarSecondItems} />
                 </div>
             </div>
