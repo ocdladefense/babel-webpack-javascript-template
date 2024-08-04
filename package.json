@@ -17,14 +17,14 @@
   "author": "José Bernal",
   "license": "ISC",
   "dependencies": {
+    "@ocdla/lib-http": "file:./dev_modules/@ocdla/lib-http",
+    "@ocdla/view": "file:./dev_modules/@ocdla/view",
+    "@ocdla/global-components": "file:./dev_modules/@ocdla/global-components",
     "autoprefixer": "^10.4.19",
     "dotenv": "^16.4.5",
     "globals": "^15.6.0",
     "postcss": "^8.4.39",
-    "tailwindcss": "^3.4.6",
-    "@ocdla/lib-http": "file:./dev_modules/@ocdla/lib-http",
-    "@ocdla/view": "file:./dev_modules/@ocdla/view",
-    "@ocdla/global-components": "file:./dev_modules/@ocdla/global-components"
+    "tailwindcss": "^3.4.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
@@ -37,14 +37,15 @@
     "css-loader": "^6.11.0",
     "dotenv-webpack": "^8.1.0",
     "eslint": "^9.7.0",
+    "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.5.4",
+    "jsdoc": "^4.0.2",
     "postcss-loader": "^8.1.1",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "style-loader": "^3.3.4",
     "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.2",
-    "jsdoc": "^4.0.2"
+    "webpack-dev-server": "^4.15.2"
   }
 }
