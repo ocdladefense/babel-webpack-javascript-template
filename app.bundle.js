@@ -2,74 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/@ocdla/global-components/src/components/Body.jsx":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@ocdla/global-components/src/components/Body.jsx ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Body)
-/* harmony export */ });
-/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
-/* harmony import */ var _Hyperlink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Hyperlink */ "./node_modules/@ocdla/global-components/src/components/Hyperlink.jsx");
-/** @jsx vNode */ /** @jsxFrag "Fragment" */
-/* eslint-disable no-unused-vars */
-
-
-/* eslint-enable */
-
-function Body(_ref) {
-  var _ref$type = _ref.type,
-    type = _ref$type === void 0 ? 'ors-viewer' : _ref$type;
-  var styleTabActive = 'tab-btn rounded-t-md border border-b-transparent p-4';
-  var styleTabInactive = 'tab-btn rounded-t-md border border-transparent border-b-inherit p-4 text-blue-400 hover:text-blue-500 hover:underline hover:underline-offset-2';
-  var toggleTabs = function toggleTabs(tabBtnClicked) {
-    var tabBtns = document.getElementsByClassName('tab-btn');
-    var tabBodies = document.getElementsByClassName('tab-body');
-    Array.from(tabBtns).forEach(function (tabBtn) {
-      return tabBtn.className = tabBtnClicked.target === tabBtn ? styleTabActive : styleTabInactive;
-    });
-    Array.from(tabBodies).forEach(function (tabBody) {
-      return tabBtnClicked.target.id.split('-')[2] === tabBody.id.split('-')[2] ? tabBody.classList.remove('hidden') : tabBody.classList.add('hidden');
-    });
-  };
-  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("main", {
-    "class": "flex w-full flex-col gap-4 p-4 lg:col-span-4 lg:col-start-2 lg:me-auto lg:border-x lg:p-8"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("h1", {
-    "class": "text-4xl font-bold"
-  }, "ORS 1.001"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
-    "class": "text-3xl font-thin"
-  }, "State policy for courts")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
-    "class": "flex flex-col gap-4"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "flex"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
-    id: "tab-btn-1",
-    "class": styleTabActive,
-    onclick: toggleTabs
-  }, "Text")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
-    id: "tab-btn-2",
-    "class": styleTabInactive,
-    onclick: toggleTabs
-  }, "Annotations")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
-    "class": "w-full border border-transparent border-b-inherit p-4"
-  }, "\xA0"))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
-    id: "tab-body-1",
-    "class": "tab-body flex flex-col gap-4"
-  }, "The Legislative Assembly hereby declares that, as a matter of statewide concern, it is in the best interests of the people of this state that the judicial branch of state government, including the appellate, tax and circuit courts, be funded and operated at the state level. The Legislative Assembly finds that state funding and operation of the judicial branch can provide for best statewide allocation of governmental resources according to the actual needs of the people and of the judicial branch by establishing an accountable, equitably funded and uniformly administered system of justice for all the people of this state. [1981 s.s. c.3 \xA71]", (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("hr", null), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("small", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("i", null, "Source: Section 1.001 \u2014 State policy for courts,", ' ', (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "https://\xADoregonlegislature.\xADgov/bills_laws/ors/ors001.\xADhtml",
-    body: "https://\xADoregonlegislature.\xADgov/bills_laws/ors/ors001.\xADhtml"
-  })))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
-    id: "tab-body-2",
-    "class": "tab-body flex flex-col gap-4"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", null, "Law Review Citations"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", null, "50 WLR 291 (2014)")));
-}
-
-/***/ }),
-
 /***/ "./node_modules/@ocdla/global-components/src/components/BreadcrumbItem.jsx":
 /*!*********************************************************************************!*\
   !*** ./node_modules/@ocdla/global-components/src/components/BreadcrumbItem.jsx ***!
@@ -610,26 +542,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ocdla_global_components_src_components_Navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/global-components/src/components/Navbar */ "./node_modules/@ocdla/global-components/src/components/Navbar.jsx");
 /* harmony import */ var _ocdla_global_components_src_components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ocdla/global-components/src/components/Breadcrumbs */ "./node_modules/@ocdla/global-components/src/components/Breadcrumbs.jsx");
 /* harmony import */ var _ocdla_global_components_src_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ocdla/global-components/src/components/Sidebar */ "./node_modules/@ocdla/global-components/src/components/Sidebar.jsx");
-/* harmony import */ var _ocdla_global_components_src_components_Body__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ocdla/global-components/src/components/Body */ "./node_modules/@ocdla/global-components/src/components/Body.jsx");
-/* harmony import */ var _ocdla_global_components_src_components_Footer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ocdla/global-components/src/components/Footer */ "./node_modules/@ocdla/global-components/src/components/Footer.jsx");
+/* harmony import */ var _ocdla_global_components_src_components_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ocdla/global-components/src/components/Footer */ "./node_modules/@ocdla/global-components/src/components/Footer.jsx");
 /** @jsx vNode */ /** @jsxFrag "Fragment" */
 
 
 
 
-
+// import Body from '@ocdla/global-components/src/components/Body';
 
 function App(_ref) {
   var view = _ref.view,
+    children = _ref.children,
     crumbs = _ref.crumbs,
     sidebarFirstItems = _ref.sidebarFirstItems,
     sidebarSecondItems = _ref.sidebarSecondItems;
-  // const appTypeIndicators = appTypeCurrent ? '📚' : '🔍';
-  // const appTypeString = appTypeCurrent ? 'books-online' : 'ors-viewer';
-
-  // Breadcrumbs - separator is calculated internally, but should be passed in as a parameter.
-  // const seperatorString = i !== items.length - 1 ? ' / ' : ' ';
-
   return (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
     "class": "group absolute right-0 m-4 flex gap-2 lg:left-0 lg:m-2"
   }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
@@ -648,9 +574,62 @@ function App(_ref) {
     "class": "lg:grid lg:grid-cols-6"
   }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     items: sidebarFirstItems
-  }), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Body__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("main", {
+    "class": "flex w-full flex-col gap-4 p-4 lg:col-span-4 lg:col-start-2 lg:me-auto lg:border-x lg:p-8"
+  }, children), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     items: sidebarSecondItems
-  }))), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Footer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+  }))), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+}
+
+/***/ }),
+
+/***/ "./src/data/ors-viewer/chapters/chapter-1.jsx":
+/*!****************************************************!*\
+  !*** ./src/data/ors-viewer/chapters/chapter-1.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Chapter)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */ /** @jsxFrag "Fragment" */
+/* eslint-disable no-unused-vars */
+
+function Chapter() {
+  var styleTabActive = 'tab-btn rounded-t-md border border-b-transparent p-4';
+  var styleTabInactive = 'tab-btn rounded-t-md border border-transparent border-b-inherit p-4 text-blue-400 hover:text-blue-500 hover:underline hover:underline-offset-2';
+  var toggleTabs = function toggleTabs() {
+    console.log('toggleTabs');
+  };
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("h1", {
+    "class": "text-4xl font-bold"
+  }, "ORS 1.001"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
+    "class": "text-3xl font-thin"
+  }, "State policy for courts")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
+    "class": "flex flex-col gap-4"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "flex"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
+    id: "tab-btn-1",
+    "class": styleTabActive,
+    onclick: toggleTabs
+  }, "Text")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
+    id: "tab-btn-2",
+    "class": styleTabInactive,
+    onclick: toggleTabs
+  }, "Annotations")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "w-full border border-transparent border-b-inherit p-4"
+  }, "\xA0"))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
+    id: "tab-body-1",
+    "class": "tab-body flex flex-col gap-4"
+  }, "The Legislative Assembly hereby declares that, as a matter of statewide concern, it is in the best interests of the people of this state that the judicial branch of state government, including the appellate, tax and circuit courts, be funded and operated at the state level. The Legislative Assembly finds that state funding and operation of the judicial branch can provide for best statewide allocation of governmental resources according to the actual needs of the people and of the judicial branch by establishing an accountable, equitably funded and uniformly administered system of justice for all the people of this state. [1981 s.s. c.3 \xA71]", (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("hr", null), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("small", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("i", null, "Source: Section 1.001 \u2014 State policy for courts,", ' ', (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    href: "https://\xADoregonlegislature.\xADgov/bills_laws/ors/ors001.\xADhtml"
+  }, "https://\xADoregonlegislature.\xADgov/bills_laws/ors/ors001.\xADhtml")))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
+    id: "tab-body-2",
+    "class": "tab-body flex flex-col gap-4"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", null, "Law Review Citations"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", null, "50 WLR 291 (2014)")));
 }
 
 /***/ }),
@@ -2591,9 +2570,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_input_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/input.css */ "./src/css/input.css");
 /* harmony import */ var _ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/view/view.js */ "./node_modules/@ocdla/view/view.js");
 /* harmony import */ var _components_App_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/App.jsx */ "./src/components/App.jsx");
-/* harmony import */ var _data_ors_viewer_breadcrumbs_items_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../data/ors-viewer/breadcrumbs/items.json */ "./src/data/ors-viewer/breadcrumbs/items.json");
-/* harmony import */ var _data_ors_viewer_sidebar_left_items_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../data/ors-viewer/sidebar_left/items.json */ "./src/data/ors-viewer/sidebar_left/items.json");
-/* harmony import */ var _data_ors_viewer_sidebar_right_items_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../data/ors-viewer/sidebar_right/items.json */ "./src/data/ors-viewer/sidebar_right/items.json");
+/* harmony import */ var _data_ors_viewer_chapters_chapter_1_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../data/ors-viewer/chapters/chapter-1.jsx */ "./src/data/ors-viewer/chapters/chapter-1.jsx");
+/* harmony import */ var _data_ors_viewer_breadcrumbs_items_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../data/ors-viewer/breadcrumbs/items.json */ "./src/data/ors-viewer/breadcrumbs/items.json");
+/* harmony import */ var _data_ors_viewer_sidebar_left_items_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../data/ors-viewer/sidebar_left/items.json */ "./src/data/ors-viewer/sidebar_left/items.json");
+/* harmony import */ var _data_ors_viewer_sidebar_right_items_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../data/ors-viewer/sidebar_right/items.json */ "./src/data/ors-viewer/sidebar_right/items.json");
 /** @jsx vNode */
 
 
@@ -2604,13 +2584,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 console.log("Loaded index.js");
 var js_root = _ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__.View.createRoot("#app");
 js_root.render((0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__.vNode)(_components_App_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-  crumbs: _data_ors_viewer_breadcrumbs_items_json__WEBPACK_IMPORTED_MODULE_3__,
-  sidebarFirstItems: _data_ors_viewer_sidebar_left_items_json__WEBPACK_IMPORTED_MODULE_4__,
-  sidebarSecondItems: _data_ors_viewer_sidebar_right_items_json__WEBPACK_IMPORTED_MODULE_5__
-}));
+  crumbs: _data_ors_viewer_breadcrumbs_items_json__WEBPACK_IMPORTED_MODULE_4__,
+  sidebarFirstItems: _data_ors_viewer_sidebar_left_items_json__WEBPACK_IMPORTED_MODULE_5__,
+  sidebarSecondItems: _data_ors_viewer_sidebar_right_items_json__WEBPACK_IMPORTED_MODULE_6__
+}, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__.vNode)(_data_ors_viewer_chapters_chapter_1_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
 /******/ })()
 ;
 //# sourceMappingURL=app.bundle.js.map
