@@ -109,10 +109,13 @@ module.exports = {
         new copyPlugin({
             patterns: [
                 {
-                from: path.resolve(__dirname, 'src/images'),
-                to: path.resolve(__dirname, 'dist/images')
+                    from: path.resolve(__dirname, 'src/images'),
+                    to: path.resolve(__dirname, 'dist/images')
                 },
-                'src/.nojekyll'
+                'src/.nojekyll',
+                'src/manifest.json',
+                'src/sw.js',
+                'src/robots.txt'
             ]
         })
     ]
