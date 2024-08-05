@@ -322,6 +322,40 @@ function Navbar() {
 
 /***/ }),
 
+/***/ "./node_modules/@ocdla/global-components/src/components/SectionEntry.jsx":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/components/SectionEntry.jsx ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SectionEntry)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */ /** @jsxFrag "Fragment" */
+/* eslint-disable-next-line no-unused-vars */
+
+function SectionEntry(_ref) {
+  var text = _ref.text,
+    heading = _ref.heading,
+    href = _ref.href,
+    _ref$active = _ref.active,
+    active = _ref$active === void 0 ? false : _ref$active,
+    children = _ref.children;
+  // Determine appropriate classes based on active state.
+  var a = active ? 'text-white border-black bg-black' : 'group hover:bg-neutral-100';
+  var h1 = active ? '' : 'text-blue-400 group-hover:text-blue-500';
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    "class": "flex flex-col gap-2 border-b px-4 py-2 ".concat(a),
+    href: href
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("h1", {
+    "class": "font-bold ".concat(h1)
+  }, heading), children));
+}
+
+/***/ }),
+
 /***/ "./node_modules/@ocdla/global-components/src/components/Sidebar.jsx":
 /*!**************************************************************************!*\
   !*** ./node_modules/@ocdla/global-components/src/components/Sidebar.jsx ***!
@@ -334,8 +368,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
 /* harmony import */ var _SidebarItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SidebarItem */ "./node_modules/@ocdla/global-components/src/components/SidebarItem.jsx");
+/* harmony import */ var _SectionEntry__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SectionEntry */ "./node_modules/@ocdla/global-components/src/components/SectionEntry.jsx");
 /** @jsx vNode */
 /* eslint-disable no-unused-vars */
+
 
 
 /* eslint-enable */
@@ -345,7 +381,12 @@ function Sidebar(_ref) {
   return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("aside", {
     "class": "hidden h-[87.5vh] overflow-scroll lg:block"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", null, items.map(function (item) {
-    return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_SidebarItem__WEBPACK_IMPORTED_MODULE_1__["default"], item);
+    return (
+      // <SidebarItem {...item} />
+      (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_SectionEntry__WEBPACK_IMPORTED_MODULE_2__["default"], item, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
+        "class": item.active ? 'text-white' : ''
+      }, item.text))
+    );
   })));
 }
 
