@@ -450,6 +450,636 @@ var interleave = function interleave(arr, thing) {
 
 /***/ }),
 
+/***/ "./node_modules/@ocdla/lib-http/HttpClient.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@ocdla/lib-http/HttpClient.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ HttpClient)
+/* harmony export */ });
+/* harmony import */ var _caches_HttpCache_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./caches/HttpCache.js */ "./node_modules/@ocdla/lib-http/caches/HttpCache.js");
+/* harmony import */ var _caches_LocalStorageCache_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./caches/LocalStorageCache.js */ "./node_modules/@ocdla/lib-http/caches/LocalStorageCache.js");
+/* harmony import */ var _Url_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Url.js */ "./node_modules/@ocdla/lib-http/Url.js");
+/* harmony import */ var _HttpHeader_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./HttpHeader.js */ "./node_modules/@ocdla/lib-http/HttpHeader.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
+
+
+console.log("I am local HTTP module");
+var HttpClient = /*#__PURE__*/function () {
+  /**
+   * 
+   * @param {Request} req 
+   * @returns Response
+   */
+
+  /*
+  @param cacheOptions - Object with two keys: 'cache' and 'params'. Constructor is the name of our cache implementation. Params is an object that will be passed to that constructor.
+  */
+  function HttpClient() {
+    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    _classCallCheck(this, HttpClient);
+    // Turns on and off hashing
+    this.debug = config.debug || false;
+    var cache = config['cacheOptions'] || null;
+    this.cache = cache ? new cache['cache'](cache['params']) : null; // Dynamically instantiate our cache service from the config. Leave null to use browser cache.
+  }
+  return _createClass(HttpClient, [{
+    key: "send",
+    value: function send(req) {
+      var _this = this;
+      if (navigator.onLine == false) {
+        throw new Error("Network offline.");
+      }
+
+      // Will hold any reference to a mocking class for the request.
+      var mock;
+
+      // Will hold a reference to the cached response, if there is one.
+      var cached;
+
+      // Reference to the pending outbound request.
+      var pending;
+
+      // Key for our cache. If we are debugging, don't hash it. Otherwise, hash it.
+      var key = this.debug ? req.method + req.url : HttpClient.cyrb53(req.method + req.url);
+
+      // Get the cache control from our request headers. If there is no cache control, use an empty string.
+      var cacheHeader = req.headers.get("cache-control") || "";
+      var cacheControl = new _HttpHeader_js__WEBPACK_IMPORTED_MODULE_3__["default"]("cache-control", cacheHeader);
+
+      // Store our complex condition in a variable. If the request is a GET, we have a caching solution, and the cache control doesn't specify no-cache.
+      var usingCaching = req.method == "GET" && this.cache && !cacheControl.hasValue("no-cache");
+      try {
+        mock = this.getMock(req);
+        if (mock) {
+          return mock.getResponse(req);
+        }
+
+        // Check the cache for a response.
+        if (usingCaching) {
+          // cached = HttpCache.get(req);
+          // check the cache for a matching response;
+          // if nothing's there we return null.
+          cached = this.cache.match(key);
+          // Prefer a completed response, if one already happens to be in the cache.
+          if (cached) return cached;
+        }
+
+        // If there is a pending request to the same URL, return it.
+        if (HttpClient.outbound[key]) {
+          return HttpClient.outbound[key];
+        }
+
+        // If we've made it this far, we need to go to the network to get the resource.
+        pending = fetch(req).then(function (resp) {
+          // Remove the pending request, as we've now fulfilled it.
+          delete HttpClient.outbound[key];
+
+          // If we are using caching, store the response in the cache.
+          if (usingCaching) {
+            _this.cache.put(key, resp.clone());
+          }
+          return resp;
+        });
+
+        // Store the pending request.
+        // This will prevent multiple unfulfilled requests to the same URL.
+        HttpClient.outbound[key] = pending;
+        return pending;
+      } catch (e) {
+        console.error(e);
+        if (req.headers.get("Accept") == "application/json") {
+          return Response.json({
+            success: false,
+            error: true,
+            code: e.cause,
+            message: e.message
+          }, {
+            status: 500
+          });
+        } else return new Response(e.message, {
+          status: 500
+        });
+      }
+    }
+  }, {
+    key: "getMock",
+    value: function getMock(req) {
+      var url = new _Url_js__WEBPACK_IMPORTED_MODULE_2__["default"](req.url);
+      var domain = url.getDomain();
+      return HttpClient.mocks[domain];
+    }
+  }], [{
+    key: "register",
+    value: function register(domain, mock) {
+      var url = new _Url_js__WEBPACK_IMPORTED_MODULE_2__["default"](domain);
+      domain = url.getDomain();
+      HttpClient.mocks[domain] = mock;
+    }
+  }, {
+    key: "cyrb53",
+    value: function cyrb53(str) {
+      var seed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var h1 = 0xdeadbeef ^ seed,
+        h2 = 0x41c6ce57 ^ seed;
+      for (var i = 0, ch; i < str.length; i++) {
+        ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+      }
+      h1 = Math.imul(h1 ^ h1 >>> 16, 2246822507);
+      h1 ^= Math.imul(h2 ^ h2 >>> 13, 3266489909);
+      h2 = Math.imul(h2 ^ h2 >>> 16, 2246822507);
+      h2 ^= Math.imul(h1 ^ h1 >>> 13, 3266489909);
+      return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+    }
+  }]);
+}();
+// Store references to mocking classes.
+// Mocking classes are registered against domains.
+_defineProperty(HttpClient, "mocks", {});
+// For performance reasons, store outbound requests.
+// This enables what would otherwise be multiple requests to
+// the same URL to resolve to the same fetch request.
+_defineProperty(HttpClient, "outbound", {});
+
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/lib-http/HttpHeader.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@ocdla/lib-http/HttpHeader.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ HttpHeader)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var HttpHeader = /*#__PURE__*/function () {
+  function HttpHeader(name, value) {
+    _classCallCheck(this, HttpHeader);
+    this.name = name;
+    this.values = HttpHeader.parseValues(value);
+  }
+
+  // 1. theres 1 value, no commas: pass
+  // 2. theres multiple value, commas: pass
+  // 3. some of those values are parameters, semicolons and commas: 
+  // 4. some of those parameters have values, semicolons, commas, and equals:
+  return _createClass(HttpHeader, [{
+    key: "hasValue",
+    value:
+    /**
+    * 
+    * @returns {bool}
+    */
+    function hasValue(v) {
+      // if v doesn't exist, it returns undefined which is falsy
+      return this.values.hasOwnProperty(v);
+    }
+  }, {
+    key: "getParameter",
+    value: function getParameter(k) {
+      return this.values[k];
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return this.name;
+    }
+  }], [{
+    key: "parseValues",
+    value: function parseValues(value) {
+      var map = {};
+      var values = value.split(",");
+      for (var i = 0; i < values.length; i++) {
+        var current = values[i].trim();
+        var _current$split = current.split("="),
+          _current$split2 = _slicedToArray(_current$split, 2),
+          k = _current$split2[0],
+          v = _current$split2[1]; // at index 0, when no "=", k = current, v = undefined
+        map[k] = v;
+      }
+      return map;
+    }
+  }]);
+}();
+
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/lib-http/Url.js":
+/*!*********************************************!*\
+  !*** ./node_modules/@ocdla/lib-http/Url.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Url)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var URL_SCHEME_SEPARATOR = "://";
+var URL_PATH_SEPARATOR = "/";
+var URL_QUERYSTRING_SEPARATOR = "?";
+var URL_FRAGMENT_SEPARATOR = "#";
+var SCHEME_HTTP = "http";
+var SCHEME_HTTPS = "https";
+var SCHEME_FILE = "file";
+var Url = /*#__PURE__*/function () {
+  function Url(url) {
+    _classCallCheck(this, Url);
+    _defineProperty(this, "url", null);
+    _defineProperty(this, "scheme", SCHEME_HTTP);
+    _defineProperty(this, "domain", null);
+    _defineProperty(this, "path", "");
+    _defineProperty(this, "query", {});
+    this.url = url;
+    var re = /:\/\/|\?/gi;
+    var parts = this.url.split(re);
+    this.scheme = parts.shift();
+    var qs;
+    if (parts.length == 2) {
+      qs = parts.pop();
+    }
+    var d = parts[0];
+    parts = d.split(URL_PATH_SEPARATOR);
+    this.domain = parts.shift();
+    this.path = URL_PATH_SEPARATOR + parts.join(URL_PATH_SEPARATOR);
+    if (qs != null) {
+      this.query = Url.parseQueryString(qs);
+    }
+  }
+  return _createClass(Url, [{
+    key: "getLastPathSegment",
+    value: function getLastPathSegment() {
+      var parts = this.path.split("/");
+      var last = parts.pop();
+      return last;
+    }
+  }, {
+    key: "getDomain",
+    value: function getDomain() {
+      return this.domain;
+    }
+  }, {
+    key: "getScheme",
+    value: function getScheme() {
+      return this.scheme;
+    }
+  }, {
+    key: "getPath",
+    value: function getPath() {
+      return this.path;
+    }
+  }, {
+    key: "getQuery",
+    value: function getQuery() {
+      return this.query;
+    }
+  }, {
+    key: "buildQuery",
+    value: function buildQuery(key, value) {
+      this.query[key] = value;
+    }
+  }, {
+    key: "toString",
+    value: function toString() {
+      var queryString = "";
+      var fragment = "";
+      var kvpa = [];
+      // start with our query object and build a string
+      for (var prop in this.query) {
+        var value = this.query[prop];
+        var kvp = !value ? prop : prop + "=" + this.query[prop];
+        kvpa.push(kvp);
+      }
+      queryString = !kvpa.length ? "" : URL_QUERYSTRING_SEPARATOR + kvpa.join("&");
+      return this.scheme + URL_SCHEME_SEPARATOR + this.domain + this.path + queryString + fragment;
+    }
+  }], [{
+    key: "parseQueryString",
+    value: function parseQueryString(qs) {
+      var queryParts = qs.split("&");
+      var query = {};
+      for (var i = 0; i < queryParts.length; i++) {
+        var kvp = queryParts[i];
+        var parts = kvp.split("=");
+        var key = parts[0];
+        var value = parts[1];
+        query[key] = value;
+      }
+      return query;
+    }
+  }, {
+    key: "formatQueryString",
+    value: function formatQueryString(obj) {
+      var params = [];
+      for (var prop in obj) {
+        var kvp = void 0;
+        kvp = prop + "=" + obj[prop];
+        params.push(kvp);
+      }
+      ;
+      return params.join("&");
+    }
+  }]);
+}();
+
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/lib-http/caches/HttpCache.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@ocdla/lib-http/caches/HttpCache.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ HttpCache)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var HttpCache = /*#__PURE__*/function () {
+  function HttpCache() {
+    _classCallCheck(this, HttpCache);
+  }
+  return _createClass(HttpCache, [{
+    key: "put",
+    value: function put(key, resp) {
+      HttpCache.cache[key] = resp;
+    }
+  }, {
+    key: "get",
+    value: function get(key) {
+      return HttpCache.cache[key] || null;
+    }
+
+    // Stay compatible with other cache interfaces.
+  }, {
+    key: "match",
+    value: function match(key) {
+      return this.get(key);
+    }
+  }]);
+}();
+_defineProperty(HttpCache, "cache", {});
+
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/lib-http/caches/LocalStorage/LocalStorage.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@ocdla/lib-http/caches/LocalStorage/LocalStorage.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ LocalStorage)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var LocalStorage = /*#__PURE__*/function () {
+  function LocalStorage() {
+    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    _classCallCheck(this, LocalStorage);
+    // Define the default string keys to access the local storage. Expects JSON object with string keys and default value types.
+    // EX. {"news": {lastFetch: new Date(), stories: null},  "favorites": new Array()}
+    if (config.defaults !== undefined) LocalStorage.DEFAULTS = config.defaults;
+  }
+
+  // Using the string key, return from local storage the value stored. If it is undefined, search on the defaults object for a base structure
+  return _createClass(LocalStorage, [{
+    key: "getValue",
+    value: function getValue(key) {
+      return localStorage[key] === undefined ? LocalStorage.DEFAULTS[key] : JSON.parse(localStorage[key]);
+    }
+
+    // Using the string key, set local storage to the passed value
+  }, {
+    key: "setValue",
+    value: function setValue(key, value) {
+      if (value !== undefined) localStorage[key] = JSON.stringify(value);
+    }
+
+    // Clear all local storage
+  }, {
+    key: "clearAll",
+    value: function clearAll() {
+      // TODO: This should really be constrained to the keys that it accesses.
+      localStorage.clear();
+    }
+  }]);
+}();
+// JSON Object that holds default string key names and default values if no values exist
+_defineProperty(LocalStorage, "DEFAULTS", {});
+
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/lib-http/caches/LocalStorage/LocalStorageResponse.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@ocdla/lib-http/caches/LocalStorage/LocalStorageResponse.js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ LocalStorageResponse)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var LocalStorageResponse = /*#__PURE__*/function () {
+  function LocalStorageResponse(body, headers, expires) {
+    _classCallCheck(this, LocalStorageResponse);
+    _defineProperty(this, "headers", {});
+    _defineProperty(this, "body", null);
+    _defineProperty(this, "expires", null);
+    this.body = body;
+    this.headers = headers || this.headers;
+    this.expires = expires || this.expires;
+  }
+  return _createClass(LocalStorageResponse, [{
+    key: "addHeader",
+    value: function addHeader(k, v) {
+      this.headers[k] = v;
+    }
+  }, {
+    key: "getHeaders",
+    value: function getHeaders() {
+      return this.headers;
+    }
+  }, {
+    key: "getBody",
+    value: function getBody() {
+      return this.body;
+    }
+  }, {
+    key: "toString",
+    value: function toString() {
+      return JSON.stringify(this);
+    }
+
+    /*
+     Convert this object to a standard JavaScript Response object.
+    */
+  }, {
+    key: "toResponse",
+    value: function toResponse() {
+      return Response.json(JSON.parse(this.body), {
+        headers: this.headers
+      });
+    }
+
+    // Convert stored JSON in the format '{"headers":{"h1":"h1","h2":"h2","h3":"h3"},"body":"{"prop1":"val1"}"}'.
+  }], [{
+    key: "fromJson",
+    value: function fromJson(cachedJson) {
+      var _JSON$parse = JSON.parse(cachedJson),
+        body = _JSON$parse.body,
+        headers = _JSON$parse.headers,
+        expires = _JSON$parse.expires;
+      return new LocalStorageResponse(body, headers, expires);
+    }
+
+    // Convert an instance JavaScript Response to an instance of this class.
+  }, {
+    key: "fromHttpResponse",
+    value: function fromHttpResponse(httpResp) {
+      var expires = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var headers = new Headers(httpResp.headers);
+      return httpResp.text().then(function (body) {
+        return new LocalStorageResponse(body, headers, expires);
+      });
+    }
+  }]);
+}();
+
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/lib-http/caches/LocalStorageCache.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@ocdla/lib-http/caches/LocalStorageCache.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ LocalStorageCache)
+/* harmony export */ });
+/* harmony import */ var _LocalStorage_LocalStorageResponse_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LocalStorage/LocalStorageResponse.js */ "./node_modules/@ocdla/lib-http/caches/LocalStorage/LocalStorageResponse.js");
+/* harmony import */ var _LocalStorage_LocalStorage_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LocalStorage/LocalStorage.js */ "./node_modules/@ocdla/lib-http/caches/LocalStorage/LocalStorage.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
+var LocalStorageCache = /*#__PURE__*/function () {
+  // @params: refresh - If refresh is specified, the cache will be refreshed every refresh seconds.
+  function LocalStorageCache() {
+    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    _classCallCheck(this, LocalStorageCache);
+    this.refreshTime = config.refresh || null;
+  }
+  return _createClass(LocalStorageCache, [{
+    key: "put",
+    value: function put(key, httpResp) {
+      var expires = this.refreshTime >= 0 ? Date.now() + this.refreshTime * 1000 : false;
+      var resp = _LocalStorage_LocalStorageResponse_js__WEBPACK_IMPORTED_MODULE_0__["default"].fromHttpResponse(httpResp, expires);
+      resp.then(function (resp) {
+        var localStorage = new _LocalStorage_LocalStorage_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+        localStorage.setValue(key, resp.toString());
+      });
+    }
+  }, {
+    key: "get",
+    value: function get(key) {
+      var localStorageParams = {
+        defaults: _defineProperty({}, key, null)
+      };
+
+      // We get the value of the key. If there is nothing, we expect to get back null.
+      var localStorage = new _LocalStorage_LocalStorage_js__WEBPACK_IMPORTED_MODULE_1__["default"](localStorageParams);
+      var json = localStorage.getValue(key);
+      if (json) {
+        var cachedResp;
+        cachedResp = _LocalStorage_LocalStorageResponse_js__WEBPACK_IMPORTED_MODULE_0__["default"].fromJson(json);
+        if (LocalStorageCache.isResponseFresh(cachedResp)) return cachedResp.toResponse();
+      }
+      return null;
+    }
+  }, {
+    key: "match",
+    value: function match(key) {
+      return this.get(key);
+    }
+
+    // Returns true if the cached response is fresh: i.e. not stale.
+  }], [{
+    key: "isResponseFresh",
+    value: function isResponseFresh(entry) {
+      var expires = entry.expires;
+      if (!expires) return true;
+      return Date.now() < new Date(expires).getTime();
+    }
+  }]);
+}();
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/runtime/api.js":
 /*!*****************************************************!*\
   !*** ./node_modules/css-loader/dist/runtime/api.js ***!
@@ -672,6 +1302,70 @@ function Chapter() {
     "class": "tab-body flex flex-col gap-4"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", null, "Law Review Citations"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", null, "50 WLR 291 (2014)")));
 }
+
+/***/ }),
+
+/***/ "./src/js/index.js":
+/*!*************************!*\
+  !*** ./src/js/index.js ***!
+  \*************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _css_input_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/input.css */ "./src/css/input.css");
+/* harmony import */ var _ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/view/view.js */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _components_App_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/App.jsx */ "./src/components/App.jsx");
+/* harmony import */ var _data_ors_viewer_chapters_chapter_1_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../data/ors-viewer/chapters/chapter-1.jsx */ "./src/data/ors-viewer/chapters/chapter-1.jsx");
+/* harmony import */ var _ocdla_lib_http_Url_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ocdla/lib-http/Url.js */ "./node_modules/@ocdla/lib-http/Url.js");
+/* harmony import */ var _ocdla_lib_http_HttpClient_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ocdla/lib-http/HttpClient.js */ "./node_modules/@ocdla/lib-http/HttpClient.js");
+/* harmony import */ var _ocdla_ors_src_OrsChapter_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ocdla/ors/src/OrsChapter.js */ "./node_modules/@ocdla/ors/src/OrsChapter.js");
+/* harmony import */ var _data_ors_viewer_breadcrumbs_items_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../data/ors-viewer/breadcrumbs/items.json */ "./src/data/ors-viewer/breadcrumbs/items.json");
+/* harmony import */ var _data_ors_viewer_sidebar_left_items_json__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../data/ors-viewer/sidebar_left/items.json */ "./src/data/ors-viewer/sidebar_left/items.json");
+/* harmony import */ var _data_ors_viewer_sidebar_right_items_json__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../data/ors-viewer/sidebar_right/items.json */ "./src/data/ors-viewer/sidebar_right/items.json");
+/** @jsx vNode */
+
+
+
+
+// Data
+/* eslint-enable */
+
+
+
+
+
+
+
+
+// An HTTP fragment, also known as a URI fragment, is a string of characters in a URL that identifies a specific location within a resource. The fragment identifier introduced by a hash mark (#) is the optional last part of a URL for a document. It is typically used to identify a portion of that document. The generic syntax is specified in RFC 3986. The hash mark separator in URIs does not belong to the fragment identifier.
+var url = new _ocdla_lib_http_Url_js__WEBPACK_IMPORTED_MODULE_4__["default"]('https://appdev.ocdla.org/books-online/index.php');
+url.buildQuery('chapter', '1');
+var req = new Request(url.toString());
+var client = new _ocdla_lib_http_HttpClient_js__WEBPACK_IMPORTED_MODULE_5__["default"]();
+var resp = await client.send(req);
+var msword = await _ocdla_ors_src_OrsChapter_js__WEBPACK_IMPORTED_MODULE_6__["default"].fromResponse(resp);
+msword.chapterNum = 1;
+var xml = _ocdla_ors_src_OrsChapter_js__WEBPACK_IMPORTED_MODULE_6__["default"].toStructuredChapter(msword);
+
+/*
+    Inspect the available properties for use in building section outline (left nav) and content.
+    section outline (left nav) is listed in sectionTitles property.
+    xml.doc contains the entire document.
+    xml.toString() will return the entire document as an HTML string for use with innerHTML.
+*/
+
+console.log(xml);
+console.log(xml.doc);
+console.log('Loaded index.js');
+var root = _ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__.View.createRoot('#app');
+root.render((0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__.vNode)(_components_App_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  crumbs: _data_ors_viewer_breadcrumbs_items_json__WEBPACK_IMPORTED_MODULE_7__,
+  sidebarFirstItems: _data_ors_viewer_sidebar_left_items_json__WEBPACK_IMPORTED_MODULE_8__,
+  sidebarSecondItems: _data_ors_viewer_sidebar_right_items_json__WEBPACK_IMPORTED_MODULE_9__
+}, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__.vNode)(_data_ors_viewer_chapters_chapter_1_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
 
 /***/ }),
 
@@ -1510,6 +2204,9 @@ video {
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.outline {
+  outline-style: solid;
+}
 .contrast-\\[0\\] {
   --tw-contrast: contrast(0);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -1669,7 +2366,7 @@ video {
     padding-bottom: 4rem;
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/css/input.css"],"names":[],"mappings":"AAAA;;CAAc,CAAd;;;CAAc;;AAAd;;;EAAA,sBAAc,EAAd,MAAc;EAAd,eAAc,EAAd,MAAc;EAAd,mBAAc,EAAd,MAAc;EAAd,qBAAc,EAAd,MAAc;AAAA;;AAAd;;EAAA,gBAAc;AAAA;;AAAd;;;;;;;;CAAc;;AAAd;;EAAA,gBAAc,EAAd,MAAc;EAAd,8BAAc,EAAd,MAAc;EAAd,gBAAc,EAAd,MAAc;EAAd,cAAc;KAAd,WAAc,EAAd,MAAc;EAAd,4IAAc,EAAd,MAAc;EAAd,6BAAc,EAAd,MAAc;EAAd,+BAAc,EAAd,MAAc;EAAd,wCAAc,EAAd,MAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,SAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;AAAA;;AAAd;;;;CAAc;;AAAd;EAAA,SAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;EAAd,qBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,yCAAc;UAAd,iCAAc;AAAA;;AAAd;;CAAc;;AAAd;;;;;;EAAA,kBAAc;EAAd,oBAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,cAAc;EAAd,wBAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,mBAAc;AAAA;;AAAd;;;;;CAAc;;AAAd;;;;EAAA,+GAAc,EAAd,MAAc;EAAd,6BAAc,EAAd,MAAc;EAAd,+BAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,cAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,cAAc;EAAd,cAAc;EAAd,kBAAc;EAAd,wBAAc;AAAA;;AAAd;EAAA,eAAc;AAAA;;AAAd;EAAA,WAAc;AAAA;;AAAd;;;;CAAc;;AAAd;EAAA,cAAc,EAAd,MAAc;EAAd,qBAAc,EAAd,MAAc;EAAd,yBAAc,EAAd,MAAc;AAAA;;AAAd;;;;CAAc;;AAAd;;;;;EAAA,oBAAc,EAAd,MAAc;EAAd,8BAAc,EAAd,MAAc;EAAd,gCAAc,EAAd,MAAc;EAAd,eAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;EAAd,uBAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;EAAd,SAAc,EAAd,MAAc;EAAd,UAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,oBAAc;AAAA;;AAAd;;;CAAc;;AAAd;;;;EAAA,0BAAc,EAAd,MAAc;EAAd,6BAAc,EAAd,MAAc;EAAd,sBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,aAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,gBAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,wBAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,YAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,6BAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,wBAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,0BAAc,EAAd,MAAc;EAAd,aAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,kBAAc;AAAA;;AAAd;;CAAc;;AAAd;;;;;;;;;;;;;EAAA,SAAc;AAAA;;AAAd;EAAA,SAAc;EAAd,UAAc;AAAA;;AAAd;EAAA,UAAc;AAAA;;AAAd;;;EAAA,gBAAc;EAAd,SAAc;EAAd,UAAc;AAAA;;AAAd;;CAAc;AAAd;EAAA,UAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,gBAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,UAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;AAAA;;AAAd;;EAAA,UAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,eAAc;AAAA;;AAAd;;CAAc;AAAd;EAAA,eAAc;AAAA;;AAAd;;;;CAAc;;AAAd;;;;;;;;EAAA,cAAc,EAAd,MAAc;EAAd,sBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,eAAc;EAAd,YAAc;AAAA;;AAAd,wEAAc;AAAd;EAAA,aAAc;AAAA;;AAAd;EAAA,wBAAc;EAAd,wBAAc;EAAd,mBAAc;EAAd,mBAAc;EAAd,cAAc;EAAd,cAAc;EAAd,cAAc;EAAd,eAAc;EAAd,eAAc;EAAd,aAAc;EAAd,aAAc;EAAd,kBAAc;EAAd,sCAAc;EAAd,8BAAc;EAAd,6BAAc;EAAd,4BAAc;EAAd,eAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,kBAAc;EAAd,2BAAc;EAAd,4BAAc;EAAd,sCAAc;EAAd,kCAAc;EAAd,2BAAc;EAAd,sBAAc;EAAd,8BAAc;EAAd,YAAc;EAAd,kBAAc;EAAd,gBAAc;EAAd,iBAAc;EAAd,kBAAc;EAAd,cAAc;EAAd,gBAAc;EAAd,aAAc;EAAd,mBAAc;EAAd,qBAAc;EAAd,2BAAc;EAAd,yBAAc;EAAd,0BAAc;EAAd,2BAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,yBAAc;EAAd,sBAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,qBAAc;EAAd;AAAc;;AAAd;EAAA,wBAAc;EAAd,wBAAc;EAAd,mBAAc;EAAd,mBAAc;EAAd,cAAc;EAAd,cAAc;EAAd,cAAc;EAAd,eAAc;EAAd,eAAc;EAAd,aAAc;EAAd,aAAc;EAAd,kBAAc;EAAd,sCAAc;EAAd,8BAAc;EAAd,6BAAc;EAAd,4BAAc;EAAd,eAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,kBAAc;EAAd,2BAAc;EAAd,4BAAc;EAAd,sCAAc;EAAd,kCAAc;EAAd,2BAAc;EAAd,sBAAc;EAAd,8BAAc;EAAd,YAAc;EAAd,kBAAc;EAAd,gBAAc;EAAd,iBAAc;EAAd,kBAAc;EAAd,cAAc;EAAd,gBAAc;EAAd,aAAc;EAAd,mBAAc;EAAd,qBAAc;EAAd,2BAAc;EAAd,yBAAc;EAAd,0BAAc;EAAd,2BAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,yBAAc;EAAd,sBAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,qBAAc;EAAd;AAAc;AACd;EAAA;AAAoB;AAApB;;EAAA;IAAA;EAAoB;AAAA;AAApB;;EAAA;IAAA;EAAoB;AAAA;AAApB;;EAAA;IAAA;EAAoB;AAAA;AAApB;;EAAA;IAAA;EAAoB;AAAA;AAApB;;EAAA;IAAA;EAAoB;AAAA;AACpB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,iBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,WAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,wBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,yBAAmB;KAAnB,sBAAmB;UAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,gCAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,qBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,mBAAmB;EAAnB;AAAmB;AAAnB;EAAA,iBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,mBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,mBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,0EAAmB;EAAnB,8FAAmB;EAAnB;AAAmB;AAAnB;EAAA,0BAAmB;EAAnB;AAAmB;AAAnB;EAAA,yBAAmB;EAAnB;AAAmB;AAAnB;EAAA,0BAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAFnB;EAAA,sBAGA;EAHA;AAGA;AAHA;EAAA,sBAGA;EAHA;AAGA;AAHA;EAAA,kBAGA;EAHA;AAGA;AAHA;EAAA,kBAGA;EAHA;AAGA;AAHA;EAAA,oBAGA;EAHA;AAGA;AAHA;EAAA,oBAGA;EAHA;AAGA;AAHA;EAAA,oBAGA;EAHA;AAGA;AAHA;EAAA;AAGA;AAHA;EAAA;AAGA;AAHA;EAAA;AAGA;AAHA;EAAA;AAGA;AAHA;EAAA;AAGA;AAHA;EAAA,oBAGA;EAHA;AAGA;AAHA;;EAAA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA,sBAGA;IAHA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA;EAGA;;EAHA;IAAA,gBAGA;IAHA;EAGA;;EAHA;IAAA,iBAGA;IAHA;EAGA;;EAHA;IAAA;EAGA;AAAA","sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/css/input.css"],"names":[],"mappings":"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","sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1994,6 +2691,575 @@ function styleTagTransform(css, styleElement) {
   }
 }
 module.exports = styleTagTransform;
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/ors/src/OrsChapter.js":
+/*!***************************************************!*\
+  !*** ./node_modules/@ocdla/ors/src/OrsChapter.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ OrsChapter)
+/* harmony export */ });
+/* harmony import */ var _Outline_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Outline.js */ "./node_modules/@ocdla/ors/src/Outline.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+var gSubRe = /^\(([0-9a-zA-Z]+)\)(.*)/gm;
+var subRe = /^\(([0-9a-zA-Z]+)\)(.*)/;
+
+// Fetches the contents of the original ORS chapter from the Oregon Legislature web site.
+// Transforms it in to a well-formed HTML document.
+var OrsChapter = /*#__PURE__*/function () {
+  function OrsChapter(chapterNum) {
+    _classCallCheck(this, OrsChapter);
+    // The chapter number.
+    _defineProperty(this, "chapterNum", null);
+    // Title of this chapter - must be a string.
+    _defineProperty(this, "title", void 0);
+    // The chapter's underlying XML document.
+    _defineProperty(this, "doc", null);
+    // Parsed title of each section of this chapter.
+    _defineProperty(this, "sectionTitles", {});
+    // Contains references to DOM node <b> elements.
+    // Might be unused.
+    _defineProperty(this, "sectionHeadings", {});
+    this.chapterNum = chapterNum;
+    this.doc = new Document();
+  }
+
+  // Convert one unstructured chapter into a structured chapter.
+  // Use the anchors in the unstructured chapter to build a structured chapter
+  // where each section and subsection(s) are grouped and wrapped in the appropriate node hierarchy.
+  return _createClass(OrsChapter, [{
+    key: "injectAnchors",
+    value:
+    // Inserts anchors as <div> tags in the doc.
+    // Note: this affects the underlying structure
+    //  of the XML document.
+    function injectAnchors() {
+      for (var prop in this.sectionTitles) {
+        var _headingDiv = this.doc.createElement('div');
+        _headingDiv.setAttribute('id', 'section-' + prop);
+        _headingDiv.setAttribute('class', 'ocdla-heading');
+        _headingDiv.setAttribute('data-chapter', this.chapterNum);
+        _headingDiv.setAttribute('data-section', prop);
+        var target = this.sectionHeadings[prop];
+        target.parentNode.insertBefore(_headingDiv, target);
+      }
+      var subset = this.doc.querySelector('.WordSection1');
+      var headingDiv = this.doc.createElement('div');
+      headingDiv.setAttribute('class', 'ocdla-heading');
+      headingDiv.setAttribute('id', 'end');
+      subset.appendChild(headingDiv);
+    }
+
+    /**
+     *
+     * @param {String} id
+     * @returns DOMNode
+     */
+  }, {
+    key: "getSection",
+    value: function getSection(id) {
+      return this.doc.getElementById('section-' + id);
+    }
+
+    /**
+     *
+     * @param {String} id
+     * @returns DOMNode
+     */
+  }, {
+    key: "querySelectorAll",
+    value: function querySelectorAll(references) {
+      var nodes = [];
+      console.log('references length is: ', references);
+      for (var i = 0; i < references.length; i++) {
+        var reference = references[i];
+        var chapter = void 0,
+          section = void 0,
+          subsection = void 0;
+        var rangeStart = void 0,
+          rangeEnd = void 0;
+        var _reference$split = reference.split('-');
+        var _reference$split2 = _slicedToArray(_reference$split, 2);
+        rangeStart = _reference$split2[0];
+        rangeEnd = _reference$split2[1];
+        console.log('Ranges', rangeStart, rangeEnd);
+        var _OrsChapter$parseRefe = OrsChapter.parseReference(rangeStart);
+        var _OrsChapter$parseRefe2 = _slicedToArray(_OrsChapter$parseRefe, 3);
+        chapter = _OrsChapter$parseRefe2[0];
+        section = _OrsChapter$parseRefe2[1];
+        subsection = _OrsChapter$parseRefe2[2];
+        console.log(chapter, section, subsection);
+        var ids = subsection ? [parseInt(section), subsection].join('-') : parseInt(section);
+        ids = '#section-' + ids;
+        console.log(ids);
+        var node = this.docTwo.querySelector(ids);
+        if (null == node) return null;
+
+        // If the selector specifies a range of subsections retrieve only those.
+        if (rangeEnd) {
+          console.log('RANGE DETECTED!');
+          node = node.parentNode.cloneNode(true);
+          node = OrsChapter.extractRange(node, rangeStart, rangeEnd);
+        }
+        nodes.push(node);
+        console.log(nodes);
+      }
+      return nodes;
+    }
+  }, {
+    key: "retrievePTags",
+    value:
+    // there are exceptions!!!
+    // such as (5)(a).
+    // it will find the 5, and put subsection level to 0.
+    // HOWEVER, we are actually supposed to be on (a).
+    // the level is supposed to be 1.
+    // the next subsection in the list is (A).
+    // this is ONLY EXPECTED when level is 1. Not when level is 0.
+    // so it breaks. Hurray!
+
+    function retrievePTags(section) {
+      var text = '';
+      var pTags = section.children;
+      var fn = function fn(match, p1, offset, original) {
+        var duo = match.split(')(');
+        return duo.join(')\n(');
+      };
+      var header = pTags[0].querySelector('b');
+      header = pTags[0].removeChild(header);
+      header = header.innerText;
+      for (var index in pTags) {
+        var child = pTags[index];
+        var childText = '';
+        if (child != null) {
+          childText = child.innerText;
+        }
+        if (childText == null || childText == '') {
+          continue;
+        }
+        childText = childText.trim().replaceAll('\n', ' ');
+        text += childText + '\n';
+      }
+      var matches = text.replaceAll(/(^\([0-9a-zA-Z]+\)\([0-9a-zA-Z]+\))/gm, fn);
+      matches = matches.match(gSubRe);
+      return matches === null ? [header, text] : [header, matches];
+    }
+  }, {
+    key: "iterateMatches",
+    value: function iterateMatches(matches, currentIndex, parent, sectionNumber) {
+      var lastLevel = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '0';
+      //if we leave off at a roman numeral then
+
+      //console.log(matches);
+      // console.log(sectionNumber);
+      if (sectionNumber == 555) {
+        console.log(matches);
+      }
+      if (currentIndex >= matches.length) {
+        return parent;
+      }
+
+      //for (var i = currentIndex; i < matches.length; i++) {
+      // let match = fun(matches, currentIndex);
+      var match = matches[currentIndex].match(subRe);
+      var nextMatch = matches[currentIndex + 1];
+      var id, divId, text, level;
+      if (match == null) {
+        // not a subsection
+        // what do?
+        // nothing. we shouldn't handle this case, this is either descriptive text or not..?
+        // maybe handle for single section text like 701.002.
+        id = 'description';
+        text = matches[currentIndex];
+        level = '0';
+        return;
+      } else {
+        id = match[1];
+        text = '(' + id + ')' + match[2];
+        level = _Outline_js__WEBPACK_IMPORTED_MODULE_0__["default"].findLevel(id, nextMatch);
+      }
+
+      //console.log(match);
+      // 0 should be full text?
+      // 1 is id
+      // 2 is text without subsection
+
+      if (level > lastLevel) {
+        parent = parent.lastChild;
+      } else if (level < lastLevel) {
+        if (lastLevel - level == 1) {
+          parent = parent.parentNode;
+        } else if (lastLevel - level == 2) {
+          parent = parent.parentNode.parentNode;
+        } else if (lastLevel - level == 3) {
+          parent = parent.parentNode.parentNode.parentNode;
+        }
+      }
+      if (parent == null) {
+        console.warn('Parent is null');
+        console.log(matches, sectionNumber);
+        return;
+      }
+      divId = parent.getAttribute('id') + '-' + id;
+      var element = _Outline_js__WEBPACK_IMPORTED_MODULE_0__["default"].buildSection(this.doc, id, divId, text, level);
+      parent.appendChild(element);
+      // identify subsections
+      // build subsection grouping elements
+
+      this.iterateMatches(matches, ++currentIndex, parent, sectionNumber, level);
+    }
+  }, {
+    key: "removeNodes",
+    value: function removeNodes(selector) {
+      var nodes = this.doc.querySelectorAll(selector);
+      for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        node.parentNode.removeChild(node);
+      }
+    }
+  }, {
+    key: "buildToc",
+    value: function buildToc() {
+      var toc = [];
+      for (var key in this.sectionTitles) {
+        var val = this.sectionTitles[key];
+        toc.push("<li><span class=\"section-number\">".concat(this.chapterNum, ".").concat(key, "</span><a data-action=\"view-section\" data-section=\"").concat(key, "\" href=\"#\">").concat(val, "</a></li>"));
+      }
+      var joinedToc = toc.join(' ');
+      return joinedToc;
+    }
+
+    // Highlights a selected section on the page
+  }, {
+    key: "highlight",
+    value: function highlight(section, endSection) {
+      console.log(this.chapterNum);
+      console.log(section);
+      console.log(endSection);
+      var range = this.doc.createRange();
+      var firstNode = this.doc.getElementById(section);
+      console.log(firstNode);
+      var secondNode = this.doc.getElementById(endSection);
+      console.log(secondNode);
+      range.setStartBefore(firstNode);
+      range.setEnd(secondNode.parentNode, secondNode.parentNode.childNodes.length);
+      console.log(range);
+      var newParent = this.doc.createElement('div');
+      newParent.setAttribute('style', 'background-color:yellow;');
+      var contents = range.extractContents();
+      console.log(contents);
+    }
+  }, {
+    key: "cloneFromIds",
+    value: function cloneFromIds(startId, endId) {
+      var startNode = this.doc.getElementById(startId);
+      if (null == startNode) {
+        throw new Error('NODE_NOT_FOUND_ERROR: (#' + startId + ')');
+      }
+      var endNode = this.doc.getElementById(endId);
+      if (null == startNode) {
+        throw new Error('NODE_NOT_FOUND_ERROR: (#' + endId + ')');
+      }
+      return this.clone(startNode, endNode);
+    }
+
+    // Clones the contents inside a range.
+  }, {
+    key: "clone",
+    value: function clone(startNode, endNode) {
+      var range = document.createRange();
+      range.setStartBefore(startNode);
+      range.setEndBefore(endNode);
+      var contents = range.cloneContents();
+      var spans = contents.querySelectorAll('span');
+      // remove styling from each span
+      for (var elements in spans) {
+        var element = spans[elements];
+        if (element.style) {
+          element.style = null;
+        }
+      }
+      // console.log(contents);
+      return contents;
+    }
+
+    // Given a valid section number,
+    // returns the next section in this ORS chapter.
+    // Used for building ranges.
+  }, {
+    key: "getNextSectionId",
+    value: function getNextSectionId(sectionNum) {
+      var headings = this.doc.querySelectorAll('.ocdla-heading');
+      var section = this.doc.getElementById(sectionNum);
+      if (null == section) {
+        throw new Error('NODE_NOT_FOUND_ERROR: Could not locate ' + sectionNum);
+      }
+      for (var i = 0; i < headings.length; i++) {
+        if (headings.item(i) == section) {
+          var nextSection = headings.item(i + 1);
+          return nextSection.getAttribute('id');
+        }
+      }
+    }
+
+    // Outputs the document as an HTML string
+  }, {
+    key: "toString",
+    value: function toString() {
+      var serializer = new XMLSerializer();
+      var subset = this.doc.querySelector('.WordSection1');
+      return serializer.serializeToString(subset);
+    }
+  }], [{
+    key: "toStructuredChapter",
+    value: function toStructuredChapter(chapter) {
+      var ch = new OrsChapter(chapter.chapterNum);
+      var doc = ch.doc;
+      ch.chapterTitle = chapter.chapterTitle;
+      ch.sectionTitles = chapter.sectionTitles;
+      var wordSection = doc.createElement('div');
+      wordSection.setAttribute('class', 'WordSection1');
+      for (var prop in chapter.sectionTitles) {
+        // Create a new section element.
+        var section = doc.createElement('div');
+        section.setAttribute('id', 'section-' + prop);
+
+        // console.log(prop);
+        var startId = 'section-' + parseInt(prop);
+        var endId = chapter.getNextSectionId(startId);
+        var clonedSection = chapter.cloneFromIds(startId, endId);
+        var _chapter$retrievePTag = chapter.retrievePTags(clonedSection),
+          _chapter$retrievePTag2 = _slicedToArray(_chapter$retrievePTag, 2),
+          header = _chapter$retrievePTag2[0],
+          matches = _chapter$retrievePTag2[1];
+
+        // If matches are returned as just a string which means no subsections exist for that section then you just build the element with the text that is stored in matches and append it to the section
+        if (typeof matches == 'string') {
+          var element = _Outline_js__WEBPACK_IMPORTED_MODULE_0__["default"].buildSection(doc, 'description', 'section-' + prop + '-description', matches, 0);
+          section.appendChild(element);
+        } else {
+          chapter.iterateMatches(matches, 0, section, prop);
+        }
+        wordSection.appendChild(section);
+      }
+      doc.appendChild(wordSection);
+      return ch;
+    }
+  }, {
+    key: "fromResponse",
+    value: function fromResponse(resp, chapterNum) {
+      return resp.arrayBuffer().then(function (buffer) {
+        var decoder = new TextDecoder('iso-8859-1');
+        return decoder.decode(buffer);
+      }).then(function (html) {
+        var parser = new DOMParser();
+        var chapter = new OrsChapter(chapterNum);
+        // Tell the parser to look for html
+        chapter.doc = parser.parseFromString(html, 'text/html');
+        var _OrsOutline$retrieveS = _Outline_js__WEBPACK_IMPORTED_MODULE_0__["default"].retrieveSectionTitles(chapter.doc),
+          _OrsOutline$retrieveS2 = _slicedToArray(_OrsOutline$retrieveS, 2),
+          sectionTitles = _OrsOutline$retrieveS2[0],
+          sectionHeadings = _OrsOutline$retrieveS2[1];
+        chapter.sectionTitles = sectionTitles;
+        chapter.sectionHeadings = sectionHeadings;
+        chapter.injectAnchors();
+        return chapter;
+      });
+    }
+  }, {
+    key: "extractRange",
+    value: function extractRange(node, startRef, endRef) {
+      console.log(node, startRef, endRef);
+      // check node.children
+      // match (1)(a)(A)(i) etc.
+
+      var start = OrsChapter.parseSubsections(startRef);
+      var end = OrsChapter.parseSubsections(endRef);
+      var remove = [];
+      var regEx, regStart, regEnd;
+      regStart = start.pop();
+      regEnd = end.pop();
+      regEx = new RegExp('[' + regStart + '-' + regEnd + ']');
+      var children = node.children;
+      for (var i = 0; i < children.length; i++) {
+        var child = children[i];
+        var id = child.getAttribute('id');
+        if (!id) continue;
+        var parts = id.split('-');
+        var compare = parts.pop();
+        console.log('Comparing ', compare, regEx);
+        if (!compare.match(regEx)) {
+          console.log('match not found');
+          remove.push(child);
+        } else {
+          console.log('match found');
+        }
+      }
+      for (var _i = 0, _remove = remove; _i < _remove.length; _i++) {
+        var n = _remove[_i];
+        node.removeChild(n);
+      }
+      return node;
+    }
+  }, {
+    key: "parseSubsections",
+    value: function parseSubsections(reference) {
+      var subs = reference.match(/(?<=\()([0-9a-zA-Z]+)(?=\))/g);
+      console.log('parseSubsections()', subs);
+      return subs;
+    }
+  }, {
+    key: "parseReference",
+    value: function parseReference(reference) {
+      var chapter, section, subsection;
+      var parts = reference.match(/([0-9a-zA-Z]+)/g);
+      chapter = parts.shift();
+      section = parts.shift();
+
+      // Parse a range of subsections.
+      // Parse a comma-delimitted series of subsections.
+      //this.references = reference.split(",");
+      subsection = parts.length > 0 ? parts.join('-') : null;
+      return [chapter, section, subsection];
+    }
+  }]);
+}();
+
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/ors/src/Outline.js":
+/*!************************************************!*\
+  !*** ./node_modules/@ocdla/ors/src/Outline.js ***!
+  \************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ OrsOutline)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+/**
+ * @class OrsOutline
+ * @description This class is used to create an outline of the ORS chapter.
+ */
+var OrsOutline = /*#__PURE__*/function () {
+  function OrsOutline() {
+    _classCallCheck(this, OrsOutline);
+  }
+  return _createClass(OrsOutline, null, [{
+    key: "retrieveSectionTitles",
+    value:
+    /**
+     * In an ORS chapter, the section titles are bolded.
+     * This method retrieves the section titles and their corresponding section numbers.
+     */
+    function retrieveSectionTitles(doc) {
+      // Createa nodeList of all the <b> elements in the body
+      var headings = doc.querySelectorAll('b');
+      var titles = [],
+        elems = [];
+      for (var i = 0; i < headings.length; i++) {
+        var boldParent = headings[i];
+        var trimmed = headings[i].textContent.trim();
+        if (trimmed.indexOf('Note') === 0) continue;
+        var strings = trimmed.split('\n');
+        var chapter = void 0,
+          section = void 0,
+          key = void 0,
+          val = void 0;
+
+        // If array has only one element,
+        // Then we know this doesn't follow the regular statute pattern.
+        if (strings.length === 1) {
+          key = strings[0];
+          val = boldParent.nextSibling ? boldParent.nextSibling.textContent : '';
+        } else {
+          // otherwise our normal case.
+          key = strings[0];
+          val = strings[1];
+          var numbers = key.split('.');
+          chapter = numbers[0];
+          section = numbers[1];
+        }
+
+        // Might need to change this one to remove parseInt
+        titles[parseInt(section)] = val;
+        elems[parseInt(section)] = boldParent;
+      }
+      return [titles, elems];
+    }
+  }, {
+    key: "findLevel",
+    value: function findLevel(text, nextMatch) {
+      var subNumRe = /^[0-9]+/;
+      var subUpperRe = /^[A-Z]+/;
+      var subRe = /^\(([0-9a-zA-Z]+)\)(.*)/;
+      var nextId;
+      if (nextMatch != null) {
+        nextId = nextMatch.match(subRe)[1];
+      }
+      if (text.match(subNumRe)) {
+        return '0';
+      } else if (!OrsOutline.isRomanNumeral(text, nextId) && !text.match(subUpperRe)) {
+        return '1';
+      } else if (text.match(subUpperRe)) {
+        return '2';
+      } else if (OrsOutline.isRomanNumeral(text, nextId)) {
+        return '3';
+      }
+    }
+  }, {
+    key: "isRomanNumeral",
+    value: function isRomanNumeral(text, nextText) {
+      var romanReg = /^[ivx]+/;
+      if (nextText == null) {
+        return text.match(romanReg);
+      }
+      return text.match(romanReg) && (nextText.match(romanReg) || text.length > 1);
+    }
+  }, {
+    key: "buildSection",
+    value: function buildSection(doc, id, divId, text, level) {
+      var sub = doc.createElement('div');
+      sub.setAttribute('id', divId);
+      sub.setAttribute('class', 'level-' + level);
+      var span = doc.createElement('span');
+      span.setAttribute('class', 'subsection');
+      if (id !== 'description') {
+        span.innerText = '(' + id + ')';
+      }
+      var theText = doc.createTextNode(text);
+      sub.appendChild(span);
+      sub.appendChild(theText);
+      return sub;
+    }
+  }]);
+}();
+
 
 /***/ }),
 
@@ -2557,6 +3823,75 @@ module.exports = /*#__PURE__*/JSON.parse('[{"type":"sidebar_right","href":"/","t
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/async module */
+/******/ 	(() => {
+/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
+/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
+/******/ 		var resolveQueue = (queue) => {
+/******/ 			if(queue && queue.d < 1) {
+/******/ 				queue.d = 1;
+/******/ 				queue.forEach((fn) => (fn.r--));
+/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 			}
+/******/ 		}
+/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 			if(dep !== null && typeof dep === "object") {
+/******/ 				if(dep[webpackQueues]) return dep;
+/******/ 				if(dep.then) {
+/******/ 					var queue = [];
+/******/ 					queue.d = 0;
+/******/ 					dep.then((r) => {
+/******/ 						obj[webpackExports] = r;
+/******/ 						resolveQueue(queue);
+/******/ 					}, (e) => {
+/******/ 						obj[webpackError] = e;
+/******/ 						resolveQueue(queue);
+/******/ 					});
+/******/ 					var obj = {};
+/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
+/******/ 					return obj;
+/******/ 				}
+/******/ 			}
+/******/ 			var ret = {};
+/******/ 			ret[webpackQueues] = x => {};
+/******/ 			ret[webpackExports] = dep;
+/******/ 			return ret;
+/******/ 		}));
+/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
+/******/ 			var queue;
+/******/ 			hasAwait && ((queue = []).d = -1);
+/******/ 			var depQueues = new Set();
+/******/ 			var exports = module.exports;
+/******/ 			var currentDeps;
+/******/ 			var outerResolve;
+/******/ 			var reject;
+/******/ 			var promise = new Promise((resolve, rej) => {
+/******/ 				reject = rej;
+/******/ 				outerResolve = resolve;
+/******/ 			});
+/******/ 			promise[webpackExports] = exports;
+/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
+/******/ 			module.exports = promise;
+/******/ 			body((deps) => {
+/******/ 				currentDeps = wrapDeps(deps);
+/******/ 				var fn;
+/******/ 				var getResult = () => (currentDeps.map((d) => {
+/******/ 					if(d[webpackError]) throw d[webpackError];
+/******/ 					return d[webpackExports];
+/******/ 				}))
+/******/ 				var promise = new Promise((resolve) => {
+/******/ 					fn = () => (resolve(getResult));
+/******/ 					fn.r = 0;
+/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
+/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
+/******/ 				});
+/******/ 				return fn.r ? promise : getResult();
+/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
+/******/ 			queue && queue.d < 0 && (queue.d = 0);
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -2603,36 +3938,12 @@ module.exports = /*#__PURE__*/JSON.parse('[{"type":"sidebar_right","href":"/","t
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-/*!*************************!*\
-  !*** ./src/js/index.js ***!
-  \*************************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _css_input_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/input.css */ "./src/css/input.css");
-/* harmony import */ var _ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/view/view.js */ "./node_modules/@ocdla/view/view.js");
-/* harmony import */ var _components_App_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/App.jsx */ "./src/components/App.jsx");
-/* harmony import */ var _data_ors_viewer_chapters_chapter_1_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../data/ors-viewer/chapters/chapter-1.jsx */ "./src/data/ors-viewer/chapters/chapter-1.jsx");
-/* harmony import */ var _data_ors_viewer_breadcrumbs_items_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../data/ors-viewer/breadcrumbs/items.json */ "./src/data/ors-viewer/breadcrumbs/items.json");
-/* harmony import */ var _data_ors_viewer_sidebar_left_items_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../data/ors-viewer/sidebar_left/items.json */ "./src/data/ors-viewer/sidebar_left/items.json");
-/* harmony import */ var _data_ors_viewer_sidebar_right_items_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../data/ors-viewer/sidebar_right/items.json */ "./src/data/ors-viewer/sidebar_right/items.json");
-/** @jsx vNode */
-
-
-
-
-// Data
-/* eslint-enable */
-
-
-
-
-console.log("Loaded index.js");
-var js_root = _ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__.View.createRoot("#app");
-js_root.render((0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__.vNode)(_components_App_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-  crumbs: _data_ors_viewer_breadcrumbs_items_json__WEBPACK_IMPORTED_MODULE_4__,
-  sidebarFirstItems: _data_ors_viewer_sidebar_left_items_json__WEBPACK_IMPORTED_MODULE_5__,
-  sidebarSecondItems: _data_ors_viewer_sidebar_right_items_json__WEBPACK_IMPORTED_MODULE_6__
-}, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_1__.vNode)(_data_ors_viewer_chapters_chapter_1_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module used 'module' so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/index.js");
+/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=app.bundle.js.map
