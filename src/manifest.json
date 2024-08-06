@@ -1,9 +1,8 @@
 {
-    "short_name": "OCDLA",
     "name": "Oregon Criminal Defense Lawyers Association",
-    "serviceworker": {
-        "src": "./sw.js"
-    },
+    "short_name": "OCDLA",
+    "start_url": "./?source=pwa",
+    "display": "standalone",
     "icons": [
         {
             "src": "images/pwa-icons-180.png",
@@ -21,12 +20,8 @@
             "type": "image/png"
         }
     ],
-    "id": "./?source=pwa",
-    "start_url": "./?source=pwa",
-    "display": "standalone",
     "background_color": "#c4a12e",
     "theme_color": "#c4a12e",
-    "scope": "./",
     "shortcuts": [
         {
             "name": "How's the weather today?",
