@@ -537,9 +537,7 @@ var HttpClient = /*#__PURE__*/function () {
         }
 
         // If there is a pending request to the same URL, return it.
-        if (HttpClient.outbound[key]) {
-          return HttpClient.outbound[key];
-        }
+        if (false) {}
 
         // If we've made it this far, we need to go to the network to get the resource.
         pending = fetch(req).then(function (resp) {
