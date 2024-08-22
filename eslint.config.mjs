@@ -1,5 +1,5 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
+import globals from "globals";
+import pluginJs from "@eslint/js";
 
 export default [
     {
@@ -11,34 +11,33 @@ export default [
                 }
             }
         },
-        files: ['**/*.js', '**/*.jsx']
+        files: ["**/*.js", "**/*.jsx"]
     },
     pluginJs.configs.recommended,
     {
         rules: {
-            'import/no-duplicates': 'off',
-            'multiline-ternary': 'off',
-            'space-before-function-paren': 'off',
-            'arrow-parens': ['warn', 'as-needed'],
-            'no-undef': 'off',
-            'no-constant-condition': 'off',
-            'no-tabs': 'warn',
-            'no-case-declarations': 'off',
+            "import/no-duplicates": "off",
+            "multiline-ternary": "off",
+            "space-before-function-paren": "off",
+            "arrow-parens": ["warn", "as-needed"],
+            "no-undef": "off",
+            "no-constant-condition": "off",
+            "no-tabs": "warn",
+            "no-case-declarations": "off",
             indent: [
-                'warn',
+                "warn",
                 4,
                 {
                     SwitchCase: 1,
-                    ignoredNodes: ['ConditionalExpression']
+                    ignoredNodes: ["ConditionalExpression"]
                 }
             ],
-            quotes: ['warn', 'single'],
-            semi: ['warn', 'always'],
-            'no-useless-concat': 'warn',
-            'no-array-constructor': 'warn',
-            'no-unused-vars': 'warn',
-            eqeqeq: 'warn',
-            'no-console': 'warn'
+            quotes: ["warn", "double"],
+            semi: ["warn", "always"],
+            "no-useless-concat": "warn",
+            "no-array-constructor": "warn",
+            "no-unused-vars": "warn",
+            "no-console": "warn"
         }
     }
 ];
