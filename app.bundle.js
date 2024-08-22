@@ -1278,7 +1278,7 @@ function App(_ref) {
   }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
     "class": "select-none whitespace-pre font-bold",
     onclick: function onclick() {
-      view.render("foo");
+      view.render('foo');
     }
   })), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("header", {
     "class": "flex flex-col lg:h-32"
@@ -1295,7 +1295,9 @@ function App(_ref) {
     "class": "flex w-full flex-col gap-4 p-4 lg:col-span-4 lg:col-start-2 lg:me-auto lg:border-x lg:p-8"
   }, children), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     items: sidebarSecondItems
-  }))), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  }))), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("footer", {
+    "class": "container mx-auto flex flex-col gap-4 border border-b-0 p-4 pb-16 lg:flex-row lg:gap-0 lg:p-8 lg:pb-16"
+  }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
 }
 
 /***/ }),
