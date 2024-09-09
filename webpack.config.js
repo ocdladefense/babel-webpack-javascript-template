@@ -95,8 +95,8 @@ module.exports = env => {
                 {
                     test: /\.xml$/i,
                     exclude: [
-                        /node_modules\/(?!@ocdla\/global-components)/,
-                        /dev_modules\/(?!@ocdla\/global-components)/
+                        /node_modules\/(?!@local)/,
+                        /dev_modules\/(?!@ocdla)/
                     ],
                     type: "asset/source"
                 },

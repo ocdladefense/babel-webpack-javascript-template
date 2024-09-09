@@ -28,7 +28,8 @@
     "globals": "^15.6.0",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.6",
-    "@local/scripts": "file:./dev_modules/@local/local"
+    "@local/scripts": "file:./dev_modules/@local/local",
+    "@local/local": "file:./dev_modules/@local/local"
   },
   "devDependencies": {
     "package-json-merge": "git+https://github.com/ocdladefense/package-json-merge.git",
