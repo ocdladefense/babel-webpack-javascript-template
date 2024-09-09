@@ -7,6 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "babel-build": "babel src --out-dir dist --source-maps",
         "build": "webpack --config webpack.config.js --env USE_MOCK_BON",
+        "update": "cp package.json package-main.json && package-json-merge package-main.json package-overrides.json > package.json",
         "start": "webpack serve",
         "lint": "eslint src/**",
         "lint-fix": "eslint --fix src/**",
@@ -29,6 +30,7 @@
         "tailwindcss": "^3.4.6"
     },
     "devDependencies": {
+        "package-json-merge": "git+https://github.com/ocdladefense/package-json-merge.git",
         "@babel/cli": "^7.18.10",
         "@babel/core": "^7.19.6",
         "@babel/preset-env": "^7.19.4",
