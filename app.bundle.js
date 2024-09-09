@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/@ocdla/global-components/src/components/BreadcrumbItem.jsx":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@ocdla/global-components/src/components/BreadcrumbItem.jsx ***!
-  \*********************************************************************************/
+/***/ "./node_modules/@ocdla/global-components/src/BreadcrumbItem.jsx":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/BreadcrumbItem.jsx ***!
+  \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -13,7 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ BreadcrumbItem)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
-/* harmony import */ var _Hyperlink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Hyperlink */ "./node_modules/@ocdla/global-components/src/components/Hyperlink.jsx");
+/* harmony import */ var _Defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Defaults */ "./node_modules/@ocdla/global-components/src/Defaults.jsx");
 /** @jsx vNode */
 /* eslint-disable no-unused-vars */
 
@@ -21,22 +21,19 @@ __webpack_require__.r(__webpack_exports__);
 /* eslint-enable */
 
 function BreadcrumbItem(_ref) {
-  var text = _ref.text,
-    href = _ref.href,
-    type = _ref.type;
-  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    text: text,
-    href: href,
-    type: type
-  }));
+  var href = _ref.href,
+    label = _ref.label;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: href
+  }, label));
 }
 
 /***/ }),
 
-/***/ "./node_modules/@ocdla/global-components/src/components/Breadcrumbs.jsx":
-/*!******************************************************************************!*\
-  !*** ./node_modules/@ocdla/global-components/src/components/Breadcrumbs.jsx ***!
-  \******************************************************************************/
+/***/ "./node_modules/@ocdla/global-components/src/Breadcrumbs.jsx":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Breadcrumbs.jsx ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -44,33 +41,154 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Breadcrumbs)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
-/* harmony import */ var _lib_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib.js */ "./node_modules/@ocdla/global-components/src/lib.js");
-/* harmony import */ var _BreadcrumbItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BreadcrumbItem */ "./node_modules/@ocdla/global-components/src/components/BreadcrumbItem.jsx");
+/* harmony import */ var _BreadcrumbItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BreadcrumbItem */ "./node_modules/@ocdla/global-components/src/BreadcrumbItem.jsx");
 /** @jsx vNode */ /** @jsxFrag "Fragment" */
 /* eslint-disable no-unused-vars */
-
 
 
 /* eslint-enable */
 
 function Breadcrumbs(_ref) {
-  var items = _ref.items,
-    separator = _ref.separator;
+  var _ref$crumbs = _ref.crumbs,
+    crumbs = _ref$crumbs === void 0 ? [] : _ref$crumbs;
   return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("section", {
-    "class": "container mx-auto flex items-center border border-t-0 p-4 text-black lg:h-16"
+    "class": "flex items-center border border-t-0 p-4 capitalize text-black lg:h-16"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
     "class": "flex flex-wrap items-center whitespace-pre"
-  }, (0,_lib_js__WEBPACK_IMPORTED_MODULE_1__.interleave)(items.map(function (item) {
-    return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_BreadcrumbItem__WEBPACK_IMPORTED_MODULE_2__["default"], item);
-  }), separator)));
+  }, crumbs.map(function (crumb, i) {
+    var seperatorString = i !== crumbs.length - 1 ? ' / ' : ' ';
+    return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_BreadcrumbItem__WEBPACK_IMPORTED_MODULE_1__["default"], crumb), seperatorString);
+  })));
 }
 
 /***/ }),
 
-/***/ "./node_modules/@ocdla/global-components/src/components/Footer.jsx":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@ocdla/global-components/src/components/Footer.jsx ***!
-  \*************************************************************************/
+/***/ "./node_modules/@ocdla/global-components/src/Button.jsx":
+/*!**************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Button.jsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Button)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _ocdla_global_components_src_Defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/global-components/src/Defaults */ "./node_modules/@ocdla/global-components/src/Defaults.jsx");
+/** @jsx vNode */
+/* eslint-disable-next-line no-unused-vars */
+
+
+function Button(_ref) {
+  var href = _ref.href,
+    label = _ref.label;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "size-full"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    "class": "group flex items-center p-4",
+    href: href
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("span", {
+    "class": _ocdla_global_components_src_Defaults__WEBPACK_IMPORTED_MODULE_1__.defaultButtonStyle
+  }, label)));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Defaults.jsx":
+/*!****************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Defaults.jsx ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Link),
+/* harmony export */   defaultButtonStyle: () => (/* binding */ defaultButtonStyle),
+/* harmony export */   defaultLinkStyle: () => (/* binding */ defaultLinkStyle)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */
+/* eslint-disable-next-line no-unused-vars */
+
+var defaultLinkStyle = 'hover:underline-blue-500 text-blue-400 hover:opacity-[67.5%] hover:underline hover:underline-offset-2';
+var defaultButtonStyle = 'text-nowrap rounded-md border border-black bg-black px-3 py-2 font-bold text-white';
+function Link(_ref) {
+  var _ref$classes = _ref.classes,
+    classes = _ref$classes === void 0 ? defaultLinkStyle : _ref$classes,
+    extraClasses = _ref.extraClasses,
+    href = _ref.href,
+    children = _ref.children,
+    id = _ref.id;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    id: id || null,
+    "class": "".concat(classes).concat(extraClasses ? " ".concat(extraClasses) : ''),
+    href: href || null
+  }, children);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Dividers.jsx":
+/*!****************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Dividers.jsx ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DividerDesktop: () => (/* binding */ DividerDesktop),
+/* harmony export */   DividerMobile: () => (/* binding */ DividerMobile)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */
+/* eslint-disable-next-line no-unused-vars */
+
+var DividerDesktop = function DividerDesktop() {
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "hidden text-neutral-300 lg:block"
+  }, "|");
+};
+var DividerMobile = function DividerMobile() {
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "block size-full lg:hidden"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("hr", null));
+};
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Dropdown.jsx":
+/*!****************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Dropdown.jsx ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Dropdown)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _Defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Defaults */ "./node_modules/@ocdla/global-components/src/Defaults.jsx");
+/** @jsx vNode */
+/* eslint-disable no-unused-vars */
+
+
+/* eslint-enable */
+
+function Dropdown(_ref) {
+  var href = _ref.href,
+    label = _ref.label;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    classes: "border lg:border-t-0 hover:border-neutral-200 bg-neutral-50 px-12 py-2 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-600",
+    href: href
+  }, label));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Footer.jsx":
+/*!**************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Footer.jsx ***!
+  \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -78,183 +196,162 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Footer)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
-/* harmony import */ var _Hyperlink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Hyperlink */ "./node_modules/@ocdla/global-components/src/components/Hyperlink.jsx");
-/** @jsx vNode */
+/* harmony import */ var _Defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Defaults */ "./node_modules/@ocdla/global-components/src/Defaults.jsx");
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Logo */ "./node_modules/@ocdla/global-components/src/Logo.jsx");
+/* harmony import */ var _Social__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Social */ "./node_modules/@ocdla/global-components/src/Social.jsx");
+/* harmony import */ var _GoogleMaps__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GoogleMaps */ "./node_modules/@ocdla/global-components/src/GoogleMaps.jsx");
+/** @jsx vNode */ /** @jsxFrag "Fragment" */
 /* eslint-disable no-unused-vars */
+
+
+
 
 
 /* eslint-enable */
 
-function Footer() {
+function Footer(_ref) {
+  var showFacebook = _ref.showFacebook,
+    showTwitter = _ref.showTwitter,
+    showYouTube = _ref.showYouTube,
+    useGoogleMapsIFrame = _ref.useGoogleMapsIFrame;
   return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("footer", {
-    "class": "container mx-auto flex flex-col gap-4 border border-b-0 p-4 pb-16 lg:flex-row lg:gap-0 lg:p-8 lg:pb-16"
+    "class": "container mx-auto border border-b-0 p-4 pb-16 lg:p-8 lg:pb-32"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "flex h-max flex-col gap-8 lg:flex-row lg:gap-32"
+    "class": "flex flex-col gap-4"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "flex items-center gap-4"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
-    "class": "flex"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "brand",
-    href: "https://oregon.public.law/",
-    text: (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
-      "class": "flex items-center"
-    }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
-      "class": "h-16",
-      src: "https://www.ocdla.org/wp-content/uploads/2019/10/cropped-ocdla-logo.png"
-    }))
-  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "flex flex-col"
+    "class": "flex flex-col gap-4 lg:flex-row lg:gap-8"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "flex gap-2"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "footer-social",
-    href: "https://www.facebook.com/OregonCriminalDefenseLawyersAssociation/",
-    text: (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
-      "class": "size-8",
-      src: "https://www.ocdla.org/wp-content/themes/wireframe/assets/images/default-facebook-icon.png"
-    })
-  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "footer-social",
-    href: "https://twitter.com/oregondefense?lang=en",
-    text: (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
-      "class": "size-8",
-      src: "https://www.ocdla.org/wp-content/themes/wireframe/assets/images/default-twitter-icon.png"
-    })
-  }))))))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "text-[0.625rem] font-thin leading-[0.75rem]"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, "\xA9 2024 Oregon Criminal Defense Lawyers Association"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, "Oregon Criminal Defense Lawyers Association is a 501(c)(3) nonprofit educational association. Contributions to OCDLA may be tax deductible - check with your tax advisor. Electronic downloads are for the sole use of the purchasing member. Files may not be distributed to others.")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "flex flex-col gap-1"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "flex items-center gap-1"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Logo__WEBPACK_IMPORTED_MODULE_2__["default"], null), showFacebook ? (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Social__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    type: "facebook",
+    handle: "OregonCriminalDefenseLawyersAssociation"
+  }) : (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null), showTwitter ? (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Social__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    type: "twitter",
+    handle: "oregondefense"
+  }) : (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null), showYouTube ? (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Social__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    type: "youtube",
+    handle: "oregoncriminaldefenselawye4822"
+  }) : (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "text-[0.625rem] font-thin leading-[0.75rem] text-neutral-500"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, "\xA9 2024 Oregon Criminal Defense Lawyers Association"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "size-full text-wrap"
+  }, "Oregon Criminal Defense Lawyers Association is a 501(c)(3) nonprofit educational association. Contributions to OCDLA may be tax deductible - check with your tax advisor. Electronic downloads are for the sole use of the purchasing member. Files may not be distributed to others."))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
     "class": "text-neutral-300"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "https://ocdla.org",
-    text: "ocdla.org"
-  }), ' ', "|", ' ', (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "https://maps.app.goo.gl/7dCYKBEyJbmo8tzS7",
-    text: "101 East 14th Ave, Eugene, OR 97401 "
-  }), ' ', "|", ' ', (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "mailto:info@ocdla.org",
-    text: "info@ocdla.org"
-  }), ' ', "|", ' ', (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "tel:541-686-8716",
-    text: "541-686-8716"
-  }))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
-    "class": "text-nowrap"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "https://ocdla.org"
+  }, "ocdla.org"), ' ', !useGoogleMapsIFrame ? (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null, "|", ' ', (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "https://maps.app.goo.gl/7dCYKBEyJbmo8tzS7"
+  }, "101 East 14th Ave, Eugene, OR 97401"), ' ') : (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null), "|", ' ', (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "mailto:info@ocdla.org"
+  }, "info@ocdla.org"), ' ', "|", ' ', (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "tel:+15416868716"
+  }, "(+1) 541-686-8716"))))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "size-full"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "flex flex-col gap-2"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("strong", null, "Services")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "https://pubs.ocdla.org/directory/members",
-    text: "Membership Directory"
-  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "https://pubs.ocdla.org/directory/experts",
-    text: "Expert Directory"
-  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "/",
-    text: "Online store"
-  })))))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
-    "class": "text-nowrap"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "flex flex-col gap-2"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("strong", null, "Research")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "https://pubs.ocdla.org/car/list",
-    text: "Research Criminal Appellate Review"
-  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "https://lod.ocdla.org/",
-    text: "Library of Defense"
-  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "https://lod.ocdla.org/Public:Subscriptions",
-    text: "Books Online"
-  })))))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
-    "class": "text-nowrap"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "flex flex-col gap-2"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("strong", null, "Resources")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "/",
-    text: "CLEs"
-  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "/",
-    text: "Videos"
-  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "standard",
-    href: "/",
-    text: "Seminars & Events"
-  }))))))));
+    "class": "flex flex-col gap-8 text-nowrap text-[#516490] lg:flex-row lg:gap-16"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "flex flex-col gap-1"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
+    "class": "text-base font-bold"
+  }, "SERVICES")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "https://pubs.ocdla.org/directory/members"
+  }, "Membership Directory")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "https://pubs.ocdla.org/directory/experts"
+  }, "Expert Directory")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "/"
+  }, "Online store")))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "flex flex-col gap-1"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
+    "class": "text-base font-bold"
+  }, "RESEARCH")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "https://pubs.ocdla.org/car/list"
+  }, "Research Criminal Appellate Review")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "https://lod.ocdla.org/"
+  }, "Library of Defense")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "https://lod.ocdla.org/Public:Subscriptions"
+  }, "Books Online")))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "flex flex-col gap-1"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
+    "class": "text-base font-bold"
+  }, "RESOURCES")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "/"
+  }, "CLEs")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "/"
+  }, "Videos")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "/"
+  }, "Seminars & Events")))))))), useGoogleMapsIFrame ? (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_GoogleMaps__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    src: "https://google.com/maps/embed?pb=!1m18!1m12!1m3!1d2867.8775315978623!2d-123.09091950000001!3d44.0445852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54c11e41b2e3f7ad%3A0xa7600cd512aa10ed!2s101%20E%2014th%20Ave%2C%20Eugene%2C%20OR%2097401!5e0!3m2!1sen!2sus!4v1722628072318!5m2!1sen!2sus"
+  }) : (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null)));
 }
 
 /***/ }),
 
-/***/ "./node_modules/@ocdla/global-components/src/components/Hyperlink.jsx":
-/*!****************************************************************************!*\
-  !*** ./node_modules/@ocdla/global-components/src/components/Hyperlink.jsx ***!
-  \****************************************************************************/
+/***/ "./node_modules/@ocdla/global-components/src/GoogleMaps.jsx":
+/*!******************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/GoogleMaps.jsx ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Hyperlink)
+/* harmony export */   "default": () => (/* binding */ GoogleMaps)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
 /** @jsx vNode */
 /* eslint-disable-next-line no-unused-vars */
 
-function Hyperlink(_ref) {
-  var text = _ref.text,
-    href = _ref.href,
-    _ref$extraClasses = _ref.extraClasses,
-    extraClasses = _ref$extraClasses === void 0 ? '' : _ref$extraClasses,
-    _ref$type = _ref.type,
-    type = _ref$type === void 0 ? 'standard' : _ref$type;
-  var baseStyle = 'hover:underline-blue-500 text-blue-400 hover:opacity-[67.5%] hover:underline hover:underline-offset-2';
-  var classes;
-  switch (type) {
-    case 'standard':
-      classes = baseStyle;
-      break;
-    case 'navbar-link':
-      classes = 'text-nowrap text-neutral-500 hover:opacity-[67.5%] hover:underline hover:underline-offset-2 -ms-4 lg:m-0 px-4 py-8';
-      break;
-    case 'navbar-dropdown':
-      classes = 'border border-t-0 hover:border-neutral-200 bg-neutral-50 px-12 py-2 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-600';
-      break;
-    case 'navbar-brand':
-      classes = 'p-4 lg:py-8 -m-4';
-      break;
-    case 'navbar-button-feedback':
-      classes = 'bg-neutral-100 hover:bg-neutral-50 text-neutral-500 hover:text-neutral-400 border border-neutral-300 hover:border-neutral-400 px-4 py-2 rounded-md';
-      break;
-    case 'body-button':
-      classes = 'border border-blue-600 hover:opacity-[67.5%] text-blue-600 px-4 py-2 rounded-md contrast-[0] saturate-0';
-      break;
-    case 'sidebar_right':
-      classes = "px-4 py-2 flex border-b ".concat(baseStyle);
-      break;
-    case 'footer-social':
-      classes = 'hover:opacity-[67.5%]';
-      break;
-  }
-  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
-    "class": "".concat(classes).concat(extraClasses),
-    href: href
-  }, text);
+function GoogleMaps(_ref) {
+  var src = _ref.src;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("iframe", {
+    "class": "aspect-square w-full border-0 lg:w-64",
+    src: src,
+    allowfullscreen: true,
+    referrerpolicy: "no-referrer-when-downgrade"
+  })));
 }
 
 /***/ }),
 
-/***/ "./node_modules/@ocdla/global-components/src/components/Navbar.jsx":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@ocdla/global-components/src/components/Navbar.jsx ***!
-  \*************************************************************************/
+/***/ "./node_modules/@ocdla/global-components/src/Logo.jsx":
+/*!************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Logo.jsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Logo)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _images_logo_ocdla_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./images/logo_ocdla.png */ "./node_modules/@ocdla/global-components/src/images/logo_ocdla.png");
+/** @jsx vNode */
+/* eslint-disable-next-line no-unused-vars */
+
+
+function Logo(_ref) {
+  var typeNavbar = _ref.typeNavbar;
+  // Default = 'footer'
+  var li = typeNavbar ? 'size-full' : '';
+  var a = typeNavbar ? 'flex px-4' : '';
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": li
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    "class": a,
+    href: "/"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
+    "class": "h-16",
+    src: _images_logo_ocdla_png__WEBPACK_IMPORTED_MODULE_1__
+  })));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Navbar.jsx":
+/*!**************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Navbar.jsx ***!
+  \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -262,104 +359,173 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Navbar)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
-/* harmony import */ var _Hyperlink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Hyperlink */ "./node_modules/@ocdla/global-components/src/components/Hyperlink.jsx");
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Logo */ "./node_modules/@ocdla/global-components/src/Logo.jsx");
+/* harmony import */ var _Navlink__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Navlink */ "./node_modules/@ocdla/global-components/src/Navlink.jsx");
+/* harmony import */ var _Dividers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Dividers */ "./node_modules/@ocdla/global-components/src/Dividers.jsx");
+/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Search */ "./node_modules/@ocdla/global-components/src/Search.jsx");
+/* harmony import */ var _Profile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Profile */ "./node_modules/@ocdla/global-components/src/Profile.jsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Button */ "./node_modules/@ocdla/global-components/src/Button.jsx");
 /** @jsx vNode */
 /* eslint-disable no-unused-vars */
+
+
+
+
+
 
 
 /* eslint-enable */
 
 function Navbar() {
   return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("nav", {
-    "class": "flex items-center lg:h-16 lg:p-0"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("menu", {
-    "class": "container mx-auto flex flex-col gap-4 border border-t-0 p-4 pt-0 lg:h-16 lg:flex-row lg:items-center lg:gap-0 lg:py-0"
+    "class": "flex flex-col border border-0 border-b lg:h-16 lg:flex-row lg:border lg:border-t-0"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "flex flex-col gap-4 lg:me-auto lg:flex-row lg:items-center lg:gap-0"
+    "class": "flex size-full flex-col items-start lg:flex-row lg:items-center"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
-    "class": "flex items-center text-white"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "navbar-brand",
-    href: "https://oregon.public.law/",
-    text: (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
-      "class": "flex items-center"
-    }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
-      "class": "h-16",
-      src: "https://www.ocdla.org/wp-content/uploads/2019/10/cropped-ocdla-logo.png"
-    }))
-  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "navbar-link",
-    href: "https://oregon.public.law/rules",
-    text: "Oregon Administrative Rules"
-  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
-    "class": "font-bold"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "navbar-link",
-    href: "https://oregon.public.law/statutes",
-    text: "Oregon Revised Statutes"
-  }))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("hr", {
-    "class": "block lg:hidden"
-  }), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
-    "class": "flex flex-row-reverse items-center gap-2 lg:flex-row"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
-    "class": "group relative ms-auto lg:m-0"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
-    "class": "peer flex h-[34px] w-[34px] items-center justify-center rounded-full bg-[#516490] p-2 text-white hover:opacity-[67.5%] group-focus-within:opacity-[67.5%]"
-  }, "G"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
-    "class": "absolute left-[50%] top-full z-10 mt-[15px] hidden -translate-x-1/2 flex-col text-nowrap shadow group-focus-within:flex"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "navbar-dropdown",
-    href: "https://oregon.public.law/users/sign_in",
-    text: "Login"
-  }))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
-    "class": "hidden text-neutral-300 lg:block"
-  }, "|"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "navbar-button-feedback",
+    "class": "size-full lg:size-max"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "flex flex-col items-center lg:flex-row"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Logo__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    typeNavbar: true
+  }), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Navlink__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    href: "https://oregon.public.law/rules"
+  }, "Oregon Administrative Rules"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Navlink__WEBPACK_IMPORTED_MODULE_2__["default"]
+  // href='https://oregon.public.law/statutes'
+  , {
+    href: "/toc"
+  }, "Oregon Revised Statutes"))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Dividers__WEBPACK_IMPORTED_MODULE_3__.DividerMobile, null), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "size-full lg:ms-auto lg:size-max"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("form", {
+    "class": "m-4 flex flex-col items-start lg:m-0 lg:flex-row lg:items-center",
+    onsubmit: function onsubmit(e) {
+      e.preventDefault();
+      window.location.pathname = '/';
+    }
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Search__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    typeNavbar: true,
+    placeholder: "Search"
+  }), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Dividers__WEBPACK_IMPORTED_MODULE_3__.DividerDesktop, null), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "size-full"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "flex flex-row-reverse items-center lg:flex-row"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Profile__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    bg: "bg-[#516490]",
+    label: "G"
+  }), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Dividers__WEBPACK_IMPORTED_MODULE_3__.DividerDesktop, null), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Button__WEBPACK_IMPORTED_MODULE_6__["default"], {
     href: "/",
-    text: "Give Feedback"
-  }), ' '))));
+    label: "GIVE FEEDBACK"
+  })))))));
 }
 
 /***/ }),
 
-/***/ "./node_modules/@ocdla/global-components/src/components/SectionEntry.jsx":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/@ocdla/global-components/src/components/SectionEntry.jsx ***!
-  \*******************************************************************************/
+/***/ "./node_modules/@ocdla/global-components/src/Navlink.jsx":
+/*!***************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Navlink.jsx ***!
+  \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ SectionEntry)
+/* harmony export */   "default": () => (/* binding */ Navlink)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
-/** @jsx vNode */ /** @jsxFrag "Fragment" */
-/* eslint-disable-next-line no-unused-vars */
+/* harmony import */ var _Defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Defaults */ "./node_modules/@ocdla/global-components/src/Defaults.jsx");
+/** @jsx vNode */
+/* eslint-disable no-unused-vars */
 
-function SectionEntry(_ref) {
-  var text = _ref.text,
-    heading = _ref.heading,
+
+/* eslint-enable */
+
+function Navlink(_ref) {
+  var active = _ref.active,
     href = _ref.href,
-    _ref$active = _ref.active,
-    active = _ref$active === void 0 ? false : _ref$active,
     children = _ref.children;
-  // Determine appropriate classes based on active state.
-  var a = active ? 'text-white border-black bg-black' : 'group hover:bg-neutral-100';
-  var h1 = active ? '' : 'text-blue-400 group-hover:text-blue-500';
-  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
-    "class": "flex flex-col gap-2 border-b px-4 py-2 ".concat(a),
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "size-full"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    classes: "".concat(active ? 'font-bold ' : '', "items-center lg:h-16 flex text-nowrap text-neutral-500 hover:opacity-[67.5%] hover:underline hover:underline-offset-2 p-4"),
     href: href
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("h1", {
-    "class": "font-bold ".concat(h1)
-  }, heading), children));
+  }, children));
 }
 
 /***/ }),
 
-/***/ "./node_modules/@ocdla/global-components/src/components/Sidebar.jsx":
-/*!**************************************************************************!*\
-  !*** ./node_modules/@ocdla/global-components/src/components/Sidebar.jsx ***!
-  \**************************************************************************/
+/***/ "./node_modules/@ocdla/global-components/src/Profile.jsx":
+/*!***************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Profile.jsx ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Profile)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _Dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Dropdown */ "./node_modules/@ocdla/global-components/src/Dropdown.jsx");
+/** @jsx vNode */
+/* eslint-disable no-unused-vars */
+
+
+/* eslint-enable */
+
+function Profile(_ref) {
+  var bg = _ref.bg,
+    label = _ref.label;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "relative"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
+    "class": "group peer flex h-16 items-center p-4",
+    type: "button"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
+    "class": "".concat(bg ? "".concat(bg, " ") : '', "h-[34px] w-[34px] flex items-center text-white justify-center rounded-full group-hover:opacity-[67.5%] focus-within:opacity-[67.5%]")
+  }, label)), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "absolute left-[-1rem] top-[calc(100%+0.5rem)] z-10 hidden -translate-x-1/2 flex-col text-nowrap shadow peer-focus-within:flex lg:left-1/2"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Dropdown__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    href: "https://oregon.public.law/users/sign_in",
+    label: "Login"
+  })));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Search.jsx":
+/*!**************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Search.jsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Search)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _ocdla_global_components_src_Defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/global-components/src/Defaults */ "./node_modules/@ocdla/global-components/src/Defaults.jsx");
+/** @jsx vNode */
+/* eslint-disable no-unused-vars */
+
+
+function Search(_ref) {
+  var typeNavbar = _ref.typeNavbar,
+    placeholder = _ref.placeholder;
+  // prettier-ignore
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "".concat(typeNavbar ? 'px-4 lg:p-4 ' : '', "flex size-full justify-center")
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("input", {
+    "class": "size-full rounded-l-md border border-neutral-300 px-3 py-2 focus:border-neutral-200",
+    type: "search",
+    placeholder: placeholder
+  }), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
+    "class": "".concat(_ocdla_global_components_src_Defaults__WEBPACK_IMPORTED_MODULE_1__.defaultButtonStyle, " rounded-l-none")
+  }, "GO"));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Sidebar.jsx":
+/*!***************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Sidebar.jsx ***!
+  \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -367,86 +533,98 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Sidebar)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
-/* harmony import */ var _SidebarItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SidebarItem */ "./node_modules/@ocdla/global-components/src/components/SidebarItem.jsx");
-/* harmony import */ var _SectionEntry__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SectionEntry */ "./node_modules/@ocdla/global-components/src/components/SectionEntry.jsx");
 /** @jsx vNode */
 /* eslint-disable no-unused-vars */
-
-
-
-/* eslint-enable */
 
 function Sidebar(_ref) {
-  var items = _ref.items;
-  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("aside", {
-    "class": "hidden h-[87.5vh] overflow-scroll lg:block"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", null, items.map(function (item) {
-    return (
-      // <SidebarItem {...item} />
-      (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_SectionEntry__WEBPACK_IMPORTED_MODULE_2__["default"], item, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
-        "class": item.active ? 'text-white' : ''
-      }, item.text))
-    );
-  })));
+  var children = _ref.children,
+    id = _ref.id,
+    _ref$sticky = _ref.sticky,
+    sticky = _ref$sticky === void 0 ? false : _ref$sticky;
+  return /* prettier-ignore */(
+    (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("aside", {
+      id: id || null,
+      "class": "".concat(sticky ? 'lg:sticky lg:top-0 ' : '', "hidden h-[87.5vh] list-none overflow-y-scroll lg:block")
+    }, children)
+  );
 }
 
 /***/ }),
 
-/***/ "./node_modules/@ocdla/global-components/src/components/SidebarItem.jsx":
-/*!******************************************************************************!*\
-  !*** ./node_modules/@ocdla/global-components/src/components/SidebarItem.jsx ***!
-  \******************************************************************************/
+/***/ "./node_modules/@ocdla/global-components/src/Social.jsx":
+/*!**************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Social.jsx ***!
+  \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ SidebarItem)
+/* harmony export */   "default": () => (/* binding */ Social)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
-/* harmony import */ var _Hyperlink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Hyperlink */ "./node_modules/@ocdla/global-components/src/components/Hyperlink.jsx");
+/* harmony import */ var _Defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Defaults */ "./node_modules/@ocdla/global-components/src/Defaults.jsx");
+/* harmony import */ var _images_logo_facebook_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/logo_facebook.png */ "./node_modules/@ocdla/global-components/src/images/logo_facebook.png");
+/* harmony import */ var _images_logo_twitter_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/logo_twitter.png */ "./node_modules/@ocdla/global-components/src/images/logo_twitter.png");
+/* harmony import */ var _images_logo_youtube_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/logo_youtube.png */ "./node_modules/@ocdla/global-components/src/images/logo_youtube.png");
 /** @jsx vNode */
 /* eslint-disable no-unused-vars */
 
 
 /* eslint-enable */
+// import abc from './images';
 
-function SidebarItem(_ref) {
-  var text = _ref.text,
-    href = _ref.href,
-    _ref$type = _ref.type,
-    type = _ref$type === void 0 ? 'standard' : _ref$type;
-  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hyperlink__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    text: text,
-    href: href,
-    type: type
-  }));
+
+
+function Social(_ref) {
+  var type = _ref.type,
+    handle = _ref.handle,
+    src = _ref.src;
+  // require.context('./', true, /\.(svg|png)$/gim);
+
+  var domain;
+  var alt;
+  handle = handle || '';
+
+  // console.log(abc);
+
+  switch (type) {
+    case 'facebook':
+    case 'meta':
+      domain = 'https://facebook.com/';
+      src = src || _images_logo_facebook_png__WEBPACK_IMPORTED_MODULE_2__;
+      alt = 'Facebook logo';
+      break;
+    case 'twitter':
+    case 'x':
+      domain = 'https://x.com/';
+      src = src || _images_logo_twitter_png__WEBPACK_IMPORTED_MODULE_3__;
+      alt = 'Twitter logo';
+      break;
+    case 'youtube':
+      domain = 'https://youtube.com/@';
+      // Temp
+      src = src || _images_logo_youtube_png__WEBPACK_IMPORTED_MODULE_4__;
+      alt = 'YouTube logo';
+      break;
+    case 'reddit':
+      domain = 'https://reddit.com/r/';
+      // TBD
+      src = src || _images_logo_twitter_png__WEBPACK_IMPORTED_MODULE_3__;
+      alt = 'Reddit logo';
+      break;
+  }
+  var href = domain + handle;
+  // const src = './images/' + type + '.png';
+
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    classes: "hover:opacity-[67.5%]",
+    href: href
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
+    "class": "w-8",
+    src: src,
+    alt: alt
+  })));
 }
-
-/***/ }),
-
-/***/ "./node_modules/@ocdla/global-components/src/lib.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/@ocdla/global-components/src/lib.js ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   interleave: () => (/* binding */ interleave)
-/* harmony export */ });
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-var interleave = function interleave(arr, thing) {
-  var _ref;
-  return (_ref = []).concat.apply(_ref, _toConsumableArray(arr.map(function (n) {
-    return [n, thing];
-  }))).slice(0, -1);
-};
-
 
 /***/ }),
 
@@ -1256,16 +1434,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ App)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view/view.js */ "./node_modules/@ocdla/view/view.js");
-/* harmony import */ var _ocdla_global_components_src_components_Navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/global-components/src/components/Navbar */ "./node_modules/@ocdla/global-components/src/components/Navbar.jsx");
-/* harmony import */ var _ocdla_global_components_src_components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ocdla/global-components/src/components/Breadcrumbs */ "./node_modules/@ocdla/global-components/src/components/Breadcrumbs.jsx");
-/* harmony import */ var _ocdla_global_components_src_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ocdla/global-components/src/components/Sidebar */ "./node_modules/@ocdla/global-components/src/components/Sidebar.jsx");
-/* harmony import */ var _ocdla_global_components_src_components_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ocdla/global-components/src/components/Footer */ "./node_modules/@ocdla/global-components/src/components/Footer.jsx");
+/* harmony import */ var _ocdla_global_components_src_Navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/global-components/src/Navbar */ "./node_modules/@ocdla/global-components/src/Navbar.jsx");
+/* harmony import */ var _ocdla_global_components_src_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ocdla/global-components/src/Breadcrumbs */ "./node_modules/@ocdla/global-components/src/Breadcrumbs.jsx");
+/* harmony import */ var _ocdla_global_components_src_Sidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ocdla/global-components/src/Sidebar */ "./node_modules/@ocdla/global-components/src/Sidebar.jsx");
+/* harmony import */ var _ocdla_global_components_src_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ocdla/global-components/src/Footer */ "./node_modules/@ocdla/global-components/src/Footer.jsx");
 /** @jsx vNode */ /** @jsxFrag "Fragment" */
 
 
 
 
-// import Body from '@ocdla/global-components/src/components/Body';
+// import Body from '@ocdla/global-components/src/Body';
 
 function App(_ref) {
   var view = _ref.view,
@@ -1278,26 +1456,26 @@ function App(_ref) {
   }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
     "class": "select-none whitespace-pre font-bold",
     onclick: function onclick() {
-      view.render('foo');
+      view.render("foo");
     }
   })), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("header", {
     "class": "flex flex-col lg:h-32"
-  }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], null), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], null), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__["default"], {
     items: crumbs,
     separator: "/"
   })), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
     "class": "container mx-auto border-x"
   }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
     "class": "lg:grid lg:grid-cols-6"
-  }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_Sidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     items: sidebarFirstItems
   }), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("main", {
     "class": "flex w-full flex-col gap-4 p-4 lg:col-span-4 lg:col-start-2 lg:me-auto lg:border-x lg:p-8"
-  }, children), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, children), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_Sidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     items: sidebarSecondItems
   }))), (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)("footer", {
     "class": "container mx-auto flex flex-col gap-4 border border-b-0 p-4 pb-16 lg:flex-row lg:gap-0 lg:p-8 lg:pb-16"
-  }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_components_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+  }, (0,_ocdla_view_view_js__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
 }
 
 /***/ }),
@@ -2040,23 +2218,26 @@ video {
 .relative {
   position: relative;
 }
-.left-\\[50\\%\\] {
-  left: 50%;
+.sticky {
+  position: sticky;
+}
+.left-\\[-1rem\\] {
+  left: -1rem;
 }
 .right-0 {
   right: 0px;
 }
-.top-full {
-  top: 100%;
+.top-0 {
+  top: 0px;
+}
+.top-\\[calc\\(100\\%\\+0\\.5rem\\)\\] {
+  top: calc(100% + 0.5rem);
 }
 .isolate {
   isolation: isolate;
 }
 .z-10 {
   z-index: 10;
-}
-.-m-4 {
-  margin: -1rem;
 }
 .m-4 {
   margin: 1rem;
@@ -2065,14 +2246,14 @@ video {
   margin-left: auto;
   margin-right: auto;
 }
-.-ms-4 {
-  margin-inline-start: -1rem;
+.ml-4 {
+  margin-left: 1rem;
 }
-.ms-auto {
-  margin-inline-start: auto;
+.mt-1 {
+  margin-top: 0.25rem;
 }
-.mt-\\[15px\\] {
-  margin-top: 15px;
+.mt-6 {
+  margin-top: 1.5rem;
 }
 .block {
   display: block;
@@ -2095,9 +2276,12 @@ video {
 .hidden {
   display: none;
 }
-.size-8 {
-  width: 2rem;
-  height: 2rem;
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+.size-full {
+  width: 100%;
+  height: 100%;
 }
 .h-16 {
   height: 4rem;
@@ -2108,9 +2292,8 @@ video {
 .h-\\[87\\.5vh\\] {
   height: 87.5vh;
 }
-.h-max {
-  height: -moz-max-content;
-  height: max-content;
+.w-8 {
+  width: 2rem;
 }
 .w-\\[34px\\] {
   width: 34px;
@@ -2130,6 +2313,9 @@ video {
      -moz-user-select: none;
           user-select: none;
 }
+.list-none {
+  list-style-type: none;
+}
 .flex-row-reverse {
   flex-direction: row-reverse;
 }
@@ -2139,11 +2325,20 @@ video {
 .flex-wrap {
   flex-wrap: wrap;
 }
+.items-start {
+  align-items: flex-start;
+}
 .items-center {
   align-items: center;
 }
+.justify-end {
+  justify-content: flex-end;
+}
 .justify-center {
   justify-content: center;
+}
+.gap-1 {
+  gap: 0.25rem;
 }
 .gap-2 {
   gap: 0.5rem;
@@ -2154,11 +2349,23 @@ video {
 .gap-8 {
   gap: 2rem;
 }
-.overflow-scroll {
-  overflow: scroll;
+.gap-x-6 {
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem;
+}
+.space-y-12 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(3rem * var(--tw-space-y-reverse));
+}
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 .whitespace-pre {
   white-space: pre;
+}
+.text-wrap {
+  text-wrap: wrap;
 }
 .text-nowrap {
   text-wrap: nowrap;
@@ -2169,12 +2376,23 @@ video {
 .rounded-md {
   border-radius: 0.375rem;
 }
+.rounded-l-md {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+.rounded-l-none {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
 .rounded-t-md {
   border-top-left-radius: 0.375rem;
   border-top-right-radius: 0.375rem;
 }
 .border {
   border-width: 1px;
+}
+.border-0 {
+  border-width: 0px;
 }
 .border-x {
   border-left-width: 1px;
@@ -2186,6 +2404,9 @@ video {
 .border-b-0 {
   border-bottom-width: 0px;
 }
+.border-l {
+  border-left-width: 1px;
+}
 .border-t-0 {
   border-top-width: 0px;
 }
@@ -2196,6 +2417,9 @@ video {
 .border-blue-600 {
   --tw-border-opacity: 1;
   border-color: rgb(37 99 235 / var(--tw-border-opacity));
+}
+.border-gray-900\\/10 {
+  border-color: rgb(17 24 39 / 0.1);
 }
 .border-neutral-300 {
   --tw-border-opacity: 1;
@@ -2218,16 +2442,20 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
-.bg-neutral-100 {
+.bg-indigo-600 {
   --tw-bg-opacity: 1;
-  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
+  background-color: rgb(79 70 229 / var(--tw-bg-opacity));
 }
 .bg-neutral-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(250 250 250 / var(--tw-bg-opacity));
 }
-.p-2 {
-  padding: 0.5rem;
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.p-32 {
+  padding: 8rem;
 }
 .p-4 {
   padding: 1rem;
@@ -2248,15 +2476,18 @@ video {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+.pb-12 {
+  padding-bottom: 3rem;
 }
 .pb-16 {
   padding-bottom: 4rem;
 }
-.pt-0 {
-  padding-top: 0px;
+.text-center {
+  text-align: center;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .text-3xl {
   font-size: 1.875rem;
@@ -2266,15 +2497,29 @@ video {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
 .text-\\[0\\.625rem\\] {
   font-size: 0.625rem;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+.font-black {
+  font-weight: 900;
+}
 .font-bold {
   font-weight: 700;
+}
+.font-semibold {
+  font-weight: 600;
 }
 .font-thin {
   font-weight: 100;
@@ -2282,8 +2527,24 @@ video {
 .uppercase {
   text-transform: uppercase;
 }
+.capitalize {
+  text-transform: capitalize;
+}
+.leading-6 {
+  line-height: 1.5rem;
+}
+.leading-7 {
+  line-height: 1.75rem;
+}
 .leading-\\[0\\.75rem\\] {
   line-height: 0.75rem;
+}
+.tracking-tighter {
+  letter-spacing: -0.05em;
+}
+.text-\\[\\#516490\\] {
+  --tw-text-opacity: 1;
+  color: rgb(81 100 144 / var(--tw-text-opacity));
 }
 .text-black {
   --tw-text-opacity: 1;
@@ -2296,6 +2557,14 @@ video {
 .text-blue-600 {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 .text-neutral-300 {
   --tw-text-opacity: 1;
@@ -2315,6 +2584,11 @@ video {
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-sm {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .outline {
@@ -2340,29 +2614,24 @@ video {
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
+.focus-within\\:opacity-\\[67\\.5\\%\\]:focus-within {
+  opacity: 67.5%;
+}
 .hover\\:border-neutral-200:hover {
   --tw-border-opacity: 1;
   border-color: rgb(229 229 229 / var(--tw-border-opacity));
 }
-.hover\\:border-neutral-400:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(163 163 163 / var(--tw-border-opacity));
+.hover\\:bg-indigo-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(99 102 241 / var(--tw-bg-opacity));
 }
 .hover\\:bg-neutral-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 245 / var(--tw-bg-opacity));
 }
-.hover\\:bg-neutral-50:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(250 250 250 / var(--tw-bg-opacity));
-}
 .hover\\:text-blue-500:hover {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
-}
-.hover\\:text-neutral-400:hover {
-  --tw-text-opacity: 1;
-  color: rgb(163 163 163 / var(--tw-text-opacity));
 }
 .hover\\:text-neutral-600:hover {
   --tw-text-opacity: 1;
@@ -2377,20 +2646,48 @@ video {
 .hover\\:opacity-\\[67\\.5\\%\\]:hover {
   opacity: 67.5%;
 }
-.group:focus-within .group-focus-within\\:flex {
-  display: flex;
+.focus\\:border-neutral-200:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 229 229 / var(--tw-border-opacity));
 }
-.group:focus-within .group-focus-within\\:opacity-\\[67\\.5\\%\\] {
-  opacity: 67.5%;
+.focus-visible\\:outline:focus-visible {
+  outline-style: solid;
+}
+.focus-visible\\:outline-2:focus-visible {
+  outline-width: 2px;
+}
+.focus-visible\\:outline-offset-2:focus-visible {
+  outline-offset: 2px;
+}
+.focus-visible\\:outline-indigo-600:focus-visible {
+  outline-color: #4f46e5;
 }
 .group:hover .group-hover\\:text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
 }
+.group:hover .group-hover\\:opacity-\\[67\\.5\\%\\] {
+  opacity: 67.5%;
+}
+.peer:focus-within ~ .peer-focus-within\\:flex {
+  display: flex;
+}
 @media (min-width: 1024px) {
+
+  .lg\\:sticky {
+    position: sticky;
+  }
 
   .lg\\:left-0 {
     left: 0px;
+  }
+
+  .lg\\:left-1\\/2 {
+    left: 50%;
+  }
+
+  .lg\\:top-0 {
+    top: 0px;
   }
 
   .lg\\:col-span-4 {
@@ -2413,6 +2710,10 @@ video {
     margin-inline-end: auto;
   }
 
+  .lg\\:ms-auto {
+    margin-inline-start: auto;
+  }
+
   .lg\\:block {
     display: block;
   }
@@ -2425,12 +2726,23 @@ video {
     display: none;
   }
 
+  .lg\\:size-max {
+    width: -moz-max-content;
+    width: max-content;
+    height: -moz-max-content;
+    height: max-content;
+  }
+
   .lg\\:h-16 {
     height: 4rem;
   }
 
   .lg\\:h-32 {
     height: 8rem;
+  }
+
+  .lg\\:w-64 {
+    width: 16rem;
   }
 
   .lg\\:grid-cols-6 {
@@ -2449,12 +2761,16 @@ video {
     gap: 0px;
   }
 
-  .lg\\:gap-32 {
-    gap: 8rem;
+  .lg\\:gap-16 {
+    gap: 4rem;
   }
 
-  .lg\\:rounded-lg {
-    border-radius: 0.5rem;
+  .lg\\:gap-8 {
+    gap: 2rem;
+  }
+
+  .lg\\:border {
+    border-width: 1px;
   }
 
   .lg\\:border-x {
@@ -2462,29 +2778,30 @@ video {
     border-right-width: 1px;
   }
 
-  .lg\\:p-0 {
-    padding: 0px;
+  .lg\\:border-t-0 {
+    border-top-width: 0px;
+  }
+
+  .lg\\:p-4 {
+    padding: 1rem;
   }
 
   .lg\\:p-8 {
     padding: 2rem;
   }
 
-  .lg\\:py-0 {
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
-  .lg\\:py-8 {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
   .lg\\:pb-16 {
     padding-bottom: 4rem;
   }
+
+  .lg\\:pb-32 {
+    padding-bottom: 8rem;
+  }
 }
-`, "",{"version":3,"sources":["webpack://./src/css/input.css"],"names":[],"mappings":"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","sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n"],"sourceRoot":""}]);
+.\\[\\&_\\*\\]\\:mb-4 * {
+  margin-bottom: 1rem;
+}
+`, "",{"version":3,"sources":["webpack://./src/css/input.css"],"names":[],"mappings":"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","sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6701,6 +7018,46 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
+/***/ "./node_modules/@ocdla/global-components/src/images/logo_facebook.png":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/images/logo_facebook.png ***!
+  \****************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "images/logo_facebook.png";
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/images/logo_ocdla.png":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/images/logo_ocdla.png ***!
+  \*************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "images/logo_ocdla.png";
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/images/logo_twitter.png":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/images/logo_twitter.png ***!
+  \***************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "images/logo_twitter.png";
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/images/logo_youtube.png":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/images/logo_youtube.png ***!
+  \***************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "images/logo_youtube.png";
+
+/***/ }),
+
 /***/ "./node_modules/@ocdla/ors/src/OrsChapter.js":
 /*!***************************************************!*\
   !*** ./node_modules/@ocdla/ors/src/OrsChapter.js ***!
@@ -7326,7 +7683,7 @@ var View = function () {
     return _refresh.apply(this, arguments);
   }
   function _refresh() {
-    _refresh = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    _refresh = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var hash, params, _parseHash, _parseHash2, tree, c, elem;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -7794,6 +8151,11 @@ module.exports = /*#__PURE__*/JSON.parse('[{"type":"sidebar_right","href":"/","t
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		__webpack_require__.p = "/";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/nonce */
