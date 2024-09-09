@@ -9,6 +9,13 @@ module.exports = {
         './node_modules/@ocdla/**/*.{html,js,jsx}'
     ],
     theme: {
+        colors: {
+            'wb-brown': '#794850', // ferra
+            'wb-red': '#D0375C', // brick red
+            'wb-lime': '#B5E179', // yellow green
+            'wb-blue': '#394657', // oxford blue
+            'wb-orange': '#F68544', // jaffa
+        },
         extend: {
             fontFamily: {
                 sans: ['"Open Sans"', ...defaultTheme.fontFamily.sans]
