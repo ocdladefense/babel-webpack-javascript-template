@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
-const htmlWebpackPlugin = require("html-webpack-plugin");
-const copyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = env => {
     console.log(env);
@@ -11,6 +11,7 @@ module.exports = env => {
         entry: {
             app: path.resolve(__dirname, "./src/js/index.js")
             // helper: path.resolve(__dirname, './src/js/helper.js')
+            // init_head: path.resolve(__dirname, "src/js/custom-elements.js")
         },
         snapshot: {
             managedPaths: ["/node_modules"],
@@ -85,22 +86,37 @@ module.exports = env => {
                 },
                 {
                     test: /\.(png|jpg|gif)$/i,
+                    exclude: [
+                        /node_modules\/(?!@ocdla\/global-components)/,
+                        /dev_modules\/(?!@ocdla\/global-components)/
+                    ],
                     type: "asset/resource"
+                },
+                {
+                    test: /\.xml$/i,
+                    exclude: [
+                        /node_modules\/(?!@ocdla\/global-components)/,
+                        /dev_modules\/(?!@ocdla\/global-components)/
+                    ],
+                    type: "asset/source"
+                },
+                {
+                    test: /\.html$/i,
+                    loader: "html-loader"
                 }
             ]
         },
         plugins: [
             new webpack.DefinePlugin({
-                APP_TYPE: JSON.stringify(env.APP_TYPE || "ors-viewer"),
-                USE_MOCK_BON: JSON.stringify(env.USE_MOCK_BON || false) // Can we even pass booleans from the CLI?
+                USE_MOCK: JSON.stringify(env.USE_MOCK || false) // Can we even pass booleans from the CLI?
             }),
-            new htmlWebpackPlugin({
+            new HtmlWebpackPlugin({
                 template: path.resolve(__dirname, "./src/index.html"),
                 chunks: ["app"],
                 inject: "body",
                 filename: "index.html"
             }),
-            new copyPlugin({
+            new CopyPlugin({
                 patterns: [
                     {
                         from: path.resolve(__dirname, "src/images"),
