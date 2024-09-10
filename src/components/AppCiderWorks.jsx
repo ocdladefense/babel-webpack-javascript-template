@@ -20,48 +20,96 @@ export default function App({ headerPinned = false }) {
                 <Navbar />
             </header>
 
-            <main>
-                <section cols="1">
-                    Some initial content and images here...
-                </section>
-                <section
-                    cols="2"
-                    width="25%,75%">
-                    <div class="container mx-auto border-x">
-                        <form>
-                            <div class="space-y-12">
-                                <div class="border-gray-900/10 border-b pb-12">
-                                    <h2 class="text-gray-900 text-base font-semibold leading-7">
-                                        Upload a file
-                                    </h2>
+            <main class="container mx-auto p-4 pb-16 lg:p-8 lg:pb-32">
+                <ContentRegion cols="1">
+                    <p>
+                        Welcome to Waldbusser Ciderworks, where the art of
+                        traditional cider making meets modern, transparent
+                        practices. Nestled in the heart of Oregon, we specialize
+                        in crafting exceptional ciders through a meticulous slow
+                        fermentation process that captures the essence of the
+                        apples we use.
+                    </p>
+                </ContentRegion>
+                <ContentRegion cols="3">
+                    <img
+                        src="../images/sample.png"
+                        width="406"
+                        height="281"
+                    />
+                    <img
+                        src="../images/sample.png"
+                        width="406"
+                        height="281"
+                    />
+                    <img
+                        src="../images/sample.png"
+                        width="406"
+                        height="281"
+                    />
+                </ContentRegion>
 
-                                    <p class="text-gray-600 mt-1 text-sm leading-6">
-                                        This information will be displayed
-                                        publicly so be careful what you share.
-                                    </p>
+                <ContentRegion cols="1">
+                    <h3>OUR PHILOSOPHY</h3>
+                    <p>
+                        At Waldbusser Ciderworks we believe that great cider
+                        starts with great ingredients. Our commitment to quality
+                        begins with sourcing the finest apples from local
+                        orchards. By partnering with growers who share our
+                        passion for sustainability and excellence, we ensure
+                        that every sip of our cider is a reflection of the rich,
+                        fertile Oregon landscape.
+                    </p>
+                </ContentRegion>
 
-                                    <input
-                                        type="file"
-                                        class="mt-6"
-                                    />
-                                </div>
-                            </div>
+                <ContentRegion cols="1">
+                    <h3>SLOW CIDER</h3>
+                    <p>
+                        Patience is at the core of our cider-making process.
+                        Unlike mass-produced ciders that rush through
+                        fermentation, we embrace a slow fermentation method that
+                        allows the natural flavors and aromas of the apples to
+                        develop fully. This careful approach results in ciders
+                        that are complex, well-balanced, and brimming with
+                        character.
+                    </p>
+                </ContentRegion>
 
-                            <div class="mt-6 flex items-center justify-end gap-x-6">
-                                <button
-                                    type="button"
-                                    class="text-gray-900 text-sm font-semibold leading-6">
-                                    Cancel
-                                </button>
-                                <button
-                                    type="submit"
-                                    class="bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600 rounded-md px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
-                                    Save
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
+                <ContentRegion cols="1">
+                    <h3>TRANSPARENCY</h3>
+                    <p>
+                        We take pride in our transparent production practices.
+                        From apple to bottle, we invite you to see every step of
+                        our process. Whether it's detailed information on our
+                        apple varieties, or insights into our fermentation
+                        techniques, we're dedicated to being open about how our
+                        ciders are made. Transparency is not just a buzzword for
+                        us; it's a commitment to our customers and a cornerstone
+                        of our brand.
+                    </p>
+                </ContentRegion>
+
+                <ContentRegion cols="1">
+                    <h3>OUR CIDERS</h3>
+                    <p>
+                        Each cider we produce tells a story. From crisp,
+                        refreshing styles to rich, robust blends, our range
+                        caters to all palates. Every bottle is a testament to
+                        our dedication to craft, quality, and tradition. Explore
+                        our collection and discover your new favorite cider.
+                    </p>
+                </ContentRegion>
+                <ContentRegion cols="1">
+                    <h3>JOIN OUR COMMUNITY</h3>
+                    <p>
+                        Stay connected with us through our social media
+                        channels. Be the first to know about new releases,
+                        special events, and exclusive offers. Join our community
+                        of cider enthusiasts and share in the journey of
+                        crafting exceptional ciders. Thank you for choosing
+                        Waldbusser Ciderworks. Cheers to slow cider!
+                    </p>
+                </ContentRegion>
             </main>
             <footer class="text-wb-white container mx-auto border border-b-0 bg-wb-black p-4 pb-16 lg:p-8 lg:pb-32">
                 {/* Resources */}
