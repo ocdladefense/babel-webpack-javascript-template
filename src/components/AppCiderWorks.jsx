@@ -50,7 +50,7 @@ export default function App({ headerPinned = false }) {
                 </ContentRegion>
 
                 <ContentRegion cols="1">
-                    <h3>OUR PHILOSOPHY</h3>
+                    <h3 class="text-wb-red text-lg">OUR PHILOSOPHY</h3>
                     <p>
                         At Waldbusser Ciderworks we believe that great cider
                         starts with great ingredients. Our commitment to quality
@@ -63,7 +63,7 @@ export default function App({ headerPinned = false }) {
                 </ContentRegion>
 
                 <ContentRegion cols="1">
-                    <h3>SLOW CIDER</h3>
+                    <h3 class="text-wb-red text-lg">SLOW CIDER</h3>
                     <p>
                         Patience is at the core of our cider-making process.
                         Unlike mass-produced ciders that rush through
@@ -76,7 +76,7 @@ export default function App({ headerPinned = false }) {
                 </ContentRegion>
 
                 <ContentRegion cols="1">
-                    <h3>TRANSPARENCY</h3>
+                    <h3 class="text-wb-red text-lg">TRANSPARENCY</h3>
                     <p>
                         We take pride in our transparent production practices.
                         From apple to bottle, we invite you to see every step of
@@ -90,7 +90,7 @@ export default function App({ headerPinned = false }) {
                 </ContentRegion>
 
                 <ContentRegion cols="1">
-                    <h3>OUR CIDERS</h3>
+                    <h3 class="text-wb-red text-lg">OUR CIDERS</h3>
                     <p>
                         Each cider we produce tells a story. From crisp,
                         refreshing styles to rich, robust blends, our range
@@ -100,7 +100,7 @@ export default function App({ headerPinned = false }) {
                     </p>
                 </ContentRegion>
                 <ContentRegion cols="1">
-                    <h3>JOIN OUR COMMUNITY</h3>
+                    <h3 class="text-wb-red text-lg">JOIN OUR COMMUNITY</h3>
                     <p>
                         Stay connected with us through our social media
                         channels. Be the first to know about new releases,
