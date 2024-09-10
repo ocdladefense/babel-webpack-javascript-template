@@ -2,12 +2,12 @@
 import { vNode, View } from "@ocdla/view";
 import "../css/input.css";
 import HttpClient from "@ocdla/lib-http/HttpClient.js";
-import SiteMock from "../mock/SiteMock.js";
+//import SiteMock from "../mock/SiteMock.js";
 import { parseReferences } from "@ocdladefense/ors/src/Outline.js";
-import App from "../components/AppNew";
+import App from "../components/AppCiderWorks.jsx";
 
 if (USE_MOCK) {
-    HttpClient.register("https://example.com/", new SiteMock());
+    //HttpClient.register("https://example.com/", new SiteMock());
 }
 
 /**
