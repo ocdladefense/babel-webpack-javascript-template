@@ -1,12 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
     content: [
-        './src/**/*.{html,js,jsx}',
-        './dev_modules/@ocdla/global-components/**/*.{html,js,jsx}',
-        './node_modules/@ocdla/**/*.{html,js,jsx}'
+        "./src/**/*.{html,js,jsx}",
+        "./dev_modules/@ocdla/global-components/**/*.{html,js,jsx}",
+        "./node_modules/@ocdla/global-components/**/*.{html,js,jsx}"
     ],
     theme: {
         colors: {
@@ -15,12 +15,13 @@ module.exports = {
             'wb-lime': '#B5E179', // yellow green
             'wb-blue': '#394657', // oxford blue
             'wb-orange': '#F68544', // jaffa
+            "wb-black": "rgb(47,42,42)"
         },
         extend: {
             fontFamily: {
-                sans: ['"Open Sans"', ...defaultTheme.fontFamily.sans]
+                sans: ["Open Sans", "Verdana", ...defaultTheme.fontFamily.sans]
             }
         }
     },
-    plugins: []
+    plugins: [require("@tailwindcss/forms")]
 };

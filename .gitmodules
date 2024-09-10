@@ -13,4 +13,4 @@
 [submodule "dev_modules/@ocdla/ors"]
 	path = dev_modules/@ocdla/ors
 	url = https://github.com/ocdladefense/node-ors.git
-	branch = development
+	branch = parser-update
