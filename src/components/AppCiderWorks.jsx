@@ -8,6 +8,13 @@ import Sitemap from "@ocdla/global-components/src/Sitemap";
 import SitemapCategory from "@ocdla/global-components/src/SitemapCategory";
 import Social from "@ocdla/global-components/src/Social";
 import Contacts from "@ocdla/global-components/src/Contacts";
+import Logo from "@ocdla/global-components/src/Logo";
+import Navlink from "@ocdla/global-components/src/Navlink";
+import {DividerMobile, DividerDesktop} from "@ocdla/global-components/src/Dividers.jsx";
+import Search from "@ocdla/global-components/src/Search";
+import Profile from "@ocdla/global-components/src/Profile";
+import Button from "@ocdla/global-components/src/Button";
+import GoogleMaps from "@ocdla/global-components/src/GoogleMaps";
 
 export default function App({ headerPinned = false }) {
     // There is a component that can be used to render a nice 404 error.
@@ -15,13 +22,58 @@ export default function App({ headerPinned = false }) {
 
     return (
         <>
-            <header
-                class={`${headerPinned ? "sticky top-0" : ""}container bg-white mx-auto flex w-full flex-col lg:h-32`}>
-                <Navbar />
+            <header class="container bg-white mx-auto flex w-full flex-col lg:h-32">
+                <nav class='flex flex-col border border-0 border-b lg:h-16 lg:flex-row lg:border lg:border-t-0'>
+                    <ul class='flex size-full flex-col items-start lg:flex-row lg:items-center'>
+                        <li class='size-full lg:size-max'>
+                            <ul class='flex flex-col items-center lg:flex-row'>
+                                <Logo typeNavbar={true} src="../images/sample.png"/>
+                                <Navlink href='https://oregon.public.law/rules'>
+                                    Oregon Administrative Rules
+                                </Navlink>
+                                <Navlink
+                                    // href='https://oregon.public.law/statutes'
+                                    href='/toc'>
+                                    Oregon Revised Statutes
+                                </Navlink>
+                            </ul>
+                        </li>
+                        <DividerMobile />
+                        <li class='size-full lg:ms-auto lg:size-max'>
+                            <form
+                                class='m-4 flex flex-col items-start lg:m-0 lg:flex-row lg:items-center'
+                                onsubmit={e => {
+                                    e.preventDefault();
+
+                                    window.location.pathname = '/';
+                                }}>
+                                <Search
+                                    typeNavbar={true}
+                                    placeholder='Search'
+                                />
+                                <DividerDesktop />
+                                <li class='size-full'>
+                                    <ul class='flex flex-row-reverse items-center lg:flex-row'>
+                                        <Profile
+                                            bg='bg-[#516490]'
+                                            label='G'
+                                            loginUrl='/'
+                                        />
+                                        <DividerDesktop />
+                                        <Button
+                                            href='/'
+                                            label='GIVE FEEDBACK'
+                                        />
+                                    </ul>
+                                </li>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
             </header>
 
             <main class="container mx-auto p-4 pb-16 lg:p-8 lg:pb-32">
-                <ContentRegion cols="1">
+                <section class="mb-8">
                     <p>
                         Welcome to Waldbusser Ciderworks, where the art of
                         traditional cider making meets modern, transparent
@@ -30,8 +82,8 @@ export default function App({ headerPinned = false }) {
                         fermentation process that captures the essence of the
                         apples we use.
                     </p>
-                </ContentRegion>
-                <ContentRegion cols="3">
+                </section>
+                <section class="columns-3 gap-0 mb-8">
                     <img
                         src="../images/sample.png"
                         width="406"
@@ -47,9 +99,9 @@ export default function App({ headerPinned = false }) {
                         width="406"
                         height="281"
                     />
-                </ContentRegion>
+                </section>
 
-                <ContentRegion cols="1">
+                <section class="mb-8">
                     <h3 class="text-wb-red text-lg">OUR PHILOSOPHY</h3>
                     <p>
                         At Waldbusser Ciderworks we believe that great cider
@@ -60,9 +112,9 @@ export default function App({ headerPinned = false }) {
                         that every sip of our cider is a reflection of the rich,
                         fertile Oregon landscape.
                     </p>
-                </ContentRegion>
+                </section>
 
-                <ContentRegion cols="1">
+                <section class="mb-8">
                     <h3 class="text-wb-red text-lg">SLOW CIDER</h3>
                     <p>
                         Patience is at the core of our cider-making process.
@@ -73,9 +125,9 @@ export default function App({ headerPinned = false }) {
                         that are complex, well-balanced, and brimming with
                         character.
                     </p>
-                </ContentRegion>
+                </section>
 
-                <ContentRegion cols="1">
+                <section class="mb-8">
                     <h3 class="text-wb-red text-lg">TRANSPARENCY</h3>
                     <p>
                         We take pride in our transparent production practices.
@@ -87,9 +139,9 @@ export default function App({ headerPinned = false }) {
                         us; it's a commitment to our customers and a cornerstone
                         of our brand.
                     </p>
-                </ContentRegion>
+                </section>
 
-                <ContentRegion cols="1">
+                <section class="mb-8">
                     <h3 class="text-wb-red text-lg">OUR CIDERS</h3>
                     <p>
                         Each cider we produce tells a story. From crisp,
@@ -98,8 +150,8 @@ export default function App({ headerPinned = false }) {
                         our dedication to craft, quality, and tradition. Explore
                         our collection and discover your new favorite cider.
                     </p>
-                </ContentRegion>
-                <ContentRegion cols="1">
+                </section>
+                <section class="mb-8">
                     <h3 class="text-wb-red text-lg">JOIN OUR COMMUNITY</h3>
                     <p>
                         Stay connected with us through our social media
@@ -109,7 +161,7 @@ export default function App({ headerPinned = false }) {
                         crafting exceptional ciders. Thank you for choosing
                         Waldbusser Ciderworks. Cheers to slow cider!
                     </p>
-                </ContentRegion>
+                </section>
             </main>
             <footer class="text-wb-white container mx-auto border border-b-0 bg-wb-black p-4 pb-16 lg:p-8 lg:pb-32">
                 {/* Resources */}
@@ -122,8 +174,7 @@ export default function App({ headerPinned = false }) {
                                     {/* Social */}
                                     <li>
                                         <Social
-                                            platforms="facebook, twitter, youtube"
-                                            handles="OregonCriminalDefenseLawyersAssociation, oregondefense, oregoncriminaldefenselawye4822"
+                                            facebook="OregonCriminalDefenseLawyersAssociation" twitter="oregondefense" youtube="oregoncriminaldefenselawye4822"
                                         />
                                     </li>
                                     {/* Copyright */}
@@ -148,8 +199,10 @@ export default function App({ headerPinned = false }) {
                             {/* Contact */}
                             <li>
                                 <Contacts
-                                    hrefs="https://ocdla.org, https://maps.app.goo.gl/7dCYKBEyJbmo8tzS7, mailto:info@ocdla.org, tel:+15416868716"
-                                    labels="ocdla.org, 101 East 14th Ave Eugene OR 97401, info@ocdla.org, (+1) 541-686-8716"
+                                    ocdla="https://ocdla.org"
+                                    maps="https://maps.app.goo.gl/7dCYKBEyJbmo8tzS7"
+                                    mail="mailto:info@ocdla.org"
+                                    phone="+15416868716"
                                 />
                             </li>
                         </ul>
@@ -158,23 +211,26 @@ export default function App({ headerPinned = false }) {
                         <Sitemap>
                             <SitemapCategory
                                 title="SERVICES"
-                                hrefs="/,/,/"
-                                labels="Membership Directory, Expert Directory, Online store"
-                                path="/"
+                                path="./services/"
+                                Membership_Directory="/membership"
+                                Expert_Directory="/experts"
+                                Online_Store="/store"
                             />
                             <SitemapCategory
                                 title="RESEARCH"
-                                hrefs="/,/"
-                                labels="Criminal Appellate Review, Criminal Legal Appellate Review"
-                                path="/"
+                                path="./research/"
+                                Criminal_Appellate_Review="/appellate"
+                                Criminal_Legal_Appellate_Review="/app"
                             />
                             <SitemapCategory
                                 title="RESOURCES"
-                                hrefs="/"
-                                labels="CLEs"
-                                path="/"
+                                path="./resources/"
+                                CLEs="/cles"
                             />
                         </Sitemap>
+                    </li>
+                    <li>
+                        <GoogleMaps src="https://google.com/maps/embed?pb=!1m18!1m12!1m3!1d2867.8775315978623!2d-123.09091950000001!3d44.0445852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54c11e41b2e3f7ad%3A0xa7600cd512aa10ed!2s101%20E%2014th%20Ave%2C%20Eugene%2C%20OR%2097401!5e0!3m2!1sen!2sus!4v1722628072318!5m2!1sen!2sus" />
                     </li>
                 </ul>
             </footer>
