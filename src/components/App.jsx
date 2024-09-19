@@ -1,6 +1,14 @@
 /** @jsx vNode */ /** @jsxFrag "Fragment" */
-import { vNode, View } from "@ocdla/view/view.js";
 
+
+
+/**
+ * This is the default App component.
+ * It should reflect an agnostic implementation of the basic repository features.
+ */
+
+
+import { vNode, View } from "@ocdla/view/view.js";
 import Navbar from "@ocdla/global-components/src/Navbar";
 import Breadcrumbs from "@ocdla/global-components/src/Breadcrumbs";
 import Sidebar from "@ocdla/global-components/src/Sidebar";

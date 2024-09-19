@@ -14,7 +14,7 @@ module.exports = env => {
             // init_head: path.resolve(__dirname, "src/js/custom-elements.js")
         },
         snapshot: {
-            managedPaths: ["/node_modules"],
+            managedPaths: [],
             unmanagedPaths: ["/dev_modules"]
         },
         watchOptions: {
@@ -44,17 +44,12 @@ module.exports = env => {
         module: {
             rules: [
                 {
-                    test: /\.html$/i,
-                    loader: "html-loader"
-                },
-                {
                     test: /\.(js|jsx)$/,
-                    // exclude: /(node_modules)/,
                     use: {
                         loader: "babel-loader",
                         options: {
                             presets: [
-                                ["@babel/preset-env", { modules: false }],
+                                ["@babel/preset-env", { modules: false, useBuiltIns: false }],
                                 [
                                     "@babel/preset-react",
                                     {
@@ -73,10 +68,6 @@ module.exports = env => {
                     }
                 },
                 {
-                    test: /\.ts$/,
-                    use: "ts-loader"
-                },
-                {
                     test: /\.css$/i,
                     use: ["style-loader", "css-loader", "postcss-loader"]
                 },
@@ -86,23 +77,16 @@ module.exports = env => {
                 },
                 {
                     test: /\.(png|jpg|gif)$/i,
-                    exclude: [
-                        /node_modules\/(?!@ocdla\/global-components)/,
-                        /dev_modules\/(?!@ocdla\/global-components)/
-                    ],
                     type: "asset/resource"
                 },
                 {
                     test: /\.xml$/i,
-                    exclude: [
-                        /node_modules\/(?!@local)/,
-                        /dev_modules\/(?!@ocdla)/
-                    ],
                     type: "asset/source"
                 },
                 {
                     test: /\.html$/i,
-                    loader: "html-loader"
+                    exclude: [/src\/index\.html/],
+                    type: "asset/source"
                 }
             ]
         },
