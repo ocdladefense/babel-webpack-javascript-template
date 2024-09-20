@@ -92,7 +92,8 @@ module.exports = env => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                USE_MOCK: JSON.stringify(env.USE_MOCK || false) // Can we even pass booleans from the CLI?
+                USE_MOCK: JSON.stringify(env.USE_MOCK || false), // Can we even pass booleans from the CLI?
+                MODULE_PATH: JSON.stringify(env.MODULE_PATH || "")
             }),
             new HtmlWebpackPlugin({
                 template: path.resolve(__dirname, "./src/index.html"),

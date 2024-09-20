@@ -6,14 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-build": "babel src --out-dir dist --source-maps",
-    "build": "webpack --config webpack.config.js --env USE_MOCK",
+    "build": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/publish",
     "update": "cp package.json package-main.json && package-json-merge package-main.json package-overrides.json > package.json",
     "start": "webpack serve",
     "lint": "eslint src/**",
     "lint-fix": "eslint --fix src/**",
     "git-reset": "git reset --soft HEAD~1",
     "git-force": "git push origin +main --force",
-    "watch": "npx webpack serve --open --env USE_MOCK",
+    "watch": "npx webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/publish",
     "watch-prod": "webpack serve --open"
   },
   "author": "José Bernal",
