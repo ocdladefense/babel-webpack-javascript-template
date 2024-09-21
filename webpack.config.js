@@ -26,7 +26,6 @@ module.exports = env => {
         },
         output: {
             path: path.resolve(__dirname, "dist"),
-            publicPath: "/",
             filename: "[name].bundle.js",
             assetModuleFilename: "images/[name][ext]",
             clean: true
