@@ -8,13 +8,14 @@
     "babel-build": "babel src --out-dir dist --source-maps",
     "build": "webpack --config webpack.config.js --env USE_MOCK",
     "update": "cp package.json package-main.json && package-json-merge package-main.json package-overrides.json > package.json",
+    "save": "cp package.json package-orig.json",
+    "reset": "cp package-orig.json package.json",
     "start": "webpack serve",
     "lint": "eslint src/**",
     "lint-fix": "eslint --fix src/**",
     "git-reset": "git reset --soft HEAD~1",
     "git-force": "git push origin +main --force",
-    "watch": "npx webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/publish",
-    "watch-prod": "webpack serve --open"
+    "watch": "npx webpack serve --open --env USE_MOCK"
   },
   "author": "José Bernal",
   "license": "ISC",

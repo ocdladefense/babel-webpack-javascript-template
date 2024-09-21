@@ -4,7 +4,7 @@
 package-overrides.json
 package-main.json
 
-
+/package-orig.json
 
 ### macOS ###
 *.DS_Store
