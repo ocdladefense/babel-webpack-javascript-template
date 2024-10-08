@@ -20,6 +20,11 @@ _Note: A secret is necessary to utilitze GitHub's Deploy to GitHub Pages functio
 ## Further reading
 
 
+## Citation parser
+1. Identify the correct repositories
+  * [<code>@ocdladefense/babel-webpack-javascript-template</code>](https://github.com/ocdladefense/babel-webpack-javascript-template)
+  * 
+
 
 ## @TODO
 * Data - The <code>data/</code> directory contains project data that properly belongs to the root repository.
