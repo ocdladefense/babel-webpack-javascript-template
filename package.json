@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-build": "babel src --out-dir dist --source-maps",
-    "build": "webpack --config webpack.config.js --env USE_MOCK",
+    "build": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/lod",
     "update": "cp package.json package-main.json && package-json-merge package-main.json package-overrides.json > package.json",
     "save": "cp package.json package-orig.json",
     "reset": "cp package-orig.json package.json",
@@ -15,7 +15,11 @@
     "lint-fix": "eslint --fix src/**",
     "git-reset": "git reset --soft HEAD~1",
     "git-force": "git push origin +main --force",
-    "watch": "npx webpack serve --open --env USE_MOCK"
+    "watch": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/lod",
+    "build:ocdla:publish": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/publish",
+    "build:ocdla:ors": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/references",
+    "watch:ocdla:publish": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/publish",
+    "watch:ocdla:ors": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/references"
   },
   "author": "José Bernal",
   "license": "ISC",
@@ -28,7 +32,10 @@
     "dotenv": "^16.4.5",
     "globals": "^15.6.0",
     "postcss": "^8.4.39",
-    "tailwindcss": "^3.4.6"
+    "tailwindcss": "^3.4.6",
+    "@local/publish": "file:./dev_modules/@local/publish",
+    "@local/references": "file:./dev_modules/@local/references",
+    "@local/lod": "file:./dev_modules/@local/lod"
   },
   "devDependencies": {
     "package-json-merge": "git+https://github.com/ocdladefense/package-json-merge.git",

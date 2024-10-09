@@ -10,12 +10,21 @@ module.exports = {
         "./node_modules/@ocdla/global-components/**/*.{html,js,jsx}"
     ],
     theme: {
-        colors: {
-            "wb-black": "rgb(47,42,42)"
+        screens: {
+        'phone': '320px',
+        'tablet-portrait': '480px',
+        'tablet': '800px',
+        'laptop': '1024px',
+        'desktop': '1280px'
         },
         extend: {
+            colors: {
+                "lod-light": "rgb(219 228 243)",
+                "lod-dark": "rgb(28 30 60)"
+            },
             fontFamily: {
-                sans: ["Open Sans", "Verdana", ...defaultTheme.fontFamily.sans]
+                sans: ["Open Sans", "Verdana", ...defaultTheme.fontFamily.sans],
+                oswald: ["Oswald", ...defaultTheme.fontFamily.sans]
             }
         }
     },
