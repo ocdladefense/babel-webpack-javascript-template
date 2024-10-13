@@ -10,12 +10,14 @@
     "editor.linkedEditing": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "files.insertFinalNewline": true,
-    "html.format.wrapAttributes": "force-expand-multiline",
+    "html.format.wrapAttributes": "aligned-multiple",
     "html.validate.scripts": true,
     "html.validate.styles": true,
     // "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
     "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     "[xml]": {
         "editor.defaultFormatter": "fabianlauer.vs-code-xml-format"
-    }
+    },
+    "html.format.wrapLineLength": 0,
+    "visualforce.format.wrapLineLength": 0
 }

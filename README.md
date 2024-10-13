@@ -20,6 +20,13 @@ _Note: A secret is necessary to utilitze GitHub's Deploy to GitHub Pages functio
 ## Further reading
 
 
+
+## Design Resources
+* https://webflow.com/blog/google-fonts
+* https://www.material-tailwind.com/blocks
+* https://sentry.io/answers/how-to-change-the-css-background-opacity-of-an-element/
+* Adobe Express
+
 ## Citation parser
 1. Identify the correct repositories
   * [<code>@ocdladefense/babel-webpack-javascript-template</code>](https://github.com/ocdladefense/babel-webpack-javascript-template)
