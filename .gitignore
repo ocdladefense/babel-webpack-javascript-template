@@ -1,7 +1,7 @@
 
 # Created by https://www.gitignore.io/api/node,macos
 ### Ignore any local overrides.
-package-overrides.json
+# package-overrides.json
 package-main.json
 
 /package-orig.json
