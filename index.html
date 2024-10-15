@@ -13,9 +13,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet" />
 </head>
 
-<body id="root" class="text-sm">
+<body id="root" class="text-sm invisible">
+    <script>0</script>
     <style type="text/css">
         label {
             display: inline-block;
@@ -24,7 +26,27 @@
     </style>
 
     <div id="app"></div>
-    <noscript>This page requires JavaScript.</noscript>
+    <noscript>
+        <style>
+            body {
+                visibility: visible;
+            }
+        </style>
+        This page requires JavaScript.
+    </noscript>
+
+    <script>
+        let domReady = (cb) => {
+            document.readyState === 'interactive' || document.readyState === 'complete'
+                ? cb()
+                : document.addEventListener('DOMContentLoaded', cb);
+        };
+
+        domReady(() => {
+            // Display body when DOM is loaded
+            document.body.style.visibility = 'visible';
+        });
+    </script>
     <script src="sw.js"></script>
 <script defer src="app.bundle.js"></script></body>
 
