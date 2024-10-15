@@ -18,8 +18,10 @@
     "watch": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/lod",
     "build:ocdla:publish": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/publish",
     "build:ocdla:ors": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/references",
+    "build:ocdla:openai": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/openai",
     "watch:ocdla:publish": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/publish",
-    "watch:ocdla:ors": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/references"
+    "watch:ocdla:ors": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/references",
+    "watch:ocdla:openai": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/openai"
   },
   "author": "José Bernal",
   "license": "ISC",
