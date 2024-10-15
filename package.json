@@ -28,7 +28,7 @@
   "dependencies": {
     "@local/openai": "file:./dev_modules/@local/openai",
     "@ocdla/global-components": "file:./dev_modules/@ocdla/global-components",
-    "@ocdla/lib-http": "^3.0.0",
+    "@ocdla/lib-http": "^2.1.0",
     "@ocdla/view": "~3.0.0",
     "@ocdla/lib-routing": "^1.1.0",
     "autoprefixer": "^10.4.19",
