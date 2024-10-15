@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-build": "babel src --out-dir dist --source-maps",
-    "build": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/lod",
+    "build":"webpack --config webpack.config.js --env USE_MOCK",
+    "watch": "npx webpack serve --open --env USE_MOCK",
     "update": "cp package.json package-main.json && package-json-merge package-main.json package-overrides.json > package.json",
     "save": "cp package.json package-orig.json",
     "reset": "cp package-orig.json package.json",
@@ -14,14 +15,7 @@
     "lint": "eslint src/**",
     "lint-fix": "eslint --fix src/**",
     "git-reset": "git reset --soft HEAD~1",
-    "git-force": "git push origin +main --force",
-    "watch": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/lod",
-    "build:ocdla:publish": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/publish",
-    "build:ocdla:ors": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/references",
-    "build:ocdla:openai": "webpack --config webpack.config.js --env USE_MOCK --env MODULE_PATH=@local/openai",
-    "watch:ocdla:publish": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/publish",
-    "watch:ocdla:ors": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/references",
-    "watch:ocdla:openai": "webpack serve --open --env USE_MOCK --env MODULE_PATH=@local/openai"
+    "git-force": "git push origin +main --force"
   },
   "author": "José Bernal",
   "license": "ISC",
