@@ -24,25 +24,28 @@
   "author": "José Bernal",
   "license": "ISC",
   "dependencies": {
+    "@local/openai": "file:./dev_modules/@local/openai",
+    "@local/lod": "file:./dev_modules/@local/lod",
+    "@local/publish": "file:./dev_modules/@local/publish",
+    "@local/references": "file:./dev_modules/@local/references",
+    "@ocdla/global-components": "file:./dev_modules/@ocdla/global-components",
     "@ocdla/lib-http": "file:./dev_modules/@ocdla/lib-http",
     "@ocdla/view": "file:./dev_modules/@ocdla/view",
-    "@ocdla/global-components": "file:./dev_modules/@ocdla/global-components",
     "@ocdladefense/ors": "file:./dev_modules/@ocdla/ors",
+    "@ocdla/lib-routing": "^1.1.0",
     "autoprefixer": "^10.4.19",
     "dotenv": "^16.4.5",
     "globals": "^15.6.0",
+    "openai": "^4.67.3",
     "postcss": "^8.4.39",
-    "tailwindcss": "^3.4.6",
-    "@local/publish": "file:./dev_modules/@local/publish",
-    "@local/references": "file:./dev_modules/@local/references",
-    "@local/lod": "file:./dev_modules/@local/lod"
+    "tailwindcss": "^3.4.6"
   },
   "devDependencies": {
-    "package-json-merge": "git+https://github.com/ocdladefense/package-json-merge.git",
     "@babel/cli": "^7.18.10",
     "@babel/core": "^7.19.6",
     "@babel/preset-env": "^7.19.4",
     "@babel/preset-react": "^7.24.7",
+    "@tailwindcss/forms": "^0.5.9",
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.11.0",
@@ -50,11 +53,11 @@
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.5.4",
     "jsdoc": "^4.0.2",
+    "package-json-merge": "git+https://github.com/ocdladefense/package-json-merge.git",
     "postcss-loader": "^8.1.1",
     "style-loader": "^3.3.4",
     "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.2",
-    "@tailwindcss/forms": "^0.5.9"
+    "webpack-dev-server": "^4.15.2"
   }
 }
