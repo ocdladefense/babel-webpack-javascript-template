@@ -12,7 +12,6 @@ import { vNode, View } from "@ocdla/view/view.js";
 import Navbar from "@ocdla/global-components/src/Navbar";
 import Breadcrumbs from "@ocdla/global-components/src/Breadcrumbs";
 import Sidebar from "@ocdla/global-components/src/Sidebar";
-// import Body from '@ocdla/global-components/src/Body';
 import Footer from "@ocdla/global-components/src/Footer";
 
 export default function App({
