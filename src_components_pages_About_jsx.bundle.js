@@ -21,7 +21,7 @@ function TwoColumnPanel(_ref) {
     striped = _ref$striped === void 0 ? false : _ref$striped;
   return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("section", {
     style: "position:relative;",
-    "class": "fullscreen bg-sunshine laptop:min-w-[800px] p-8 gap-0 tablet:place-items-start mb-16 tablet:my-22"
+    "class": "fullscreen bg-default-background laptop:min-w-[800px] p-8 gap-0 tablet:place-items-start mb-16 tablet:my-22"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
     "class": "container tablet:max-w-[90%] laptop:max-w-[80%] tablet:mx-auto"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
