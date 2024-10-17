@@ -106,6 +106,42 @@ function GoogleMaps(_ref) {
 
 /***/ }),
 
+/***/ "./node_modules/@ocdla/global-components/src/Header.jsx":
+/*!**************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Header.jsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Header)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _navigation_Navigation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navigation/Navigation */ "./node_modules/@ocdla/global-components/src/navigation/Navigation.jsx");
+/** @jsx vNode */ /** @jsxFrag "Fragment" */
+
+
+function Header(_ref) {
+  var navItems = _ref.navItems,
+    logo = _ref.logo,
+    logoWidth = _ref.logoWidth,
+    logoHeight = _ref.logoHeight;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("header", {
+    "class": "w-full mb-0 p-[10px] sticky top-0 bg-wb-black z-50"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
+    style: "inline-block vertical-align:middle;",
+    "class": "inline-block",
+    width: logoWidth,
+    height: logoHeight,
+    src: logo
+  }), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_navigation_Navigation__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    routes: navItems
+  }));
+}
+
+/***/ }),
+
 /***/ "./node_modules/@ocdla/global-components/src/Legal.jsx":
 /*!*************************************************************!*\
   !*** ./node_modules/@ocdla/global-components/src/Legal.jsx ***!
@@ -393,6 +429,32 @@ function SocialItem(_ref) {
 
 /***/ }),
 
+/***/ "./node_modules/@ocdla/global-components/src/navigation/Hamburger.jsx":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/navigation/Hamburger.jsx ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Hamburger)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */ /** @jsxFrag "Fragment" */
+
+function Hamburger() {
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
+    style: "float:right; margin-right:15px;",
+    id: "toggle-menu",
+    "class": "tablet:hidden mx-auto inline-block cursor-pointer leading-8"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
+    "class": "hamburgler inline-block w-3 h-1 bg-menu rounded-full transition-all duration-150 before:content-[''] before:absolute before:w-5 before:h-1 before:bg-menu before:rounded-full before:-translate-y-2 before:transition-all before:duration-150 after:content-[''] after:absolute after:w-4 after:h-1 after:bg-menu after:rounded-full after:translate-y-2 after:transition-all after:duration-150"
+  }));
+}
+
+/***/ }),
+
 /***/ "./node_modules/@ocdla/global-components/src/navigation/Navigation.jsx":
 /*!*****************************************************************************!*\
   !*** ./node_modules/@ocdla/global-components/src/navigation/Navigation.jsx ***!
@@ -405,7 +467,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Navigation)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _Hamburger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Hamburger */ "./node_modules/@ocdla/global-components/src/navigation/Hamburger.jsx");
 /** @jsx vNode */ /** @jsxFrag "Fragment" */
+
 
 function Navigation(_ref) {
   var routes = _ref.routes;
@@ -429,14 +493,14 @@ function Navigation(_ref) {
       "class": "text-center font-marketing text-base subpixel-antialiased hover:text-wb-cordovan"
     }, item.label)));
   });
-  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("nav", {
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("nav", {
     "class": "ml-4 inline-block tablet:px-8"
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
     "class": "inline-block"
-  }, top), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+  }, top)), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hamburger__WEBPACK_IMPORTED_MODULE_1__["default"], null), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("nav", {
     id: "mobile-menu",
     "class": "block hidden min-h-[100vh] pt-[15vh]"
-  }, all));
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", null, all)));
 }
 
 /***/ }),
@@ -772,10 +836,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ App)
 /* harmony export */ });
 /* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
-/* harmony import */ var _ocdla_global_components_src_navigation_Navigation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/global-components/src/navigation/Navigation */ "./node_modules/@ocdla/global-components/src/navigation/Navigation.jsx");
+/* harmony import */ var _ocdla_global_components_src_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/global-components/src/Header */ "./node_modules/@ocdla/global-components/src/Header.jsx");
 /* harmony import */ var _components_Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Footer */ "./src/components/Footer.jsx");
 /* harmony import */ var _data_routes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./data/routes.js */ "./src/data/routes.js");
 /* harmony import */ var _ocdla_lib_routing_src_Router_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ocdla/lib-routing/src/Router.js */ "./node_modules/@ocdla/lib-routing/src/Router.js");
+/* harmony import */ var _images_logos_logo_header_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/logos/logo-header.svg */ "./src/images/logos/logo-header.svg");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -784,7 +849,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 /** @jsx vNode */ /** @jsxFrag "Fragment" */
 
-// import Header from "./components/Header";
+
 
 
 
@@ -845,11 +910,12 @@ function App() {
     label: "orders",
     hidden: true
   }];
-  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("header", {
-    "class": "w-full mb-0 pb-1 p-[10px] sticky top-0 bg-wb-black z-50"
-  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_navigation_Navigation__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    routes: items
-  })), typeof HeaderTwo === "function" ? (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(HeaderTwo, null) : (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("main", {
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    navItems: items,
+    logo: _images_logos_logo_header_svg__WEBPACK_IMPORTED_MODULE_5__,
+    logoWidth: "40",
+    logoHeight: "40"
+  }), typeof HeaderTwo === "function" ? (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(HeaderTwo, null) : (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("main", {
     "class": "grow overflow-x-hidden font-default-paragraph ".concat(location)
   }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("i", null, "No module provided."), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(Page, null)), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_components_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 }
@@ -1944,6 +2010,9 @@ select {
   --tw-translate-x: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+.cursor-pointer {
+  cursor: pointer;
+}
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -1963,9 +2032,6 @@ select {
 }
 .flex-wrap {
   flex-wrap: wrap;
-}
-.place-content-center {
-  place-content: center;
 }
 .items-start {
   align-items: flex-start;
@@ -2229,6 +2295,9 @@ select {
 }
 .capitalize {
   text-transform: capitalize;
+}
+.leading-8 {
+  line-height: 2rem;
 }
 .leading-\\[0\\.75rem\\] {
   line-height: 0.75rem;
@@ -2855,7 +2924,7 @@ ul.social img {
 .\\[\\&_\\*\\]\\:mb-4 * {
   margin-bottom: 1rem;
 }
-`, "",{"version":3,"sources":["webpack://./src/css/input.css"],"names":[],"mappings":"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","sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n@tailwind forms;\n\n\n\n.allura-regular {\n  font-family: \"Allura\", cursive;\n  font-weight: 400;\n  font-style: normal;\n}\n\n\n@font-face {\n    font-family: 'Smoothy Cursive';\n    src: url(/src/fonts/smoothy-sans-regular.ttf) format('truetype');\n}\n\n\n\n@media screen and (min-width:1024px) {\n    section div.container {\n        max-width: 70%;\n    }\n    /*\n    main:not(.ciders, .drink, .order-progress) {\n        max-width: 90%;\n        margin: 0 auto;\n    }*/\n}\n\n@media screen and (min-width:1200px) {\n    /*\n    main:not(.ciders, .drink, .order-progress) {\n        max-width: 80%;\n        margin: 0 auto;\n    }*/\n}\n\n\n\n\n    section.fullscreen {\n        margin-bottom:0px;\n    }\n\n\n  @font-face {\n    font-family: 'Marketing';\n    font-style: normal;\n    font-weight: 400;\n    font-display: swap;\n    src: url(/src/fonts/smoothy-sans-regular.ttf) format('truetype');\n  }\n\n\n.font-smoothy {\n  font-family: var(--font-family-smoothy);\n}\n\nnav .col-span-1 {\n    display: inline-block;\n    padding: 10px 15px;\n    vertical-align:middle;\n}\n\n\nnav .text-base {\n    font-size: 0.9rem;\n    line-height: 1.5rem;\n    color: rgba(255, 255, 255, 0.6);\n}\n\n\n.panel-striped {\n    background-color: rgb(225 215 220);\n    /* margin: 0px -25px 45px -25px;\n    padding: 15px 25px; */\n}\n\n\nsection div p {\n    margin-bottom: 1.5rem;\n}\n\n.content-heading {\n    text-transform: uppercase;\n}\n\n.callout {\n\n    /* margin-top: -112px; */\n    \n    font-size: 1.0rem;\n    font-weight: 200;\n    margin: 0 auto;\n    margin-top: -25px;\n}\n\n.callout p {\n    font-size: 1.0rem;\n}\n\n.hero-image {\n  @apply relative;\n  background-position: center;\n}\n\n.overlay-logo {\n  background-image: url('/src/images/logos/logo-white.png');\n  position: absolute;\n  top: 40%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 60%;\n  height: 60%;\n  background-size:contain;\n  background-position: center;\n  object-fit:contain;\n  background-repeat: no-repeat;\n  z-index: 1;\n}\n.overlay-slow-cider {\n  background-image: url('/src/images/mockup/slow-cider.png');\n   position: absolute;\n  position: absolute;\n  top: 85%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 50%;\n  height: 50%;\n  background-size:contain;\n  background-position: center;\n  object-fit:contain;\n  background-repeat: no-repeat;\n  z-index: 1;\n}\n\n\nul.social img {\n    padding: 3px;\n    margin-left: -5px;\n    opacity: 0.6;\n}\n\n\n.hamburgler {\n    margin-left: 60px;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/css/input.css"],"names":[],"mappings":"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","sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n@tailwind forms;\n\n\n\n.allura-regular {\n  font-family: \"Allura\", cursive;\n  font-weight: 400;\n  font-style: normal;\n}\n\n\n@font-face {\n    font-family: 'Smoothy Cursive';\n    src: url(/src/fonts/smoothy-sans-regular.ttf) format('truetype');\n}\n\n\n\n@media screen and (min-width:1024px) {\n    section div.container {\n        max-width: 70%;\n    }\n    /*\n    main:not(.ciders, .drink, .order-progress) {\n        max-width: 90%;\n        margin: 0 auto;\n    }*/\n}\n\n@media screen and (min-width:1200px) {\n    /*\n    main:not(.ciders, .drink, .order-progress) {\n        max-width: 80%;\n        margin: 0 auto;\n    }*/\n}\n\n\n\n\n    section.fullscreen {\n        margin-bottom:0px;\n    }\n\n\n  @font-face {\n    font-family: 'Marketing';\n    font-style: normal;\n    font-weight: 400;\n    font-display: swap;\n    src: url(/src/fonts/smoothy-sans-regular.ttf) format('truetype');\n  }\n\n\n.font-smoothy {\n  font-family: var(--font-family-smoothy);\n}\n\nnav .col-span-1 {\n    display: inline-block;\n    padding: 10px 15px;\n    vertical-align:middle;\n}\n\n\nnav .text-base {\n    font-size: 0.9rem;\n    line-height: 1.5rem;\n    color: rgba(255, 255, 255, 0.6);\n}\n\n\n.panel-striped {\n    background-color: rgb(225 215 220);\n    /* margin: 0px -25px 45px -25px;\n    padding: 15px 25px; */\n}\n\n\nsection div p {\n    margin-bottom: 1.5rem;\n}\n\n.content-heading {\n    text-transform: uppercase;\n}\n\n.callout {\n\n    /* margin-top: -112px; */\n    \n    font-size: 1.0rem;\n    font-weight: 200;\n    margin: 0 auto;\n    margin-top: -25px;\n}\n\n.callout p {\n    font-size: 1.0rem;\n}\n\n.hero-image {\n  @apply relative;\n  background-position: center;\n}\n\n.overlay-logo {\n  background-image: url('/src/images/logos/logo-white.png');\n  position: absolute;\n  top: 40%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 60%;\n  height: 60%;\n  background-size:contain;\n  background-position: center;\n  object-fit:contain;\n  background-repeat: no-repeat;\n  z-index: 1;\n}\n.overlay-slow-cider {\n  background-image: url('/src/images/mockup/slow-cider.png');\n   position: absolute;\n  position: absolute;\n  top: 85%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 50%;\n  height: 50%;\n  background-size:contain;\n  background-position: center;\n  object-fit:contain;\n  background-repeat: no-repeat;\n  z-index: 1;\n}\n\n\nul.social img {\n    padding: 3px;\n    margin-left: -5px;\n    opacity: 0.6;\n}\n\n\n.hamburgler {\n    margin-left: 60px;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3360,6 +3429,17 @@ module.exports = __webpack_require__.p + "images/logo_youtube.png";
 
 "use strict";
 module.exports = __webpack_require__.p + "images/smoothy-sans-regular.ttf";
+
+/***/ }),
+
+/***/ "./src/images/logos/logo-header.svg":
+/*!******************************************!*\
+  !*** ./src/images/logos/logo-header.svg ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/logo-header.svg";
 
 /***/ }),
 
