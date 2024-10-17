@@ -1,9 +1,7 @@
 /** @jsx vNode */ /** @jsxFrag "Fragment" */
 import { vNode, View } from "@ocdla/view";
 import Social from "@ocdla/global-components/src/Social";
-import Logo from "@ocdla/global-components/src/Logo";
-import ContentPanel from "../ContentPanel";
-import TwoColumnPanel from "../TwoColumnPanel";
+import ContentPanel from "@ocdla/global-components/src/ContentPanel";
 
 export default function Contact() {
     return (
