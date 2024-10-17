@@ -1,6 +1,644 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
+
+/***/ "./node_modules/@ocdla/global-components/src/Contacts.jsx":
+/*!****************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Contacts.jsx ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Contacts)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _Defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Defaults */ "./node_modules/@ocdla/global-components/src/Defaults.jsx");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/** @jsx vNode */
+/* eslint-disable no-unused-vars */
+
+
+/* eslint-enable */
+
+function Contacts(props) {
+  var className = props.className || "text-neutral-300";
+  delete props.className;
+  delete props.children;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": className
+  }, Object.entries(props).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+      label = _ref2[0],
+      href = _ref2[1];
+    return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      href: href
+    }, label.replaceAll("_", " ")));
+  }));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Defaults.jsx":
+/*!****************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Defaults.jsx ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Link),
+/* harmony export */   defaultButtonStyle: () => (/* binding */ defaultButtonStyle),
+/* harmony export */   defaultLinkStyle: () => (/* binding */ defaultLinkStyle)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */
+/* eslint-disable-next-line no-unused-vars */
+
+var defaultLinkStyle = 'hover:underline-blue-500 text-blue-400 hover:opacity-[67.5%] hover:underline hover:underline-offset-2';
+var defaultButtonStyle = 'text-nowrap rounded-md border border-black bg-black px-3 py-2 font-bold text-white';
+function Link(_ref) {
+  var _ref$classes = _ref.classes,
+    classes = _ref$classes === void 0 ? defaultLinkStyle : _ref$classes,
+    extraClasses = _ref.extraClasses,
+    href = _ref.href,
+    children = _ref.children,
+    id = _ref.id;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    id: id || null,
+    "class": "".concat(classes).concat(extraClasses ? " ".concat(extraClasses) : ''),
+    href: href || null
+  }, children);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/GoogleMaps.jsx":
+/*!******************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/GoogleMaps.jsx ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GoogleMaps)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */
+/* eslint-disable-next-line no-unused-vars */
+
+function GoogleMaps(_ref) {
+  var src = _ref.src;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("iframe", {
+    "class": "aspect-square w-full border-0 lg:w-64",
+    src: src,
+    allowfullscreen: true,
+    referrerpolicy: "no-referrer-when-downgrade"
+  });
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Legal.jsx":
+/*!*************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Legal.jsx ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Legal)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */
+/* eslint-disable-next-line no-unused-vars */
+
+function Legal(_ref) {
+  var className = _ref.className,
+    year = _ref.year,
+    association = _ref.association,
+    children = _ref.children;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": className || "text-neutral-500 text-[0.625rem] font-thin leading-[0.75rem]"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, "\xA9", year, " ", association), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    "class": "size-full text-wrap"
+  }, children || ""));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Logo.jsx":
+/*!************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Logo.jsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Logo)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */
+/* eslint-disable-next-line no-unused-vars */
+
+function Logo(_ref) {
+  var className = _ref.className,
+    src = _ref.src;
+  // Default = 'footer'
+  className = className || "flex px-4";
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    "class": className,
+    href: "/"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
+    src: src
+  }));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Sitemap.jsx":
+/*!***************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Sitemap.jsx ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Sitemap)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */
+
+
+// <li class="size-full"> This was wrapping the entire return. We may need to keep size-full when using this.
+// [{title: "SERVICES", links: [{href="/", label: "Membership Directory"}, {} ]}, {}]
+function Sitemap(_ref) {
+  var className = _ref.className,
+    children = _ref.children;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": className || "flex flex-col gap-8 text-nowrap text-[#516490] lg:flex-row lg:gap-16"
+  }, children);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/SitemapCategory.jsx":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/SitemapCategory.jsx ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SitemapCategory)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _ocdla_global_components_src_Defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/global-components/src/Defaults */ "./node_modules/@ocdla/global-components/src/Defaults.jsx");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/** @jsx vNode */
+
+
+
+// <li class="size-full"> This was wrapping the entire return. We may need to keep size-full when using this.
+// [{title: "SERVICES", links: [{href="/", label: "Membership Directory"}, {} ]}, {}]
+function SitemapCategory(props) {
+  var title = props.title;
+  var className = props.className || null;
+  var path = props.path;
+  delete props.title;
+  delete props.className;
+  delete props.path;
+  delete props.children;
+
+  // Remove trailing '/' if there is one.
+  path = path.at(-1) == "/" ? path.slice(0, -1) : path;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "flex flex-col gap-8 text-nowrap text-[#516490] lg:flex-row lg:gap-16"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "flex flex-col gap-1"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("p", {
+    "class": "text-base font-bold ".concat(className)
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    href: "{path}"
+  }, title))), Object.entries(props).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+      label = _ref2[0],
+      href = _ref2[1];
+    return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+      href: href[0] == "/" ? path + href : href,
+      "class": className
+    }, label.replaceAll("_", " ")));
+  }))));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/Social.jsx":
+/*!**************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/Social.jsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Social)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _SocialItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SocialItem */ "./node_modules/@ocdla/global-components/src/SocialItem.jsx");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/** @jsx vNode */
+/* eslint-disable no-unused-vars */
+
+
+/* eslint-enable */
+
+function Social(props) {
+  // Remove the extra children from the original props
+  delete props.children;
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "social flex items-center gap-2"
+  }, Object.entries(props).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+      platform = _ref2[0],
+      handle = _ref2[1];
+    return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_SocialItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      type: platform,
+      handle: handle
+    });
+  }));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/SocialItem.jsx":
+/*!******************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/SocialItem.jsx ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SocialItem)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _Defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Defaults */ "./node_modules/@ocdla/global-components/src/Defaults.jsx");
+/* harmony import */ var _images_logo_facebook_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/logo_facebook.png */ "./node_modules/@ocdla/global-components/src/images/logo_facebook.png");
+/* harmony import */ var _images_logo_twitter_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/logo_twitter.png */ "./node_modules/@ocdla/global-components/src/images/logo_twitter.png");
+/* harmony import */ var _images_logo_youtube_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/logo_youtube.png */ "./node_modules/@ocdla/global-components/src/images/logo_youtube.png");
+/* harmony import */ var _images_fa_facebook_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/fa_facebook.png */ "./node_modules/@ocdla/global-components/src/images/fa_facebook.png");
+/* harmony import */ var _images_fa_instagram_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/fa_instagram.png */ "./node_modules/@ocdla/global-components/src/images/fa_instagram.png");
+/* harmony import */ var _images_fa_instagram_solid_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./images/fa_instagram_solid.png */ "./node_modules/@ocdla/global-components/src/images/fa_instagram_solid.png");
+/** @jsx vNode */
+/* eslint-disable no-unused-vars */
+
+
+/* eslint-enable */
+// import abc from './images';
+
+
+
+
+
+
+function SocialItem(_ref) {
+  var type = _ref.type,
+    handle = _ref.handle,
+    src = _ref.src;
+  // require.context('./', true, /\.(svg|png)$/gim);
+
+  var domain;
+  var alt;
+  handle = handle || "";
+
+  // console.log(abc);
+
+  switch (type) {
+    case "facebook":
+    case "meta":
+      domain = "https://facebook.com/";
+      src = src || _images_logo_facebook_png__WEBPACK_IMPORTED_MODULE_2__;
+      alt = "Facebook logo";
+      break;
+    case "fa-facebook":
+    case "fa-meta":
+      domain = "https://facebook.com/";
+      src = src || _images_fa_facebook_png__WEBPACK_IMPORTED_MODULE_5__;
+      alt = "Facebook logo";
+      break;
+    case "instagram":
+    case "fa-instagram":
+      domain = "https://instagram.com/";
+      src = src || _images_fa_instagram_png__WEBPACK_IMPORTED_MODULE_6__;
+      alt = "Instagram logo";
+      break;
+    case "instagram-solid":
+      domain = "https://instagram.com/";
+      src = src || _images_fa_instagram_solid_png__WEBPACK_IMPORTED_MODULE_7__;
+      alt = "Instagram logo";
+      break;
+    case "twitter":
+    case "x":
+      domain = "https://x.com/";
+      src = src || _images_logo_twitter_png__WEBPACK_IMPORTED_MODULE_3__;
+      alt = "Twitter logo";
+      break;
+    case "youtube":
+      domain = "https://youtube.com/@";
+      // Temp
+      src = src || _images_logo_youtube_png__WEBPACK_IMPORTED_MODULE_4__;
+      alt = "YouTube logo";
+      break;
+    case "reddit":
+      domain = "https://reddit.com/r/";
+      // TBD
+      src = src || _images_logo_twitter_png__WEBPACK_IMPORTED_MODULE_3__;
+      alt = "Reddit logo";
+      break;
+  }
+  var href = domain + handle;
+  // const src = './images/' + type + '.png';
+
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Defaults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    classes: "hover:opacity-[67.5%]",
+    href: href
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
+    "class": "w-8",
+    src: src,
+    alt: alt
+  })));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/navigation/Hamburger.jsx":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/navigation/Hamburger.jsx ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Hamburger)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/** @jsx vNode */ /** @jsxFrag "Fragment" */
+
+function Hamburger() {
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
+    style: "float:right; margin-right:15px;",
+    id: "toggle-menu",
+    "class": "tablet:hidden grid place-content-center w-20 h-10 p-6 mx-auto"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
+    "class": "hamburgler inline-block w-3 h-1 bg-menu rounded-full transition-all duration-150 before:content-[''] before:absolute before:w-5 before:h-1 before:bg-menu before:rounded-full before:-translate-y-2 before:transition-all before:duration-150 after:content-[''] after:absolute after:w-4 after:h-1 after:bg-menu after:rounded-full after:translate-y-2 after:transition-all after:duration-150"
+  }));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/navigation/Navigation.jsx":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/navigation/Navigation.jsx ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Navigation)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _Hamburger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Hamburger */ "./node_modules/@ocdla/global-components/src/navigation/Hamburger.jsx");
+/** @jsx vNode */ /** @jsxFrag "Fragment" */
+
+
+function Navigation(_ref) {
+  var routes = _ref.routes;
+  var top = routes.map(function (item) {
+    var phoneDisplay = !!item.hidden ? "hidden phone:hidden tablet:inline-block" : "phone:inline-block";
+    return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+      "class": "hidden ".concat(phoneDisplay, " p-2")
+    }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+      href: item.url
+    }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
+      "class": "font-marketing text-base subpixel-antialiased hover:text-wb-cordovan"
+    }, item.label)));
+  });
+  var all = routes.map(function (item) {
+    // let phoneDisplay = !!item.hidden ? "hidden phone:hidden tablet:inline-block" : "phone:inline-block";
+    return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+      "class": "p-2 text-center"
+    }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+      href: item.url
+    }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("button", {
+      "class": "text-center font-marketing text-base subpixel-antialiased hover:text-wb-cordovan"
+    }, item.label)));
+  });
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("nav", {
+    "class": "tablet:px-8"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "inline-block"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", {
+    style: "vertical-align:middle;",
+    "class": "inline-block p-2"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    href: "/"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
+    style: "inline-block vertical-align:middle;",
+    width: "30",
+    height: "30",
+    src: "../images/logos/logo.svg"
+  }))), top), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_Hamburger__WEBPACK_IMPORTED_MODULE_1__["default"], null), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    id: "mobile-menu",
+    "class": "block hidden min-h-[100vh] pt-[15vh]"
+  }, all));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/lib-routing/src/Router.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@ocdla/lib-routing/src/Router.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _classPrivateFieldInitSpec(e, t, a) { _checkPrivateRedeclaration(e, t), t.set(e, a); }
+function _checkPrivateRedeclaration(e, t) { if (t.has(e)) throw new TypeError("Cannot initialize the same private elements twice on an object"); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _classPrivateFieldGet(s, a) { return s.get(_assertClassBrand(s, a)); }
+function _classPrivateFieldSet(s, a, r) { return s.set(_assertClassBrand(s, a), r), r; }
+function _assertClassBrand(e, t, n) { if ("function" == typeof e ? e === t : e.has(t)) return arguments.length < 3 ? t : n; throw new TypeError("Private element is not present on this object"); }
+var _routes = /*#__PURE__*/new WeakMap();
+var _defaultPage = /*#__PURE__*/new WeakMap();
+var _notFoundCallback = /*#__PURE__*/new WeakMap();
+/**
+ * @classdesc Router class to handle routing logic for a web application.
+ */
+var Router = /*#__PURE__*/function () {
+  function Router(routes) {
+    _classCallCheck(this, Router);
+    _defineProperty(this, "basePath", "/");
+    /**
+     * @private
+     * @type {Object}
+     */
+    _classPrivateFieldInitSpec(this, _routes, []);
+    /**
+     * @private
+     * @type {string}
+     */
+    _classPrivateFieldInitSpec(this, _defaultPage, void 0);
+    /**
+     * Creates an instance of Router.
+     * @constructor
+     * @param {Object} routes - An object mapping route names to page components.
+     */
+
+    _classPrivateFieldInitSpec(this, _notFoundCallback, void 0);
+    _classPrivateFieldSet(_routes, this, routes || []);
+  }
+  return _createClass(Router, [{
+    key: "setComponentPath",
+    value: function setComponentPath(path) {
+      Router.componentPath = path;
+    }
+  }, {
+    key: "setNotFoundCallback",
+    value: function setNotFoundCallback(callback) {
+      _classPrivateFieldSet(_notFoundCallback, this, callback);
+    }
+  }, {
+    key: "match",
+    value: function match(_path) {
+      // Leave the root path alone; compensate for any trailing slashes.
+      var normalized = _path === '/' ? '/' : _path.replace(/\/+$/, '');
+      var parts = normalized.split('/');
+      var _var = parts.length > 2 ? parts[parts.length - 2] : null;
+      var _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(_routes, this).reverse()),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var r = _step.value;
+          var path = r.path,
+            callback = r.callback,
+            params = r.params;
+          path = path.replaceAll('/', '\\/');
+
+          // May need to add in modifiers / flags.
+          var re = new RegExp(path);
+          var matches = _path.match(re);
+
+          // If matches is null, then this didn't match.
+          if (!matches) continue;
+          if (null !== _var) {
+            params[_var] = matches[1];
+          }
+          return [callback, params];
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return [_classPrivateFieldGet(_notFoundCallback, this), {}];
+    }
+  }, {
+    key: "setBasePath",
+    value: function setBasePath(path) {
+      this.basePath = path;
+    }
+
+    /**
+     * Gets the current location from the URL.
+     * @returns {string} The current location.
+     */
+  }, {
+    key: "getLocation",
+    value: function getLocation() {
+      return window.location.href.split("/").at(-1).toLowerCase();
+    }
+
+    /**
+     * Sets the default page to be used when no route matches.
+     * @param {string} page - The default page component.
+     */
+  }, {
+    key: "setDefaultPage",
+    value: function setDefaultPage(page) {
+      _classPrivateFieldSet(_defaultPage, this, page);
+    }
+  }, {
+    key: "addRoute",
+    value: function addRoute(path, callback) {
+      var params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var routeExists = _classPrivateFieldGet(_routes, this).find(function (r) {
+        return r.route === path;
+      });
+      if (routeExists) {
+        routeExists.id = id;
+        routeExists.callback = callback;
+      } else _classPrivateFieldGet(_routes, this).push({
+        path: path,
+        callback: callback,
+        params: params
+      });
+    }
+
+    /**
+     * Gets the current route from the URL.
+     * @returns {string} The current route.
+     */
+  }, {
+    key: "getRoute",
+    value: function getRoute() {
+      return window.location.href.split("/").at(-1).toLowerCase();
+    }
+  }]);
+}();
+/**
+ * The default path to look for when loading components.
+ */
+_defineProperty(Router, "componentPath", "/src/components");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Router);
+
+/***/ }),
 
 /***/ "./node_modules/css-loader/dist/runtime/api.js":
 /*!*****************************************************!*\
@@ -8,6 +646,7 @@
   \*****************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /*
@@ -102,6 +741,7 @@ module.exports = function (cssWithMappingToString) {
   \********************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 module.exports = function (url, options) {
@@ -137,6 +777,7 @@ module.exports = function (url, options) {
   \************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 module.exports = function (item) {
@@ -156,19 +797,263 @@ module.exports = function (item) {
 
 /***/ }),
 
+/***/ "./src/App.jsx":
+/*!*********************!*\
+  !*** ./src/App.jsx ***!
+  \*********************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ App)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _ocdla_global_components_src_navigation_Navigation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/global-components/src/navigation/Navigation */ "./node_modules/@ocdla/global-components/src/navigation/Navigation.jsx");
+/* harmony import */ var _components_Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Footer */ "./src/components/Footer.jsx");
+/* harmony import */ var _data_routes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./data/routes.js */ "./src/data/routes.js");
+/* harmony import */ var _ocdla_lib_routing_src_Router_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ocdla/lib-routing/src/Router.js */ "./node_modules/@ocdla/lib-routing/src/Router.js");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/** @jsx vNode */ /** @jsxFrag "Fragment" */
+
+// import Header from "./components/Header";
+
+
+
+
+var router = new _ocdla_lib_routing_src_Router_js__WEBPACK_IMPORTED_MODULE_4__["default"]();
+router.setBasePath("/");
+router.setDefaultPage("Home");
+router.setNotFoundCallback("Home");
+// router.setComponentPath("../../../../src/components/pages");
+_data_routes_js__WEBPACK_IMPORTED_MODULE_3__["default"].forEach(function (route) {
+  router.addRoute(route.path, route.callback);
+});
+
+// component = NotFound
+
+// let Page = await router.getPage();
+var _router$match = router.match(window.location.pathname),
+  _router$match2 = _slicedToArray(_router$match, 1),
+  componentName = _router$match2[0];
+var module = await __webpack_require__("./src/components/pages lazy recursive ^\\.\\/.*$")("./".concat(componentName));
+var Page = module["default"];
+var HeaderTwo;
+if (["Home", ""].includes(router.getRoute())) {
+  var h = await __webpack_require__.e(/*! import() */ "src_components_HomeHeader_jsx").then(__webpack_require__.bind(__webpack_require__, /*! ./components/HomeHeader */ "./src/components/HomeHeader.jsx"));
+  HeaderTwo = h["default"];
+}
+console.log(Page, HeaderTwo);
+var location = router.getLocation();
+function App() {
+  var items = [{
+    url: "/",
+    label: "home"
+  }, {
+    url: "/ciders",
+    label: "ciders"
+  }, {
+    url: "/growers",
+    label: "growers",
+    hidden: true
+  }, {
+    url: "/drink",
+    label: "drink",
+    hidden: false
+  }, {
+    url: "/how-its-made",
+    label: "how it's made",
+    hidden: true
+  }, {
+    url: "/about",
+    label: "about",
+    hidden: true
+  }, {
+    url: "/contact",
+    label: "contact us",
+    hidden: true
+  }, {
+    url: "/order-progress",
+    label: "orders",
+    hidden: true
+  }];
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("header", {
+    "class": "w-full mb-0 pb-1 p-[10px] sticky top-0 bg-wb-black z-50"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_navigation_Navigation__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    routes: items
+  })), typeof HeaderTwo === "function" ? (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(HeaderTwo, null) : (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("main", {
+    "class": "grow overflow-x-hidden font-default-paragraph ".concat(location)
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("i", null, "No module provided."), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(Page, null)), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_components_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+}
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
+/***/ "./src/components/Footer.jsx":
+/*!***********************************!*\
+  !*** ./src/components/Footer.jsx ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Footer)
+/* harmony export */ });
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _ocdla_global_components_src_Legal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocdla/global-components/src/Legal */ "./node_modules/@ocdla/global-components/src/Legal.jsx");
+/* harmony import */ var _ocdla_global_components_src_Sitemap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ocdla/global-components/src/Sitemap */ "./node_modules/@ocdla/global-components/src/Sitemap.jsx");
+/* harmony import */ var _ocdla_global_components_src_SitemapCategory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ocdla/global-components/src/SitemapCategory */ "./node_modules/@ocdla/global-components/src/SitemapCategory.jsx");
+/* harmony import */ var _ocdla_global_components_src_Social__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ocdla/global-components/src/Social */ "./node_modules/@ocdla/global-components/src/Social.jsx");
+/* harmony import */ var _ocdla_global_components_src_Contacts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ocdla/global-components/src/Contacts */ "./node_modules/@ocdla/global-components/src/Contacts.jsx");
+/* harmony import */ var _ocdla_global_components_src_Logo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ocdla/global-components/src/Logo */ "./node_modules/@ocdla/global-components/src/Logo.jsx");
+/* harmony import */ var _ocdla_global_components_src_GoogleMaps__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ocdla/global-components/src/GoogleMaps */ "./node_modules/@ocdla/global-components/src/GoogleMaps.jsx");
+/** @jsx vNode */ /** @jsxFrag "Fragment" */
+
+
+
+
+
+
+
+
+function Footer() {
+  return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("footer", {
+    "class": "text-slate-200 bg-wb-black p-8 tablet:p-16 laptop:p-32 laptop:pt-16"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
+    "class": "container text-slate-200 text-center text-4xl mb-20",
+    style: "line-height:1.0rem;"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("span", {
+    "class": "allura-regular text-slate-300 inline-block"
+  }, "Slow"), "\xA0", (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("span", {
+    "class": "font-marketing text-xl text-slate-300 inline-block"
+  }, "cider"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("span", {
+    "class": "pl-8 allura-regular text-slate-300 inline-block"
+  }, "Made"), "\xA0", (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("span", {
+    "class": "font-marketing text-xl text-slate-300 inline-block"
+  }, "dry")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
+    "class": "container tablet:grid tablet:grid-cols-6"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
+    "class": "col-start-1 pb-8"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    href: "/"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("img", {
+    src: "../images/logos/logo.svg"
+  }))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("div", {
+    "class": "col-start-3 pb-8"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("h3", {
+    "class": "text-wb-red text-lg"
+  }, "Contact"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("ul", {
+    "class": "text-slate-400"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, "George Waldbusser"), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    href: "http://ciderworks.ocdla.org/",
+    "class": "hover:text-wb-lime"
+  }, "waldbusserciderworks.com")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    href: "tel:+14106101726",
+    "class": "hover:text-wb-lime"
+  }, "(410) 610-1726")), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("li", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("a", {
+    href: "mailto:info@waldbusserciderworks.com",
+    "class": "hover:text-wb-lime"
+  }, "info@waldbusserciderworks.com"))), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_Social__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    instagram: "waldbusserciderworks"
+  })), (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_Sitemap__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "col-start-5 text-nowrap text-stone-400 pb-8",
+    style: "font-weight:200;"
+  }, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_SitemapCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: "Waldbusser Ciderworks",
+    path: "/",
+    className: "hover:text-stone-500",
+    Home: "/",
+    About: "/about",
+    How_Its_Made: "/how-its-made",
+    Growers: "/growers",
+    Where_To_Buy: "/where-to-buy",
+    Order_Progress: "/order-progress",
+    Contact_Us: "/contact"
+  }))));
+}
+
+/***/ }),
+
+/***/ "./src/data/routes.js":
+/*!****************************!*\
+  !*** ./src/data/routes.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var routes = [{
+  path: "/about",
+  callback: "About"
+}, {
+  path: "/contact",
+  callback: "Contact"
+}, {
+  path: "/growers",
+  callback: "Growers"
+}, {
+  path: "/ciders",
+  callback: "Ciders"
+}, {
+  path: "/how-its-made",
+  callback: "HowItsMade"
+}, {
+  path: "/drink",
+  callback: "WhereToBuy"
+}, {
+  path: "/order-progress",
+  callback: "OrderProgress"
+}, {
+  path: "/whats-brewing",
+  callback: "OrderProgress"
+}];
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (routes);
+
+/***/ }),
+
 /***/ "./src/js/index.js":
 /*!*************************!*\
   !*** ./src/js/index.js ***!
   \*************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _css_input_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/input.css */ "./src/css/input.css");
+/* harmony import */ var _ocdla_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ocdla/view */ "./node_modules/@ocdla/view/view.js");
+/* harmony import */ var _css_input_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../css/input.css */ "./src/css/input.css");
+/* harmony import */ var _App_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../App.jsx */ "./src/App.jsx");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_App_jsx__WEBPACK_IMPORTED_MODULE_2__]);
+_App_jsx__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/** @jsx vNode */ /** @jsxFrag "Fragment" */
 
-if (false) {}else await Promise.all(/*! import() */[__webpack_require__.e("vendors-node_modules_ocdla_view_view_js"), __webpack_require__.e("src_js_main_js")]).then(__webpack_require__.bind(__webpack_require__, /*! ./main.js */ "./src/js/main.js"));
+
+
+if (false) {}else {
+  if (true) {}
+  var $root = document.getElementById("root");
+  var root = _ocdla_view__WEBPACK_IMPORTED_MODULE_0__.View.createRoot($root);
+  root.render((0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_App_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  var toggle = document.querySelector("#toggle-menu");
+  var menu = document.querySelector("#mobile-menu");
+  toggle.addEventListener("click", function () {
+    menu.classList.toggle("hidden");
+    // menu.classList.toggle("flex");
+  });
+}
 __webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } }, 1);
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
@@ -178,6 +1063,7 @@ __webpack_async_result__();
   \***********************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2032,6 +2918,7 @@ ul.social img {
   \***************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2086,6 +2973,7 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \****************************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 var stylesInDOM = [];
@@ -2179,6 +3067,7 @@ module.exports = function (list, options) {
   \********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 var memo = {};
@@ -2222,6 +3111,7 @@ module.exports = insertBySelector;
   \**********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -2241,6 +3131,7 @@ module.exports = insertStyleElement;
   \**********************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -2260,6 +3151,7 @@ module.exports = setAttributesWithoutAttributes;
   \***************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -2330,6 +3222,7 @@ module.exports = domAPI;
   \*********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -2347,12 +3240,65 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
+/***/ "./src/components/pages lazy recursive ^\\.\\/.*$":
+/*!**************************************************************!*\
+  !*** ./src/components/pages/ lazy ^\.\/.*$ namespace object ***!
+  \**************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./About": [
+		"./src/components/pages/About.jsx",
+		"src_components_pages_About_jsx"
+	],
+	"./About.jsx": [
+		"./src/components/pages/About.jsx",
+		"src_components_pages_About_jsx"
+	],
+	"./Contact": [
+		"./src/components/pages/Contact.jsx",
+		"src_components_pages_Contact_jsx"
+	],
+	"./Contact.jsx": [
+		"./src/components/pages/Contact.jsx",
+		"src_components_pages_Contact_jsx"
+	],
+	"./Home": [
+		"./src/components/pages/Home.jsx",
+		"src_components_pages_Home_jsx"
+	],
+	"./Home.jsx": [
+		"./src/components/pages/Home.jsx",
+		"src_components_pages_Home_jsx"
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(() => {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return __webpack_require__.e(ids[1]).then(() => {
+		return __webpack_require__(id);
+	});
+}
+webpackAsyncContext.keys = () => (Object.keys(map));
+webpackAsyncContext.id = "./src/components/pages lazy recursive ^\\.\\/.*$";
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
 /***/ "data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27white%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3ccircle cx=%278%27 cy=%278%27 r=%273%27/%3e%3c/svg%3e":
 /*!***************************************************************************************************************************************************************************!*\
   !*** data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27white%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3ccircle cx=%278%27 cy=%278%27 r=%273%27/%3e%3c/svg%3e ***!
   \***************************************************************************************************************************************************************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = "data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27white%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3ccircle cx=%278%27 cy=%278%27 r=%273%27/%3e%3c/svg%3e";
 
 /***/ }),
@@ -2363,6 +3309,7 @@ module.exports = "data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27whit
   \*********************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = "data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27white%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath d=%27M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z%27/%3e%3c/svg%3e";
 
 /***/ }),
@@ -2373,6 +3320,7 @@ module.exports = "data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27whit
   \******************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = "data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 16 16%27%3e%3cpath stroke=%27white%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27M4 8h8%27/%3e%3c/svg%3e";
 
 /***/ }),
@@ -2383,7 +3331,74 @@ module.exports = "data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%
   \******************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = "data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3e%3cpath stroke=%27%236b7280%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27M6 8l4 4 4-4%27/%3e%3c/svg%3e";
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/images/fa_facebook.png":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/images/fa_facebook.png ***!
+  \**************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/fa_facebook.png";
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/images/fa_instagram.png":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/images/fa_instagram.png ***!
+  \***************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/fa_instagram.png";
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/images/fa_instagram_solid.png":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/images/fa_instagram_solid.png ***!
+  \*********************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/fa_instagram_solid.png";
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/images/logo_facebook.png":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/images/logo_facebook.png ***!
+  \****************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/logo_facebook.png";
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/images/logo_twitter.png":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/images/logo_twitter.png ***!
+  \***************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/logo_twitter.png";
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/global-components/src/images/logo_youtube.png":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@ocdla/global-components/src/images/logo_youtube.png ***!
+  \***************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/logo_youtube.png";
 
 /***/ }),
 
@@ -2393,6 +3408,7 @@ module.exports = "data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%
   \********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
 module.exports = __webpack_require__.p + "images/smoothy-sans-regular.ttf";
 
 /***/ }),
@@ -2403,6 +3419,7 @@ module.exports = __webpack_require__.p + "images/smoothy-sans-regular.ttf";
   \*****************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
 module.exports = __webpack_require__.p + "images/Waldbusser Ciderworks - Logo White.png";
 
 /***/ }),
@@ -2413,7 +3430,369 @@ module.exports = __webpack_require__.p + "images/Waldbusser Ciderworks - Logo Wh
   \******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
 module.exports = __webpack_require__.p + "images/slow-cider.png";
+
+/***/ }),
+
+/***/ "./node_modules/@ocdla/view/view.js":
+/*!******************************************!*\
+  !*** ./node_modules/@ocdla/view/view.js ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   View: () => (/* binding */ View),
+/* harmony export */   getEffects: () => (/* binding */ getEffects),
+/* harmony export */   useEffect: () => (/* binding */ useEffect),
+/* harmony export */   vNode: () => (/* binding */ vNode)
+/* harmony export */ });
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+/**
+ * @ocdladefense/view
+ *
+ * @description Here is my description.
+ *
+ *
+ *
+ */
+
+var effects = [];
+
+// import { CACHE, HISTORY } from "./cache.js";
+
+function useEffect(fn, deps) {
+  effects.push({
+    fn: fn,
+    deps: deps
+  });
+}
+function getEffects() {
+  return effects;
+}
+
+/**
+ * @class View
+ *
+ * This is a description of the View class.
+ */
+var View = function () {
+  function refresh() {
+    return _refresh.apply(this, arguments);
+  }
+  function _refresh() {
+    _refresh = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var hash, params, _parseHash, _parseHash2, tree, c, elem;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _parseHash = parseHash(window.location.hash);
+            _parseHash2 = _slicedToArray(_parseHash, 2);
+            hash = _parseHash2[0];
+            params = _parseHash2[1];
+            elem = document.querySelector("#job-container");
+            if (elem) {
+              elem.removeEventListener("click", this.currentComponent);
+            }
+            if (hash == "" || hash == "#") {
+              c = new JobList();
+            } else if (hash == "#new") {
+              c = new JobForm();
+            } else if (hash.startsWith("#edit")) {
+              c = new JobForm(params.id);
+            } else if (hash.startsWith("#details")) {
+              c = new JobSearch(params.id);
+            }
+            c.listenTo("click", "#job-container");
+            /*
+            Listen for submit events
+            c.listenTo("submit", "#record-form");
+            */
+            if (!c.loadData) {
+              _context.next = 11;
+              break;
+            }
+            _context.next = 11;
+            return c.loadData();
+          case 11:
+            tree = c.render();
+            this.view.render(tree);
+            this.currentComponent = c;
+          case 14:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, this);
+    }));
+    return _refresh.apply(this, arguments);
+  }
+  var NODE_CHANGED_STATES = ["NODE_NO_COMPARISON", "NODE_DIFFERENT_TYPE", "NODE_NOT_EQUAL", "NODE_DIFFERENT_ELEMENT", "NODE_PROPS_CHANGED", "TEXT_NODES_NOT_EQUAL"];
+
+  /**
+   * @constructs View
+   * @param root
+   */
+  function View(root) {
+    this.root = root;
+    //document.getElementById("order-history-main").addEventListener("click", myAppEventHandler);
+    //root.addEventListener("click", myAppEventHandler);
+  }
+
+  /**
+   * @memberof View
+   * @method render
+   * @instance
+   * @description Perform an initial paint of a virtual node structure.
+   * @param {Object} vNode A virtual node structure.
+   */
+  function render(vNode) {
+    this.currentTree = vNode;
+    var $newNode = createElement(vNode);
+    this.root.innerHTML = "";
+    this.root.appendChild($newNode);
+  }
+  function update(newNode) {
+    updateElement(this.root, newNode, this.currentTree);
+    this.currentTree = newNode;
+  }
+
+  /**
+   * @memberof View
+   * @method updateElement
+   * @instance
+   * @description Perform an initial paint of a virtual node structure.
+   * @param {DOMNode} $parent
+   * @param {vNode} newNode Then new virtual node tree to be rendered.
+   * @param {vNode} oldNode The old virtual node tree to be diffed.
+   * @param {Integer} index The current index of a recursive structure.
+   */
+  function updateElement($parent, newNode, oldNode) {
+    var index = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+    var state = getChangeState(newNode, oldNode);
+
+    // Whether to use replaceChild to swap nodes.
+    var shouldSwapNodes = changed(state);
+
+    // Whether this current evaluation is a synthetic node.
+    var isSynthetic = newNode && typeof newNode.type === "function";
+    if ($parent.nodeType == 3) {
+      return;
+    }
+    if (!oldNode) {
+      var n = View.createElement(newNode);
+      $parent.appendChild(n);
+    } else if (!newNode) {
+      if (!$parent.children[index]) {
+        $parent.removeChild($parent.children[$parent.children.length - 1]);
+      } else {
+        $parent.removeChild($parent.children[index]);
+      }
+    } else if (isSynthetic) {
+      if (newNode.type && newNode.type.prototype && newNode.type.prototype.render) {
+        var obj = new newNode.type(newNode.props);
+        newNode = obj.render();
+      } else {
+        newNode = typeof newNode.type === "function" ? newNode.type(newNode.props) : newNode;
+      }
+      if (oldNode.type && oldNode.type.prototype && oldNode.type.prototype.render) {
+        var _obj = new oldNode.type(oldNode.props);
+        oldNode = _obj.render();
+      } else oldNode = typeof oldNode.type === "function" ? oldNode.type(oldNode.props) : oldNode;
+      updateElement($parent, newNode, oldNode, index);
+    } else if (!isSynthetic && shouldSwapNodes) {
+      var _n = createElement(newNode);
+      if (newNode.type) {
+        $parent.replaceChild(_n, $parent.childNodes[index]);
+      } else {
+        $parent.replaceChild(_n, $parent.childNodes[index]);
+      }
+    }
+
+    // Not obvious, but text nodes don"t have a type and should
+    // have been handled before this block executes.
+    else if (newNode.type && newNode.children) {
+      var newLength = newNode.children.length;
+      var oldLength = oldNode.children.length;
+      for (var i = 0; i < newLength || i < oldLength; i++) {
+        var nextParent = $parent.childNodes[index];
+        var revisedNode = newNode.children[i];
+        var expiredNode = oldNode.children[i];
+        var equal = revisedNode == expiredNode;
+        if (equal) continue;
+        updateElement(nextParent, revisedNode, expiredNode, i);
+      }
+    }
+  }
+  function getChangeState(n1, n2) {
+    if (n1 && !n2) return "NODE_NO_COMPARISON";
+    if (n1 == n2) return "NODE_NO_CHANGE";
+
+    // Comparing two text nodes that are obviously different.
+    if (typeof n1 === "string" && typeof n2 === "string" && n1 !== n2) {
+      return "TEXT_NODES_NOT_EQUAL";
+    }
+    if (_typeof(n1) !== _typeof(n2)) {
+      return "NODE_DIFFERENT_TYPE";
+    }
+    if (n1.type !== n2.type) {
+      return "NODE_DIFFERENT_ELEMENT";
+    }
+    if (propsChanged(n1, n2)) {
+      return "NODE_PROPS_CHANGED";
+    }
+    if (n1 != n2) {
+      return "NODE_RECURSIVE_EVALUATE";
+    }
+    return "NODE_NO_CHANGE";
+  }
+  function changed(state) {
+    return NODE_CHANGED_STATES.includes(state);
+  }
+  function propsChanged(node1, node2) {
+    var node1Props = node1.props;
+    var node2Props = node2.props;
+    if (_typeof(node1Props) != _typeof(node2Props)) {
+      return true;
+    }
+    if (!node1Props && !node2Props) {
+      return false;
+    }
+    var aProps = Object.getOwnPropertyNames(node1Props);
+    var bProps = Object.getOwnPropertyNames(node2Props);
+    if (aProps.length != bProps.length) {
+      return true;
+    }
+    for (var i = 0; i < aProps.length; i++) {
+      var propName = aProps[i];
+      if (node1Props[propName] !== node2Props[propName]) {
+        return true;
+      }
+    }
+    return false;
+  }
+  View.prototype = {
+    render: render,
+    update: update,
+    createElement: createElement
+  };
+  return View;
+}();
+
+/**
+ * Return a View instance from the given DOM element or selector.
+ *
+ * @param {string} selector
+ * @returns {View}
+ */
+View.createRoot = function (selector) {
+  var elem = typeof selector == "string" ? document.querySelector(selector) : selector;
+  var root = elem.cloneNode(false);
+  elem.parentElement.replaceChild(root, elem);
+  return new View(root);
+};
+
+/**
+ * @memberof View
+ * @method createElement
+ * @description Recursively transform a virtual node structure into a DOM node tree.
+ * @param {Object} vnode A virtual node structure.
+ * @returns DOMElement
+ */
+function createElement(vnode) {
+  if (typeof vnode === "string" || typeof vnode === "number") {
+    return document.createTextNode(vnode.toString());
+  }
+  if (vnode.type == "text") {
+    return document.createTextNode(vnode.children);
+  }
+  //first check to see if component references a class name
+  if (typeof vnode.type == "function" && vnode.type.prototype && vnode.type.prototype.render) {
+    console.log("vNode is a class reference");
+    var obj = new vnode.type(vnode.props);
+    var render = obj.render();
+    var node = createElement(render);
+    //BACKTO
+    // Let the component know about its own root.
+    // obj.setRoot(node);
+    return node;
+  }
+  if (typeof vnode.type == "function") {
+    var fn = vnode.type(vnode.props);
+    return createElement(fn);
+  }
+  var $el = vnode.type == "Fragment" ? document.createDocumentFragment() : document.createElement(vnode.type);
+  var theClassNames;
+  var theEventKey;
+  if (vnode.props) {
+    //var html5 = "className" == prop ? "class" : prop;
+    theClassNames = vnode.props["class"];
+    if (theClassNames) {
+      theClassNames = theClassNames.split(" "); //hack, get better way of obtaining names, this one only gets the first
+      // theEventKey = theClassNames[0];
+    }
+  }
+
+  //BACKTO
+  for (var prop in vnode.props) {
+    var html5 = "className" == prop ? "class" : prop;
+    if ("children" == prop) continue;
+    if (prop.indexOf("on") === 0) {
+      $el.addEventListener(prop.substring(2), vnode.props[prop]);
+      continue;
+    } else if (vnode.props[prop] === null) {
+      continue;
+    } else {
+      $el.setAttribute(html5, vnode.props[prop]);
+    }
+  }
+  if (null != vnode.children) {
+    vnode.children.map(createElement).forEach($el.appendChild.bind($el));
+  }
+  return $el;
+}
+View.createElement = createElement;
+
+/**
+ * JSX parsing function.
+ */
+function vNode(name, attributes) {
+  attributes = attributes || {};
+  var joined = [];
+  for (var _len = arguments.length, children = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    children[_key - 2] = arguments[_key];
+  }
+  if (children.length == 0 || null == children[0] || typeof children[0] == "undefined") {
+    joined = [];
+  } else if (children.length == 1 && typeof children[0] == "string") {
+    joined = children;
+  } else {
+    for (var i = 0; i < children.length; i++) {
+      if (Array.isArray(children[i])) {
+        joined = joined.concat(children[i]);
+      } else {
+        joined.push(children[i]);
+      }
+    }
+  }
+  attributes.children = joined;
+  var vnode = {
+    type: name,
+    props: attributes,
+    children: joined
+  };
+  return vnode;
+}
 
 /***/ })
 
