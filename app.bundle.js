@@ -532,12 +532,17 @@ function _classPrivateFieldGet(s, a) { return s.get(_assertClassBrand(s, a)); }
 function _classPrivateFieldSet(s, a, r) { return s.set(_assertClassBrand(s, a), r), r; }
 function _assertClassBrand(e, t, n) { if ("function" == typeof e ? e === t : e.has(t)) return arguments.length < 3 ? t : n; throw new TypeError("Private element is not present on this object"); }
 var _routes = /*#__PURE__*/new WeakMap();
-var _defaultPage = /*#__PURE__*/new WeakMap();
+var _menus = /*#__PURE__*/new WeakMap();
 var _notFoundCallback = /*#__PURE__*/new WeakMap();
+var _defaultPage = /*#__PURE__*/new WeakMap();
 /**
- * @classdesc Router class to handle routing logic for a web application.
+ * Router class to manage routes and menus.
  */
 var Router = /*#__PURE__*/function () {
+  /**
+   * Creates an instance of Router.
+   * @param {Array} routes - The initial routes.
+   */
   function Router(routes) {
     _classCallCheck(this, Router);
     _defineProperty(this, "basePath", "/");
@@ -546,25 +551,47 @@ var Router = /*#__PURE__*/function () {
      * @type {Object}
      */
     _classPrivateFieldInitSpec(this, _routes, []);
+    _classPrivateFieldInitSpec(this, _menus, {});
+    _classPrivateFieldInitSpec(this, _notFoundCallback, void 0);
     /**
      * @private
      * @type {string}
      */
     _classPrivateFieldInitSpec(this, _defaultPage, void 0);
-    /**
-     * Creates an instance of Router.
-     * @constructor
-     * @param {Object} routes - An object mapping route names to page components.
-     */
-
-    _classPrivateFieldInitSpec(this, _notFoundCallback, void 0);
     _classPrivateFieldSet(_routes, this, routes || []);
   }
+
+  /**
+   * Adds a menu with specified items.
+   * @param {string} menuId - The ID of the menu.
+   * @param {Array} items - The items to add to the menu.
+   */
   return _createClass(Router, [{
+    key: "addMenu",
+    value: function addMenu(menuId, items) {
+      _classPrivateFieldGet(_menus, this)[menuId] = items;
+    }
+
+    /**
+     * Converts routes to menu items.
+     * @param {Array} routes - The routes to convert.
+     * @returns {Array} The converted menu items.
+     */
+  }, {
     key: "setComponentPath",
-    value: function setComponentPath(path) {
+    value:
+    /**
+     * Sets the component path.
+     * @param {string} path - The path to set.
+     */
+    function setComponentPath(path) {
       Router.componentPath = path;
     }
+
+    /**
+     * Sets the callback for not found routes.
+     * @param {Function} callback - The callback to set.
+     */
   }, {
     key: "setNotFoundCallback",
     value: function setNotFoundCallback(callback) {
@@ -655,6 +682,17 @@ var Router = /*#__PURE__*/function () {
     key: "getRoute",
     value: function getRoute() {
       return window.location.href.split("/").at(-1).toLowerCase();
+    }
+  }], [{
+    key: "toMenuItems",
+    value: function toMenuItems(routes) {
+      return routes.map(function (route) {
+        return {
+          url: route.path,
+          label: route.callback.toLowerCase(),
+          hidden: false
+        };
+      });
     }
   }]);
 }();
@@ -879,37 +917,8 @@ if (["Home", ""].includes(router.getRoute())) {
 console.log(Page, HeaderTwo);
 var location = router.getLocation();
 function App() {
-  var items = [{
-    url: "/",
-    label: "home"
-  }, {
-    url: "/ciders",
-    label: "ciders"
-  }, {
-    url: "/growers",
-    label: "growers",
-    hidden: true
-  }, {
-    url: "/drink",
-    label: "drink",
-    hidden: false
-  }, {
-    url: "/how-its-made",
-    label: "how it's made",
-    hidden: true
-  }, {
-    url: "/about",
-    label: "about",
-    hidden: true
-  }, {
-    url: "/contact",
-    label: "contact us",
-    hidden: true
-  }, {
-    url: "/order-progress",
-    label: "orders",
-    hidden: true
-  }];
+  var menuId = "main";
+  var items = menus[menuId];
   return (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)("Fragment", null, (0,_ocdla_view__WEBPACK_IMPORTED_MODULE_0__.vNode)(_ocdla_global_components_src_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
     navItems: items,
     logo: _images_logos_logo_header_svg__WEBPACK_IMPORTED_MODULE_5__,
