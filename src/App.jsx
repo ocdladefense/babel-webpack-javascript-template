@@ -36,47 +36,9 @@ console.log(Page, HeaderTwo);
 let location = router.getLocation();
 
 export default function App() {
-    let items = [
-        {
-            url: "/",
-            label: "home"
-        },
-        {
-            url: "/ciders",
-            label: "ciders"
-        },
-        {
-            url: "/growers",
-            label: "growers",
-            hidden: true
-        },
-        {
-            url: "/drink",
-            label: "drink",
-            hidden: false
-        },
-        {
-            url: "/how-its-made",
-            label: "how it's made",
-            hidden: true
-        },
-        {
-            url: "/about",
-            label: "about",
-            hidden: true
-        },
-        {
-            url: "/contact",
-            label: "contact us",
-            hidden: true
-        },
-        {
-            url: "/order-progress",
-            label: "orders",
-            hidden: true
-        }
-    ];
-
+    let menuId = "main";
+    let items = menus[menuId];
+    
     return (
         <>
             <Header navItems={items} logo={logo} logoWidth="40" logoHeight="40" />
