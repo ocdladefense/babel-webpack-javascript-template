@@ -1,6 +1,7 @@
 /** @jsx vNode */ /** @jsxFrag "Fragment" */
 import { vNode, View } from "@ocdla/view";
 import "../css/input.css";
+import "@themes/active/css/theme.css";
 import App from "../App.jsx";
 
 

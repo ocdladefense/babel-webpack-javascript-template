@@ -21,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "@local/openai": "file:./dev_modules/@local/openai",
+    "@themes/active": "file:./dev_modules/@themes/default",
     "@ocdla/global-components": "file:./dev_modules/@ocdla/global-components",
     "@ocdla/lib-http": "^2.1.0",
     "@ocdla/view": "~2.5.0",

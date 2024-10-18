@@ -77,11 +77,7 @@ module.exports = env => {
                     use: ["style-loader", "css-loader", "postcss-loader"]
                 },
                 {
-                    test: /\.(svg|eot|ttf|woff|woff2)$/i,
-                    type: "asset/resource"
-                },
-                {
-                    test: /\.(png|jpg|gif)$/i,
+                    test: /\.(svg|eot|ttf|woff|woff2|webp|png|jpg|gif)$/i,
                     type: "asset/resource"
                 },
                 {
@@ -110,6 +106,10 @@ module.exports = env => {
                 patterns: [
                     {
                         from: path.resolve(__dirname, "src/images"),
+                        to: path.resolve(__dirname, "dist/images")
+                    },
+                    {
+                        from: "node_modules/@themes/active/images",
                         to: path.resolve(__dirname, "dist/images")
                     },
                     "src/.nojekyll",
